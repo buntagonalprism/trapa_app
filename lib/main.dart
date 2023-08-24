@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:firebase_ui_oauth_google/firebase_ui_oauth_google.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_messages.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -34,6 +35,7 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
+      debugShowCheckedModeBanner: !kIsWeb,
       localizationsDelegates: const [
         AppMessages.delegate,
         GlobalMaterialLocalizations.delegate,
@@ -45,6 +47,9 @@ class MainApp extends StatelessWidget {
       ],
       onGenerateTitle: (context) => getIt<Config>().appNamePrefix + Messages.of(context)!.title,
       routerConfig: getIt<AppRouter>().goRouter,
+      theme: ThemeData(
+        primarySwatch: Colors.green,
+      ),
     );
   }
 }

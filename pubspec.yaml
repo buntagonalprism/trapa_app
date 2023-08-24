@@ -8,6 +8,7 @@ environment:
 
 dependencies:
   cloud_firestore: ^4.8.5
+  device_info_plus: ^9.0.3
   firebase_auth: ^4.7.3
   firebase_core: ^2.15.1
   firebase_ui_auth: ^1.6.4
@@ -21,6 +22,7 @@ dependencies:
   freezed_annotation: ^2.4.1
   get_it: ^7.6.0
   go_router: ^10.1.0
+  google_fonts: ^5.1.0
   google_sign_in: ^6.1.4
   injectable: ^2.3.0
   intl: ^0.18.1
@@ -40,3 +42,6 @@ dev_dependencies:
 flutter:
   generate: true
   uses-material-design: true
+
+assets:
+  - assets/google_fonts/

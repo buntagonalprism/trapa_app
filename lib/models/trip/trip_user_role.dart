@@ -1,0 +1,4 @@
+enum TripUserRole {
+  owner,
+  editor,
+}

@@ -23,4 +23,8 @@ class AuthService {
   /// Updated with the currently logged in user details.
   /// `null` if the user is not logged in.
   Observable<User?> user = Observable<User?>(null);
+
+  void signOut() {
+    auth.FirebaseAuth.instance.signOut();
+  }
 }

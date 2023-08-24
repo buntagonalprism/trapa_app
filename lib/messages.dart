@@ -5,4 +5,5 @@ typedef Messages = AppMessages;
 extension MessagesExtension on AppMessages {
   String get trips => 'Trips';
   String get guidebook => 'Guidebook';
+  String get homeNewTrip => 'New Trip';
 }
