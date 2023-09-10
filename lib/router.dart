@@ -78,7 +78,7 @@ class AppRouter {
       )
     ],
     redirect: (BuildContext context, GoRouterState state) {
-      if (authService.user.value == null) {
+      if (authService.user == null) {
         return '/login';
       } else {
         return null;

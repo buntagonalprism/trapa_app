@@ -16,5 +16,5 @@ abstract class _HomeViewModel with Store {
   final AuthService _authService;
 
   @computed
-  String get userEmail => _authService.user.value?.email ?? '';
+  String get userEmail => _authService.user?.email ?? '';
 }

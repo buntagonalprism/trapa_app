@@ -7,6 +7,7 @@ class EnvironmentDefaultFirebaseOptions {
   static FirebaseOptions get forCurrentPlatform {
     const enviroment = String.fromEnvironment("firebaseEnvironment");
     return switch (enviroment) {
+      "local" => dev.DefaultFirebaseOptions.currentPlatform,
       "dev" => dev.DefaultFirebaseOptions.currentPlatform,
       "prod" => prod.DefaultFirebaseOptions.currentPlatform,
       _ => throw UnsupportedError("Unknown environment for firebase: $enviroment"),

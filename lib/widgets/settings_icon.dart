@@ -1,4 +1,6 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../injection.dart';
 import '../services/auth_service.dart';
@@ -26,6 +28,9 @@ class SettingsIcon extends StatelessWidget {
       case _SettingsMenu.logout:
         _auth.signOut();
         break;
+      case _SettingsMenu.copyAuthToken:
+        Clipboard.setData(ClipboardData(text: _auth.authToken ?? 'Not logged in'));
+        break;
     }
   }
 
@@ -39,6 +44,11 @@ class SettingsIcon extends StatelessWidget {
         value: _SettingsMenu.logout,
         child: Text('Logout'),
       ),
+      if (kDebugMode)
+        const PopupMenuItem(
+          value: _SettingsMenu.copyAuthToken,
+          child: Text('Copy Auth Token'),
+        )
     ];
   }
 }
@@ -47,4 +57,5 @@ enum _SettingsMenu {
   profile,
   settings,
   logout,
+  copyAuthToken,
 }

@@ -4,25 +4,52 @@ import 'package:mobx/mobx.dart';
 
 import '../models/user.dart';
 
+part 'auth_service.g.dart';
+
 @singleton
-class AuthService {
-  AuthService() {
+class AuthService = _AuthService with _$AuthService;
+
+abstract class _AuthService with Store {
+  _AuthService() {
     auth.FirebaseAuth.instance.authStateChanges().listen((auth.User? firebaseUser) {
-      if (firebaseUser != null) {
-        runInAction(() => user.value = User(
-              id: firebaseUser.uid,
-              name: firebaseUser.displayName ?? '',
-              email: firebaseUser.email,
-            ));
-      } else {
-        runInAction(() => user.value = null);
-      }
+      _updateUser(firebaseUser);
+    });
+
+    auth.FirebaseAuth.instance.idTokenChanges().listen((auth.User? firebaseUser) {
+      _updateUser(firebaseUser);
     });
   }
 
-  /// Updated with the currently logged in user details.
-  /// `null` if the user is not logged in.
-  Observable<User?> user = Observable<User?>(null);
+  @observable
+  User? user;
+
+  @observable
+  ObservableFuture<String?>? _authTokenFuture;
+
+  @computed
+  String? get authToken {
+    final tokenFuture = _authTokenFuture;
+    if (tokenFuture != null && tokenFuture.status == FutureStatus.fulfilled) {
+      return tokenFuture.value;
+    } else {
+      return null;
+    }
+  }
+
+  @action
+  void _updateUser(auth.User? firebaseUser) {
+    if (firebaseUser != null) {
+      user = User(
+        id: firebaseUser.uid,
+        name: firebaseUser.displayName ?? '',
+        email: firebaseUser.email,
+      );
+      _authTokenFuture = ObservableFuture(firebaseUser.getIdToken());
+    } else {
+      user = null;
+      _authTokenFuture = null;
+    }
+  }
 
   void signOut() {
     auth.FirebaseAuth.instance.signOut();
