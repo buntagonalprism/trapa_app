@@ -50,7 +50,24 @@ class MainApp extends StatelessWidget {
       onGenerateTitle: (context) => getIt<Config>().appNamePrefix + Messages.of(context)!.title,
       routerConfig: getIt<AppRouter>().goRouter,
       theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.green,
+          error: Colors.red,
+        ),
         primarySwatch: Colors.green,
+        inputDecorationTheme: InputDecorationTheme(
+          border: const OutlineInputBorder(),
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: Colors.grey[400]!,
+              width: 1.0,
+            ),
+          ),
+          errorStyle: const TextStyle(
+            color: Colors.red,
+            fontSize: 12,
+          ),
+        ),
       ),
     );
   }
