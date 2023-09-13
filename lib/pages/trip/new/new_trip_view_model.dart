@@ -36,7 +36,7 @@ abstract class _NewTripViewModel with Store {
       name: form.tripName.value,
       startDate: form.startDate.value!,
       endDate: form.endDate.value!,
-      singleCountry: form.tripCountries.value == TripCountries.single,
+      singleCountry: form.tripCountries.value == TripCountries.single ? form.country : null,
     );
     return result.when(
       success: (trip) => OperationResult.success(trip),

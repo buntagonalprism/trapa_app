@@ -29,8 +29,15 @@ class SettingsIcon extends StatelessWidget {
         _auth.signOut();
         break;
       case _SettingsMenu.copyAuthToken:
-        Clipboard.setData(ClipboardData(text: _auth.authToken ?? 'Not logged in'));
+        _copyAuthTokenToClipboard();
         break;
+    }
+  }
+
+  void _copyAuthTokenToClipboard() async {
+    final authToken = await _auth.getAuthToken();
+    if (authToken != null) {
+      await Clipboard.setData(ClipboardData(text: authToken));
     }
   }
 

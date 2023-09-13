@@ -21,16 +21,26 @@ abstract class _AuthService with Store {
   }
 
   @observable
-  User? user;
-
-  @observable
-  ObservableFuture<String?>? _authTokenFuture;
+  auth.User? _firebaseUser;
 
   @computed
-  String? get authToken {
-    final tokenFuture = _authTokenFuture;
-    if (tokenFuture != null && tokenFuture.status == FutureStatus.fulfilled) {
-      return tokenFuture.value;
+  User? get user {
+    final firebaseUser = _firebaseUser;
+    if (firebaseUser != null) {
+      return User(
+        id: firebaseUser.uid,
+        name: firebaseUser.displayName ?? '',
+        email: firebaseUser.email,
+      );
+    } else {
+      return null;
+    }
+  }
+
+  Future<String?> getAuthToken() async {
+    final firebaseUser = _firebaseUser;
+    if (firebaseUser != null) {
+      return firebaseUser.getIdToken();
     } else {
       return null;
     }
@@ -38,17 +48,7 @@ abstract class _AuthService with Store {
 
   @action
   void _updateUser(auth.User? firebaseUser) {
-    if (firebaseUser != null) {
-      user = User(
-        id: firebaseUser.uid,
-        name: firebaseUser.displayName ?? '',
-        email: firebaseUser.email,
-      );
-      _authTokenFuture = ObservableFuture(firebaseUser.getIdToken());
-    } else {
-      user = null;
-      _authTokenFuture = null;
-    }
+    _firebaseUser = firebaseUser;
   }
 
   void signOut() {

@@ -1,4 +1,6 @@
+import 'package:country_picker/country_picker.dart';
 import 'package:injectable/injectable.dart';
+import 'package:intl/intl.dart';
 import 'package:mobx/mobx.dart';
 
 import '../models/api/network_result.dart';
@@ -21,27 +23,26 @@ abstract class _TripStore with Store {
   final TrapaApiService apiService;
   final CrashReportService crashReporter;
 
-  @observable
-  int value = 0;
-
   static const tripsPath = 'v1/trips';
 
   static String tripPath(String id) => '$tripsPath/$id';
+
+  final dateFormat = DateFormat('yyyy-MM-dd');
 
   Future<NetworkResult<Trip>> createTrip({
     required String name,
     required DateTime startDate,
     required DateTime endDate,
-    required bool singleCountry,
+    required Country? singleCountry,
   }) async {
     try {
       final response = await apiService.put(
         tripsPath,
         CreateTripRequest(
           name: name,
-          startDate: startDate,
-          endDate: endDate,
-          singleCountry: singleCountry,
+          startDate: dateFormat.format(startDate),
+          endDate: dateFormat.format(endDate),
+          singleCountryCode: singleCountry?.countryCode,
         ),
       );
       final trip = response.parseSuccessBody(Trip.fromJson);

@@ -22,8 +22,10 @@ class TrapaApiService {
   /// [TrapaApiConnectionException] will be thrown.
   Future<TrapaApiResponse> put(String path, dynamic body) async {
     final uri = Uri.parse('$host/$path');
+    final headers = await _buildHeaders();
+    final bodyJson = json.encode(body);
     try {
-      final response = await http.put(uri, body: json.encode(body), headers: _buildHeaders());
+      final response = await http.put(uri, body: bodyJson, headers: headers);
       return TrapaApiResponse(
         responseBody: response.body,
         requestUri: uri,
@@ -41,8 +43,10 @@ class TrapaApiService {
   /// [TrapaApiConnectionException] will be thrown.
   Future<TrapaApiResponse> post(String path, dynamic body) async {
     final uri = Uri.parse('$host/$path');
+    final headers = await _buildHeaders();
+    final bodyJson = json.encode(body);
     try {
-      final response = await http.post(uri, body: json.encode(body), headers: _buildHeaders());
+    final response = await http.post(uri, body: bodyJson, headers: headers);
       return TrapaApiResponse(
         responseBody: response.body,
         requestUri: uri,
@@ -56,9 +60,9 @@ class TrapaApiService {
     }
   }
 
-  Map<String, String> _buildHeaders() {
+  Future<Map<String, String>> _buildHeaders() async {
     final headers = <String, String>{'Content-Type': 'application/json'};
-    final token = _authService.authToken;
+    final token = await _authService.getAuthToken();
     if (token != null) {
       headers['Authorization'] = 'Bearer $token';
     }

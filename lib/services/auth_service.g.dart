@@ -9,42 +9,26 @@ part of 'auth_service.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$AuthService on _AuthService, Store {
-  Computed<String?>? _$authTokenComputed;
+  Computed<User?>? _$userComputed;
 
   @override
-  String? get authToken =>
-      (_$authTokenComputed ??= Computed<String?>(() => super.authToken,
-              name: '_AuthService.authToken'))
-          .value;
+  User? get user => (_$userComputed ??=
+          Computed<User?>(() => super.user, name: '_AuthService.user'))
+      .value;
 
-  late final _$userAtom = Atom(name: '_AuthService.user', context: context);
+  late final _$_firebaseUserAtom =
+      Atom(name: '_AuthService._firebaseUser', context: context);
 
   @override
-  User? get user {
-    _$userAtom.reportRead();
-    return super.user;
+  auth.User? get _firebaseUser {
+    _$_firebaseUserAtom.reportRead();
+    return super._firebaseUser;
   }
 
   @override
-  set user(User? value) {
-    _$userAtom.reportWrite(value, super.user, () {
-      super.user = value;
-    });
-  }
-
-  late final _$_authTokenFutureAtom =
-      Atom(name: '_AuthService._authTokenFuture', context: context);
-
-  @override
-  ObservableFuture<String?>? get _authTokenFuture {
-    _$_authTokenFutureAtom.reportRead();
-    return super._authTokenFuture;
-  }
-
-  @override
-  set _authTokenFuture(ObservableFuture<String?>? value) {
-    _$_authTokenFutureAtom.reportWrite(value, super._authTokenFuture, () {
-      super._authTokenFuture = value;
+  set _firebaseUser(auth.User? value) {
+    _$_firebaseUserAtom.reportWrite(value, super._firebaseUser, () {
+      super._firebaseUser = value;
     });
   }
 
@@ -65,8 +49,7 @@ mixin _$AuthService on _AuthService, Store {
   @override
   String toString() {
     return '''
-user: ${user},
-authToken: ${authToken}
+user: ${user}
     ''';
   }
 }

@@ -21,9 +21,9 @@ CreateTripRequest _$CreateTripRequestFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$CreateTripRequest {
   String get name => throw _privateConstructorUsedError;
-  DateTime get startDate => throw _privateConstructorUsedError;
-  DateTime get endDate => throw _privateConstructorUsedError;
-  bool get singleCountry => throw _privateConstructorUsedError;
+  String get startDate => throw _privateConstructorUsedError;
+  String get endDate => throw _privateConstructorUsedError;
+  String? get singleCountryCode => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -38,7 +38,10 @@ abstract class $CreateTripRequestCopyWith<$Res> {
       _$CreateTripRequestCopyWithImpl<$Res, CreateTripRequest>;
   @useResult
   $Res call(
-      {String name, DateTime startDate, DateTime endDate, bool singleCountry});
+      {String name,
+      String startDate,
+      String endDate,
+      String? singleCountryCode});
 }
 
 /// @nodoc
@@ -57,7 +60,7 @@ class _$CreateTripRequestCopyWithImpl<$Res, $Val extends CreateTripRequest>
     Object? name = null,
     Object? startDate = null,
     Object? endDate = null,
-    Object? singleCountry = null,
+    Object? singleCountryCode = freezed,
   }) {
     return _then(_value.copyWith(
       name: null == name
@@ -67,15 +70,15 @@ class _$CreateTripRequestCopyWithImpl<$Res, $Val extends CreateTripRequest>
       startDate: null == startDate
           ? _value.startDate
           : startDate // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as String,
       endDate: null == endDate
           ? _value.endDate
           : endDate // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      singleCountry: null == singleCountry
-          ? _value.singleCountry
-          : singleCountry // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as String,
+      singleCountryCode: freezed == singleCountryCode
+          ? _value.singleCountryCode
+          : singleCountryCode // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -89,7 +92,10 @@ abstract class _$$_CreateTripRequestCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String name, DateTime startDate, DateTime endDate, bool singleCountry});
+      {String name,
+      String startDate,
+      String endDate,
+      String? singleCountryCode});
 }
 
 /// @nodoc
@@ -106,7 +112,7 @@ class __$$_CreateTripRequestCopyWithImpl<$Res>
     Object? name = null,
     Object? startDate = null,
     Object? endDate = null,
-    Object? singleCountry = null,
+    Object? singleCountryCode = freezed,
   }) {
     return _then(_$_CreateTripRequest(
       name: null == name
@@ -116,15 +122,15 @@ class __$$_CreateTripRequestCopyWithImpl<$Res>
       startDate: null == startDate
           ? _value.startDate
           : startDate // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as String,
       endDate: null == endDate
           ? _value.endDate
           : endDate // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      singleCountry: null == singleCountry
-          ? _value.singleCountry
-          : singleCountry // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as String,
+      singleCountryCode: freezed == singleCountryCode
+          ? _value.singleCountryCode
+          : singleCountryCode // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -136,7 +142,7 @@ class _$_CreateTripRequest extends _CreateTripRequest {
       {required this.name,
       required this.startDate,
       required this.endDate,
-      required this.singleCountry})
+      this.singleCountryCode})
       : super._();
 
   factory _$_CreateTripRequest.fromJson(Map<String, dynamic> json) =>
@@ -145,15 +151,15 @@ class _$_CreateTripRequest extends _CreateTripRequest {
   @override
   final String name;
   @override
-  final DateTime startDate;
+  final String startDate;
   @override
-  final DateTime endDate;
+  final String endDate;
   @override
-  final bool singleCountry;
+  final String? singleCountryCode;
 
   @override
   String toString() {
-    return 'CreateTripRequest(name: $name, startDate: $startDate, endDate: $endDate, singleCountry: $singleCountry)';
+    return 'CreateTripRequest(name: $name, startDate: $startDate, endDate: $endDate, singleCountryCode: $singleCountryCode)';
   }
 
   @override
@@ -165,14 +171,14 @@ class _$_CreateTripRequest extends _CreateTripRequest {
             (identical(other.startDate, startDate) ||
                 other.startDate == startDate) &&
             (identical(other.endDate, endDate) || other.endDate == endDate) &&
-            (identical(other.singleCountry, singleCountry) ||
-                other.singleCountry == singleCountry));
+            (identical(other.singleCountryCode, singleCountryCode) ||
+                other.singleCountryCode == singleCountryCode));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, name, startDate, endDate, singleCountry);
+      Object.hash(runtimeType, name, startDate, endDate, singleCountryCode);
 
   @JsonKey(ignore: true)
   @override
@@ -192,9 +198,9 @@ class _$_CreateTripRequest extends _CreateTripRequest {
 abstract class _CreateTripRequest extends CreateTripRequest {
   const factory _CreateTripRequest(
       {required final String name,
-      required final DateTime startDate,
-      required final DateTime endDate,
-      required final bool singleCountry}) = _$_CreateTripRequest;
+      required final String startDate,
+      required final String endDate,
+      final String? singleCountryCode}) = _$_CreateTripRequest;
   const _CreateTripRequest._() : super._();
 
   factory _CreateTripRequest.fromJson(Map<String, dynamic> json) =
@@ -203,11 +209,11 @@ abstract class _CreateTripRequest extends CreateTripRequest {
   @override
   String get name;
   @override
-  DateTime get startDate;
+  String get startDate;
   @override
-  DateTime get endDate;
+  String get endDate;
   @override
-  bool get singleCountry;
+  String? get singleCountryCode;
   @override
   @JsonKey(ignore: true)
   _$$_CreateTripRequestCopyWith<_$_CreateTripRequest> get copyWith =>

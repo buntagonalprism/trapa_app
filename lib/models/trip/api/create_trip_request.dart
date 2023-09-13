@@ -9,9 +9,9 @@ class CreateTripRequest with _$CreateTripRequest {
 
   const factory CreateTripRequest({
     required String name,
-    required DateTime startDate,
-    required DateTime endDate,
-    required bool singleCountry,
+    required String startDate,
+    required String endDate,
+    String? singleCountryCode,
   }) = _CreateTripRequest;
 
   factory CreateTripRequest.fromJson(Map<String, dynamic> json) =>
