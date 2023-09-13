@@ -6,7 +6,9 @@ import '../models/api/network_result.dart';
 import '../models/json_converters.dart';
 import '../models/trip/api/create_trip_request.dart';
 import '../models/trip/trip.dart';
+import '../services/auth_service.dart';
 import '../services/crash_report_service.dart';
+import '../services/firestore_service.dart';
 import '../services/trapa_api_service.dart';
 
 part 'trip_store.g.dart';
@@ -18,14 +20,48 @@ abstract class _TripStore with Store {
   _TripStore({
     required this.apiService,
     required this.crashReporter,
+    required this.firestoreService,
+    required this.authService,
   });
 
   final TrapaApiService apiService;
   final CrashReportService crashReporter;
+  final FirestoreService firestoreService;
+  final AuthService authService;
 
-  static const tripsPath = 'v1/trips';
+  static const tripsApiPath = 'v1/trips';
 
-  static String tripPath(String id) => '$tripsPath/$id';
+  static const tripsFirestoreCollection = 'trips';
+
+  @computed
+  ObservableStream<List<Trip>>? get _userTrips {
+    final user = authService.user;
+    if (user == null) {
+      return null;
+    }
+    return firestoreService.collectionSnapshots<Trip>(
+      path: tripsFirestoreCollection,
+      fromJson: Trip.fromJson,
+      fieldQueries: [
+        FirestoreFieldQuery(
+          fieldName: 'editors',
+          fieldValue: user.id,
+          operator: FirestoreQueryOperator.arrayContains,
+        ),
+      ],
+    );
+  }
+
+  @computed
+  List<Trip> get userTrips {
+    if (_userTrips == null) {
+      return [];
+    }
+    if (_userTrips!.value == null) {
+      return [];
+    }
+    return _userTrips!.value!;
+  }
 
   Future<NetworkResult<Trip>> createTrip({
     required String name,
@@ -35,7 +71,7 @@ abstract class _TripStore with Store {
   }) async {
     try {
       final response = await apiService.put(
-        tripsPath,
+        tripsApiPath,
         CreateTripRequest(
           name: name,
           startDate: DateConverter.dateFormat.format(startDate),

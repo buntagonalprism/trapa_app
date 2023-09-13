@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 
 import '../../injection.dart';
 import '../../messages.dart';
+import '../../models/trip/trip.dart';
 import '../../router.dart';
 import '../../widgets/settings_icon.dart';
 import 'home_view_model.dart';
@@ -54,6 +57,11 @@ class _HomePageState extends State<HomePage> {
                 ),
               ],
             ),
+            const SizedBox(height: 36),
+            Text(
+              'Travel Research And Planning App',
+              style: Theme.of(context).textTheme.headlineSmall,
+            ),
             const SizedBox(height: 48),
             Card(
               shape: RoundedRectangleBorder(
@@ -79,6 +87,52 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             const SizedBox(height: 48),
+            Text('My trips', style: theme.textTheme.headlineMedium),
+            Observer(builder: (context) {
+              return Wrap(
+                spacing: 16,
+                runSpacing: 16,
+                alignment: WrapAlignment.start,
+                crossAxisAlignment: WrapCrossAlignment.start,
+                children: widget.vm.trips.map((trip) => TripTile(trip: trip)).toList(),
+              );
+            })
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class TripTile extends StatelessWidget {
+  const TripTile({
+    required this.trip,
+    super.key,
+  });
+
+  final Trip trip;
+
+  static final _dateFormat = DateFormat("EEEE, MMM d, yyyy");
+
+  @override
+  Widget build(BuildContext context) {
+    final duration = trip.endDate.difference(trip.startDate).inDays;
+    return Card(
+      child: Container(
+        height: 180,
+        width: 300,
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(trip.name, style: Theme.of(context).textTheme.headlineSmall),
+            const SizedBox(height: 12),
+            Text('Departing: ${_dateFormat.format(trip.startDate)}'),
+            const SizedBox(height: 12),
+            Text('Returning: ${_dateFormat.format(trip.endDate)}'),
+            const SizedBox(height: 12),
+            Text('Duration: $duration day${duration == 1 ? '' : 's'}'),
           ],
         ),
       ),

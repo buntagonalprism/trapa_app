@@ -1,7 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../json_converters.dart';
-import 'trip_user_role.dart';
 
 part 'trip.freezed.dart';
 part 'trip.g.dart';

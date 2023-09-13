@@ -1,7 +1,8 @@
 import 'package:injectable/injectable.dart';
 import 'package:mobx/mobx.dart';
 
-import '../../services/auth_service.dart';
+import '../../models/trip/trip.dart';
+import '../../stores/trip_store.dart';
 
 part 'home_view_model.g.dart';
 
@@ -10,11 +11,15 @@ class HomeViewModel = _HomeViewModel with _$HomeViewModel;
 
 abstract class _HomeViewModel with Store {
   _HomeViewModel({
-    required AuthService authService,
-  }) : _authService = authService;
+    required TripStore tripStore,
+  }) : _tripStore = tripStore;
 
-  final AuthService _authService;
+  final TripStore _tripStore;
 
   @computed
-  String get userEmail => _authService.user?.email ?? '';
+  List<Trip> get trips {
+    final userTrips = List.of(_tripStore.userTrips);
+    userTrips.sort((a, b) => a.startDate.compareTo(b.startDate));
+    return userTrips;
+  }
 }
