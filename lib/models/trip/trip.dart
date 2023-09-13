@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../json_converters.dart';
 import 'trip_user_role.dart';
 
 part 'trip.freezed.dart';
@@ -12,9 +13,8 @@ class Trip with _$Trip {
   const factory Trip({
     required String id,
     required String name,
-    required DateTime startDate,
-    required DateTime endDate,
-    required List<TripUserRole> userRoles,
+    @DateConverter() required DateTime startDate,
+    @DateConverter() required DateTime endDate,
   }) = _Trip;
 
   factory Trip.fromJson(Map<String, dynamic> json) => _$TripFromJson(json);

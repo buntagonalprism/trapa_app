@@ -22,9 +22,10 @@ Trip _$TripFromJson(Map<String, dynamic> json) {
 mixin _$Trip {
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
+  @DateConverter()
   DateTime get startDate => throw _privateConstructorUsedError;
+  @DateConverter()
   DateTime get endDate => throw _privateConstructorUsedError;
-  List<TripUserRole> get userRoles => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -39,9 +40,8 @@ abstract class $TripCopyWith<$Res> {
   $Res call(
       {String id,
       String name,
-      DateTime startDate,
-      DateTime endDate,
-      List<TripUserRole> userRoles});
+      @DateConverter() DateTime startDate,
+      @DateConverter() DateTime endDate});
 }
 
 /// @nodoc
@@ -61,7 +61,6 @@ class _$TripCopyWithImpl<$Res, $Val extends Trip>
     Object? name = null,
     Object? startDate = null,
     Object? endDate = null,
-    Object? userRoles = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -80,10 +79,6 @@ class _$TripCopyWithImpl<$Res, $Val extends Trip>
           ? _value.endDate
           : endDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      userRoles: null == userRoles
-          ? _value.userRoles
-          : userRoles // ignore: cast_nullable_to_non_nullable
-              as List<TripUserRole>,
     ) as $Val);
   }
 }
@@ -97,9 +92,8 @@ abstract class _$$_TripCopyWith<$Res> implements $TripCopyWith<$Res> {
   $Res call(
       {String id,
       String name,
-      DateTime startDate,
-      DateTime endDate,
-      List<TripUserRole> userRoles});
+      @DateConverter() DateTime startDate,
+      @DateConverter() DateTime endDate});
 }
 
 /// @nodoc
@@ -115,7 +109,6 @@ class __$$_TripCopyWithImpl<$Res> extends _$TripCopyWithImpl<$Res, _$_Trip>
     Object? name = null,
     Object? startDate = null,
     Object? endDate = null,
-    Object? userRoles = null,
   }) {
     return _then(_$_Trip(
       id: null == id
@@ -134,10 +127,6 @@ class __$$_TripCopyWithImpl<$Res> extends _$TripCopyWithImpl<$Res, _$_Trip>
           ? _value.endDate
           : endDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      userRoles: null == userRoles
-          ? _value._userRoles
-          : userRoles // ignore: cast_nullable_to_non_nullable
-              as List<TripUserRole>,
     ));
   }
 }
@@ -148,11 +137,9 @@ class _$_Trip extends _Trip {
   const _$_Trip(
       {required this.id,
       required this.name,
-      required this.startDate,
-      required this.endDate,
-      required final List<TripUserRole> userRoles})
-      : _userRoles = userRoles,
-        super._();
+      @DateConverter() required this.startDate,
+      @DateConverter() required this.endDate})
+      : super._();
 
   factory _$_Trip.fromJson(Map<String, dynamic> json) => _$$_TripFromJson(json);
 
@@ -161,20 +148,15 @@ class _$_Trip extends _Trip {
   @override
   final String name;
   @override
+  @DateConverter()
   final DateTime startDate;
   @override
+  @DateConverter()
   final DateTime endDate;
-  final List<TripUserRole> _userRoles;
-  @override
-  List<TripUserRole> get userRoles {
-    if (_userRoles is EqualUnmodifiableListView) return _userRoles;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_userRoles);
-  }
 
   @override
   String toString() {
-    return 'Trip(id: $id, name: $name, startDate: $startDate, endDate: $endDate, userRoles: $userRoles)';
+    return 'Trip(id: $id, name: $name, startDate: $startDate, endDate: $endDate)';
   }
 
   @override
@@ -186,15 +168,12 @@ class _$_Trip extends _Trip {
             (identical(other.name, name) || other.name == name) &&
             (identical(other.startDate, startDate) ||
                 other.startDate == startDate) &&
-            (identical(other.endDate, endDate) || other.endDate == endDate) &&
-            const DeepCollectionEquality()
-                .equals(other._userRoles, _userRoles));
+            (identical(other.endDate, endDate) || other.endDate == endDate));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, startDate, endDate,
-      const DeepCollectionEquality().hash(_userRoles));
+  int get hashCode => Object.hash(runtimeType, id, name, startDate, endDate);
 
   @JsonKey(ignore: true)
   @override
@@ -214,9 +193,8 @@ abstract class _Trip extends Trip {
   const factory _Trip(
       {required final String id,
       required final String name,
-      required final DateTime startDate,
-      required final DateTime endDate,
-      required final List<TripUserRole> userRoles}) = _$_Trip;
+      @DateConverter() required final DateTime startDate,
+      @DateConverter() required final DateTime endDate}) = _$_Trip;
   const _Trip._() : super._();
 
   factory _Trip.fromJson(Map<String, dynamic> json) = _$_Trip.fromJson;
@@ -226,11 +204,11 @@ abstract class _Trip extends Trip {
   @override
   String get name;
   @override
+  @DateConverter()
   DateTime get startDate;
   @override
+  @DateConverter()
   DateTime get endDate;
-  @override
-  List<TripUserRole> get userRoles;
   @override
   @JsonKey(ignore: true)
   _$$_TripCopyWith<_$_Trip> get copyWith => throw _privateConstructorUsedError;

@@ -1,9 +1,9 @@
 import 'package:country_picker/country_picker.dart';
 import 'package:injectable/injectable.dart';
-import 'package:intl/intl.dart';
 import 'package:mobx/mobx.dart';
 
 import '../models/api/network_result.dart';
+import '../models/json_converters.dart';
 import '../models/trip/api/create_trip_request.dart';
 import '../models/trip/trip.dart';
 import '../services/crash_report_service.dart';
@@ -27,8 +27,6 @@ abstract class _TripStore with Store {
 
   static String tripPath(String id) => '$tripsPath/$id';
 
-  final dateFormat = DateFormat('yyyy-MM-dd');
-
   Future<NetworkResult<Trip>> createTrip({
     required String name,
     required DateTime startDate,
@@ -40,8 +38,8 @@ abstract class _TripStore with Store {
         tripsPath,
         CreateTripRequest(
           name: name,
-          startDate: dateFormat.format(startDate),
-          endDate: dateFormat.format(endDate),
+          startDate: DateConverter.dateFormat.format(startDate),
+          endDate: DateConverter.dateFormat.format(endDate),
           singleCountryCode: singleCountry?.countryCode,
         ),
       );
