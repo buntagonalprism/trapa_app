@@ -7,86 +7,72 @@ class MockTripStore extends Mock implements TripStore {}
 
 void main() {
   late MockTripStore tripStore;
-  late NewTripViewModel newTripViewModel;
+  late NewTripViewModel vm;
 
   setUp(() {
     tripStore = MockTripStore();
-    newTripViewModel = NewTripViewModel(tripStore: tripStore);
+    vm = NewTripViewModel(tripStore: tripStore);
   });
 
   test(
       'GIVEN trip name not set '
       'THEN trip name error is present', () {
-    newTripViewModel.setTripName('');
-    expect(newTripViewModel.tripNameError, NewTripFieldError.tripNameMissing);
-    expect(newTripViewModel.allErrors, contains(NewTripFieldError.tripNameMissing));
+    vm.form.tripName.set('');
+    expect(vm.form.tripName.error, NewTripFieldError.tripNameMissing);
   });
 
   test(
-      'GIVEN start date is not set '
+      'GIVEN start date not set '
       'THEN start date error is present', () {
-    expect(newTripViewModel.startDateError, NewTripFieldError.startDateMissing);
-    expect(newTripViewModel.allErrors, contains(NewTripFieldError.startDateMissing));
+    vm.form.startDate.set(null);
+    expect(vm.form.startDate.error, NewTripFieldError.startDateMissing);
   });
 
   test(
-      'GIVEN end date is not set '
+      'GIVEN end date not set '
       'THEN end date error is present', () {
-    expect(newTripViewModel.endDateError, NewTripFieldError.endDateMissing);
-    expect(newTripViewModel.allErrors, contains(NewTripFieldError.endDateMissing));
+    vm.form.endDate.set(null);
+    expect(vm.form.endDate.error, NewTripFieldError.endDateMissing);
   });
 
   test(
-      'GIVEN start date is set '
-      'AND end date is set as before start date '
+      'GIVEN end date before start date '
       'THEN end date error is present', () {
-    newTripViewModel.setStartDate(DateTime.now());
-    newTripViewModel.setEndDate(DateTime.now().subtract(const Duration(days: 1)));
-    expect(newTripViewModel.endDateError, NewTripFieldError.endDateBeforeStartDate);
-    expect(newTripViewModel.allErrors, contains(NewTripFieldError.endDateBeforeStartDate));
+    vm.form.startDate.set(DateTime(2021, 1, 1));
+    vm.form.endDate.set(DateTime(2020, 1, 1));
+    expect(vm.form.endDate.error, NewTripFieldError.endDateBeforeStartDate);
   });
 
   test(
-      'GIVEN trip countries is not set '
+      'GIVEN trip countries not selected '
       'THEN trip countries error is present', () {
-    expect(newTripViewModel.tripCountriesError, NewTripFieldError.tripCountriesNotSelected);
-    expect(newTripViewModel.allErrors, contains(NewTripFieldError.tripCountriesNotSelected));
+    expect(vm.form.tripCountries.error, NewTripFieldError.tripCountriesNotSelected);
   });
 
   test(
       'GIVEN trip countries is selected as single country '
-      'AND single country is not selected '
+      'AND single country not selected '
       'THEN single country error is present', () {
-    newTripViewModel.setTripCountries(TripCountries.single);
-    expect(newTripViewModel.singleCountryError, NewTripFieldError.singleCountryNotSelected);
-    expect(newTripViewModel.allErrors, contains(NewTripFieldError.singleCountryNotSelected));
-  });
-
-  test(
-      'GIVEN trip countries is selected as single country '
-      'AND single country is selected '
-      'THEN single country error is not present', () {
-    newTripViewModel.setTripCountries(TripCountries.single);
-    newTripViewModel.setSingleCountry('PL');
-    expect(newTripViewModel.singleCountryError, null);
+    vm.form.tripCountries.set(TripCountries.single);
+    expect(vm.form.singleCountryCode.error, NewTripFieldError.singleCountryNotSelected);
   });
 
   test(
       'GIVEN trip countries is selected as multiple countries '
+      'AND single country not selected '
       'THEN single country error is not present', () {
-    newTripViewModel.setTripCountries(TripCountries.multiple);
-    expect(newTripViewModel.singleCountryError, null);
+    vm.form.tripCountries.set(TripCountries.multiple);
+    expect(vm.form.singleCountryCode.error, null);
   });
 
   test(
-      'GIVEN all fields are set '
+      'GIVEN all fields are valid '
       'THEN form is valid', () {
-    newTripViewModel.setTripName('Trip name');
-    newTripViewModel.setStartDate(DateTime.now());
-    newTripViewModel.setEndDate(DateTime.now().add(const Duration(days: 1)));
-    newTripViewModel.setTripCountries(TripCountries.single);
-    newTripViewModel.setSingleCountry('PL');
-    expect(newTripViewModel.allErrors.where((e) => e != null), isEmpty);
-    expect(newTripViewModel.isValid, true);
+    vm.form.tripName.set('Trip name');
+    vm.form.startDate.set(DateTime(2021, 1, 1));
+    vm.form.endDate.set(DateTime(2021, 1, 2));
+    vm.form.tripCountries.set(TripCountries.single);
+    vm.form.singleCountryCode.set('IT');
+    expect(vm.form.isValid, true);
   });
 }

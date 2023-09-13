@@ -4,7 +4,10 @@ import 'package:injectable/injectable.dart';
 import 'package:mobx/mobx.dart';
 
 import '../../../messages.dart';
+import '../../../models/operations.dart';
+import '../../../models/trip/trip.dart';
 import '../../../stores/trip_store.dart';
+import '../../../utils/form_store.dart';
 
 part 'new_trip_view_model.g.dart';
 
@@ -18,94 +21,33 @@ abstract class _NewTripViewModel with Store {
 
   final TripStore tripStore;
 
-  @observable
-  String tripName = '';
+  final form = NewTripForm();
 
-  @observable
-  DateTime? startDate;
-
-  @observable
-  DateTime? endDate;
-
-  @observable
-  TripCountries tripCountries = TripCountries.notSelected;
-
-  @observable
-  String? singleCountryCode;
-
-  @computed
-  Country? get country => singleCountryCode != null ? Country.parse(singleCountryCode!) : null;
-
-  @action
-  void setTripName(String newTripName) => tripName = newTripName;
-
-  @action
-  void setStartDate(DateTime newStartDate) => startDate = newStartDate;
-
-  @action
-  void setEndDate(DateTime newEndDate) => endDate = newEndDate;
-
-  @action
-  void setTripCountries(TripCountries newTripCountries) => tripCountries = newTripCountries;
-
-  @action
-  void setSingleCountry(String? contryCode) => singleCountryCode = contryCode;
-
-  @computed
-  int get tripDuration => endDate?.difference(startDate ?? endDate ?? DateTime.now()).inDays ?? 0;
-
-  @observable
-  bool showErrors = false;
-
-  @computed
-  NewTripFieldError? get tripNameError =>
-      tripName.isEmpty ? NewTripFieldError.tripNameMissing : null;
-
-  @computed
-  NewTripFieldError? get startDateError =>
-      startDate == null ? NewTripFieldError.startDateMissing : null;
-
-  @computed
-  NewTripFieldError? get endDateError {
-    if (endDate == null) {
-      return NewTripFieldError.endDateMissing;
+  Future<OperationResult<Trip>>? createTrip() {
+    form.submit();
+    if (!form.isValid) {
+      return null;
     }
-    if (startDate != null && endDate!.isBefore(startDate!)) {
-      return NewTripFieldError.endDateBeforeStartDate;
-    }
-    return null;
+    return _createTrip();
   }
 
-  @computed
-  NewTripFieldError? get tripCountriesError => tripCountries == TripCountries.notSelected
-      ? NewTripFieldError.tripCountriesNotSelected
-      : null;
-
-  @computed
-  NewTripFieldError? get singleCountryError =>
-      tripCountries == TripCountries.single && singleCountryCode == null
-          ? NewTripFieldError.singleCountryNotSelected
-          : null;
-
-  @computed
-  List<NewTripFieldError?> get allErrors => [
-        tripNameError,
-        startDateError,
-        endDateError,
-        tripCountriesError,
-        singleCountryError,
-      ];
-
-  @computed
-  bool get isValid => allErrors.every((error) => error == null);
-
-  @action
-  void createTrip() {
-    showErrors = true;
+  Future<OperationResult<Trip>> _createTrip() async {
+    await Future.delayed(const Duration(seconds: 3));
+    final result = await tripStore.createTrip(
+      name: form.tripName.value,
+      startDate: form.startDate.value!,
+      endDate: form.endDate.value!,
+      singleCountry: form.tripCountries.value == TripCountries.single,
+    );
+    return result.when(
+      success: (trip) => OperationResult.success(trip),
+      connectionError: () => const OperationResult.error(NewTripApiError.networkError),
+      unknownError: () => const OperationResult.error(NewTripApiError.unknownError),
+    );
   }
 }
 
-enum NewTripFieldError {
+enum NewTripFieldError implements FieldError {
   tripNameMissing,
   startDateMissing,
   endDateMissing,
@@ -115,10 +57,8 @@ enum NewTripFieldError {
 
   const NewTripFieldError();
 
-  String? message(NewTripViewModel vm, BuildContext context) {
-    if (!vm.showErrors) {
-      return null;
-    }
+  @override
+  String message(BuildContext context) {
     final messages = Messages.of(context)!;
     return switch (this) {
       tripNameMissing => messages.newTripErrorTripNameMissing,
@@ -131,8 +71,93 @@ enum NewTripFieldError {
   }
 }
 
+enum NewTripApiError implements OperationError {
+  networkError(retryable: true),
+  unknownError(retryable: false);
+
+  const NewTripApiError({required this.retryable});
+
+  @override
+  final bool retryable;
+
+  @override
+  String titleText(BuildContext context) {
+    final messages = Messages.of(context)!;
+    return switch (this) {
+      networkError => messages.connectionErrorTitle,
+      unknownError => messages.unknownErrorTitle,
+    };
+  }
+
+  @override
+  String bodyText(BuildContext context) {
+    final messages = Messages.of(context)!;
+    return switch (this) {
+      networkError => messages.connectionErrorBody,
+      unknownError => messages.unknownErrorBody,
+    };
+  }
+}
+
 enum TripCountries {
   notSelected,
   single,
   multiple,
+}
+
+@injectable
+class NewTripForm = _NewTripForm with _$NewTripForm;
+
+abstract class _NewTripForm extends FormStore with Store {
+  _NewTripForm() : super(errorDisplayBehaviour: ErrorDisplayBehaviour.onSubmit);
+
+  late final FieldStore<String> tripName = FieldStore<String>(
+    form: this,
+    initialValue: '',
+    validator: (value) => value.isEmpty ? NewTripFieldError.tripNameMissing : null,
+  );
+
+  late final FieldStore<DateTime?> startDate = FieldStore<DateTime?>(
+    form: this,
+    initialValue: null,
+    validator: (value) => value == null ? NewTripFieldError.startDateMissing : null,
+  );
+
+  late final FieldStore<DateTime?> endDate = FieldStore<DateTime?>(
+    form: this,
+    initialValue: null,
+    validator: (value) {
+      if (value == null) {
+        return NewTripFieldError.endDateMissing;
+      }
+      if (startDate.value != null && value.isBefore(startDate.value!)) {
+        return NewTripFieldError.endDateBeforeStartDate;
+      }
+      return null;
+    },
+  );
+
+  late final FieldStore<TripCountries> tripCountries = FieldStore<TripCountries>(
+    form: this,
+    initialValue: TripCountries.notSelected,
+    validator: (value) =>
+        value == TripCountries.notSelected ? NewTripFieldError.tripCountriesNotSelected : null,
+  );
+
+  late final FieldStore<String?> singleCountryCode = FieldStore<String?>(
+    form: this,
+    initialValue: null,
+    validator: (value) => tripCountries.value == TripCountries.single && value == null
+        ? NewTripFieldError.singleCountryNotSelected
+        : null,
+  );
+
+  @computed
+  Country? get country =>
+      singleCountryCode.value != null ? Country.parse(singleCountryCode.value!) : null;
+
+  @computed
+  int get tripDuration => endDate.value != null && startDate.value != null
+      ? endDate.value!.difference(startDate.value!).inDays
+      : 0;
 }
