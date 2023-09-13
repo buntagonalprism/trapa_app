@@ -3,8 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:intl/intl.dart';
 
+import '../../../injection.dart';
 import '../../../messages.dart';
+import '../../../router.dart';
 import '../../../widgets/home_icon.dart';
+import '../../../widgets/operation_buttons.dart';
 import '../../../widgets/settings_icon.dart';
 import 'new_trip_view_model.dart';
 
@@ -81,9 +84,9 @@ class _NewTripPageState extends State<NewTripPage> {
                     return TextField(
                       decoration: InputDecoration(
                         hintText: 'Trip name',
-                        errorText: vm.tripNameError?.message(vm, context),
+                        errorText: vm.form.tripName.errorText(context),
                       ),
-                      onChanged: (value) => vm.setTripName(value),
+                      onChanged: (value) => vm.form.tripName.set(value),
                     );
                   }),
                   const SizedBox(height: 24),
@@ -93,15 +96,28 @@ class _NewTripPageState extends State<NewTripPage> {
                   _TripDatesSelector(vm: vm),
                   const SizedBox(height: 24),
                   Observer(builder: (context) {
-                    return Text('Trip duration: ${vm.tripDuration} days');
+                    return Text('Trip duration: ${vm.form.tripDuration} days');
                   }),
                   const SizedBox(height: 24),
                   const Text('Where will you be travelling?'),
                   const SizedBox(height: 8),
                   _TripCountriesSelector(vm: vm),
                   Center(
-                    child: FilledButton(
-                      onPressed: () => saveTrip(),
+                    child: FilledOperationButton(
+                      onPressed: () => widget.vm.createTrip(),
+                      onSuccess: (trip) => getIt<AppRouter>().goToTrip(context, trip.id),
+                      inProgressChild: const Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          SizedBox(
+                            height: 12,
+                            width: 12,
+                            child: CircularProgressIndicator(strokeWidth: 2),
+                          ),
+                          SizedBox(width: 8),
+                          Text('Creating trip...'),
+                        ],
+                      ),
                       child: const Text('Create Trip'),
                     ),
                   ),
@@ -189,13 +205,13 @@ class _TripDatesSelector extends StatelessWidget {
           Expanded(
             child: InputFieldContainer(
               onTap: () => selectStartDate(context),
-              error: vm.startDateError?.message(vm, context),
+              error: vm.form.startDate.errorText(context),
               child: Row(
                 children: [
                   const Icon(Icons.calendar_today),
                   const SizedBox(width: 8),
                   Text(
-                    vm.startDate?.displayFormat() ?? 'Start date',
+                    vm.form.startDate.value?.displayFormat() ?? 'Start date',
                   ),
                 ],
               ),
@@ -205,13 +221,13 @@ class _TripDatesSelector extends StatelessWidget {
           Expanded(
             child: InputFieldContainer(
               onTap: () => selectEndDate(context),
-              error: vm.endDateError?.message(vm, context),
+              error: vm.form.endDate.errorText(context),
               child: Row(
                 children: [
                   const Icon(Icons.calendar_today),
                   const SizedBox(width: 8),
                   Text(
-                    vm.endDate?.displayFormat() ?? 'End date',
+                    vm.form.endDate.value?.displayFormat() ?? 'End date',
                   ),
                 ],
               ),
@@ -226,18 +242,18 @@ class _TripDatesSelector extends StatelessWidget {
     final now = DateTime.now();
     final date = await showDatePicker(
       context: context,
-      initialDate: vm.startDate ?? now,
+      initialDate: vm.form.startDate.value ?? now,
       firstDate: now.add(const Duration(days: -365)),
       lastDate: now.add(const Duration(days: 10 * 365)),
     );
     if (date != null) {
-      vm.setStartDate(date);
+      vm.form.startDate.set(date);
     }
   }
 
   void selectEndDate(BuildContext context) async {
     final now = DateTime.now();
-    final startDate = vm.startDate;
+    final startDate = vm.form.startDate.value;
     final date = await showDatePicker(
       context: context,
       initialDate: startDate?.add(const Duration(days: 1)) ?? now,
@@ -245,7 +261,7 @@ class _TripDatesSelector extends StatelessWidget {
       lastDate: (startDate ?? now).add(const Duration(days: 10 * 365)),
     );
     if (date != null) {
-      vm.setEndDate(date);
+      vm.form.endDate.set(date);
     }
   }
 }
@@ -258,28 +274,29 @@ class _TripCountriesSelector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Observer(builder: (context) {
+      final tripCountries = vm.form.tripCountries.value;
       return Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          RadioListTile(
+          RadioListTile<TripCountries>(
             value: TripCountries.single,
-            groupValue: vm.tripCountries,
-            onChanged: (value) => vm.setTripCountries(value!),
+            groupValue: tripCountries,
+            onChanged: (value) => vm.form.tripCountries.set(value!),
             title: const Text('One country'),
           ),
-          RadioListTile(
+          RadioListTile<TripCountries>(
             value: TripCountries.multiple,
-            groupValue: vm.tripCountries,
-            onChanged: (value) => vm.setTripCountries(value!),
+            groupValue: tripCountries,
+            onChanged: (value) => vm.form.tripCountries.set(value!),
             title: const Text('Multiple countries'),
           ),
-          if (vm.tripCountries == TripCountries.multiple)
+          if (tripCountries == TripCountries.multiple)
             const Padding(
               padding: EdgeInsets.only(top: 12),
               child: Text('A great globe-trotting adventure! You can add the countries later'),
             ),
-          if (vm.tripCountries == TripCountries.single)
+          if (tripCountries == TripCountries.single)
             Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -291,20 +308,20 @@ class _TripCountriesSelector extends StatelessWidget {
                 const SizedBox(height: 16),
                 InputFieldContainer(
                   onTap: () => selectSingleCountry(context),
-                  error: vm.singleCountryError?.message(vm, context),
+                  error: vm.form.singleCountryCode.errorText(context),
                   child: Row(children: [
                     const Icon(Icons.map),
                     const SizedBox(width: 8),
                     Text(
-                      vm.country?.displayName ?? 'Select country',
+                      vm.form.country?.displayName ?? 'Select country',
                     ),
                   ]),
                 )
               ],
             ),
-          if (vm.tripCountriesError?.message(vm, context) != null)
+          if (vm.form.tripCountries.errorText(context) != null)
             Text(
-              vm.tripCountriesError!.message(vm, context)!,
+              vm.form.tripCountries.errorText(context)!,
               style: Theme.of(context).inputDecorationTheme.errorStyle,
             ),
         ],
@@ -317,7 +334,7 @@ class _TripCountriesSelector extends StatelessWidget {
       context: context,
       showPhoneCode: false,
       onSelect: (Country country) {
-        vm.setSingleCountry(country.countryCode);
+        vm.form.singleCountryCode.set(country.countryCode);
       },
     );
   }

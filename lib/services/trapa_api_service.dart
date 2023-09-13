@@ -18,12 +18,31 @@ class TrapaApiService {
 
   final AuthService _authService;
 
-  /// Sent a HTTP POST request to the provided path. If the server cannot be reached, a
+  /// Sent a HTTP PUT request to the provided path. If the server cannot be reached, a
+  /// [TrapaApiConnectionException] will be thrown.
+  Future<TrapaApiResponse> put(String path, dynamic body) async {
+    final uri = Uri.parse('$host/$path');
+    try {
+      final response = await http.put(uri, body: json.encode(body), headers: _buildHeaders());
+      return TrapaApiResponse(
+        responseBody: response.body,
+        requestUri: uri,
+        statusCode: response.statusCode,
+      );
+    } catch (e, trace) {
+      Error.throwWithStackTrace(
+        TrapaApiConnectionException(requestPath: path, message: e.toString()),
+        trace,
+      );
+    }
+  }
+
+  /// Send a HTTP POST request to the provided path. If the server cannot be reached, a
   /// [TrapaApiConnectionException] will be thrown.
   Future<TrapaApiResponse> post(String path, dynamic body) async {
     final uri = Uri.parse('$host/$path');
-    final response = await http.post(uri, body: body, headers: _buildHeaders());
     try {
+      final response = await http.post(uri, body: json.encode(body), headers: _buildHeaders());
       return TrapaApiResponse(
         responseBody: response.body,
         requestUri: uri,

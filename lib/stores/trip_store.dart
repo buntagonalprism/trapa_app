@@ -24,11 +24,9 @@ abstract class _TripStore with Store {
   @observable
   int value = 0;
 
-  static const tripsPath = 'trips';
+  static const tripsPath = 'v1/trips';
 
   static String tripPath(String id) => '$tripsPath/$id';
-
-  static const newTripPath = '$tripsPath/new';
 
   Future<NetworkResult<Trip>> createTrip({
     required String name,
@@ -37,8 +35,8 @@ abstract class _TripStore with Store {
     required bool singleCountry,
   }) async {
     try {
-      final response = await apiService.post(
-        newTripPath,
+      final response = await apiService.put(
+        tripsPath,
         CreateTripRequest(
           name: name,
           startDate: startDate,

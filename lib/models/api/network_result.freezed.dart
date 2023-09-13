@@ -19,7 +19,6 @@ mixin _$NetworkResult<T> {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(T value) success,
-    required TResult Function(String displayMessage) error,
     required TResult Function() unknownError,
     required TResult Function() connectionError,
   }) =>
@@ -27,7 +26,6 @@ mixin _$NetworkResult<T> {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(T value)? success,
-    TResult? Function(String displayMessage)? error,
     TResult? Function()? unknownError,
     TResult? Function()? connectionError,
   }) =>
@@ -35,7 +33,6 @@ mixin _$NetworkResult<T> {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(T value)? success,
-    TResult Function(String displayMessage)? error,
     TResult Function()? unknownError,
     TResult Function()? connectionError,
     required TResult orElse(),
@@ -44,7 +41,6 @@ mixin _$NetworkResult<T> {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(NetworkResultSuccess<T> value) success,
-    required TResult Function(NetworkResultError<T> value) error,
     required TResult Function(NetworkResultUnknownError<T> value) unknownError,
     required TResult Function(NetworkResultConnectionError<T> value)
         connectionError,
@@ -53,7 +49,6 @@ mixin _$NetworkResult<T> {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(NetworkResultSuccess<T> value)? success,
-    TResult? Function(NetworkResultError<T> value)? error,
     TResult? Function(NetworkResultUnknownError<T> value)? unknownError,
     TResult? Function(NetworkResultConnectionError<T> value)? connectionError,
   }) =>
@@ -61,7 +56,6 @@ mixin _$NetworkResult<T> {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(NetworkResultSuccess<T> value)? success,
-    TResult Function(NetworkResultError<T> value)? error,
     TResult Function(NetworkResultUnknownError<T> value)? unknownError,
     TResult Function(NetworkResultConnectionError<T> value)? connectionError,
     required TResult orElse(),
@@ -154,7 +148,6 @@ class _$NetworkResultSuccess<T> implements NetworkResultSuccess<T> {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(T value) success,
-    required TResult Function(String displayMessage) error,
     required TResult Function() unknownError,
     required TResult Function() connectionError,
   }) {
@@ -165,7 +158,6 @@ class _$NetworkResultSuccess<T> implements NetworkResultSuccess<T> {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(T value)? success,
-    TResult? Function(String displayMessage)? error,
     TResult? Function()? unknownError,
     TResult? Function()? connectionError,
   }) {
@@ -176,7 +168,6 @@ class _$NetworkResultSuccess<T> implements NetworkResultSuccess<T> {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(T value)? success,
-    TResult Function(String displayMessage)? error,
     TResult Function()? unknownError,
     TResult Function()? connectionError,
     required TResult orElse(),
@@ -191,7 +182,6 @@ class _$NetworkResultSuccess<T> implements NetworkResultSuccess<T> {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(NetworkResultSuccess<T> value) success,
-    required TResult Function(NetworkResultError<T> value) error,
     required TResult Function(NetworkResultUnknownError<T> value) unknownError,
     required TResult Function(NetworkResultConnectionError<T> value)
         connectionError,
@@ -203,7 +193,6 @@ class _$NetworkResultSuccess<T> implements NetworkResultSuccess<T> {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(NetworkResultSuccess<T> value)? success,
-    TResult? Function(NetworkResultError<T> value)? error,
     TResult? Function(NetworkResultUnknownError<T> value)? unknownError,
     TResult? Function(NetworkResultConnectionError<T> value)? connectionError,
   }) {
@@ -214,7 +203,6 @@ class _$NetworkResultSuccess<T> implements NetworkResultSuccess<T> {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(NetworkResultSuccess<T> value)? success,
-    TResult Function(NetworkResultError<T> value)? error,
     TResult Function(NetworkResultUnknownError<T> value)? unknownError,
     TResult Function(NetworkResultConnectionError<T> value)? connectionError,
     required TResult orElse(),
@@ -232,155 +220,6 @@ abstract class NetworkResultSuccess<T> implements NetworkResult<T> {
   T get value;
   @JsonKey(ignore: true)
   _$$NetworkResultSuccessCopyWith<T, _$NetworkResultSuccess<T>> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$NetworkResultErrorCopyWith<T, $Res> {
-  factory _$$NetworkResultErrorCopyWith(_$NetworkResultError<T> value,
-          $Res Function(_$NetworkResultError<T>) then) =
-      __$$NetworkResultErrorCopyWithImpl<T, $Res>;
-  @useResult
-  $Res call({String displayMessage});
-}
-
-/// @nodoc
-class __$$NetworkResultErrorCopyWithImpl<T, $Res>
-    extends _$NetworkResultCopyWithImpl<T, $Res, _$NetworkResultError<T>>
-    implements _$$NetworkResultErrorCopyWith<T, $Res> {
-  __$$NetworkResultErrorCopyWithImpl(_$NetworkResultError<T> _value,
-      $Res Function(_$NetworkResultError<T>) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? displayMessage = null,
-  }) {
-    return _then(_$NetworkResultError<T>(
-      null == displayMessage
-          ? _value.displayMessage
-          : displayMessage // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$NetworkResultError<T> implements NetworkResultError<T> {
-  const _$NetworkResultError(this.displayMessage);
-
-  @override
-  final String displayMessage;
-
-  @override
-  String toString() {
-    return 'NetworkResult<$T>.error(displayMessage: $displayMessage)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$NetworkResultError<T> &&
-            (identical(other.displayMessage, displayMessage) ||
-                other.displayMessage == displayMessage));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, displayMessage);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$NetworkResultErrorCopyWith<T, _$NetworkResultError<T>> get copyWith =>
-      __$$NetworkResultErrorCopyWithImpl<T, _$NetworkResultError<T>>(
-          this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(T value) success,
-    required TResult Function(String displayMessage) error,
-    required TResult Function() unknownError,
-    required TResult Function() connectionError,
-  }) {
-    return error(displayMessage);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(T value)? success,
-    TResult? Function(String displayMessage)? error,
-    TResult? Function()? unknownError,
-    TResult? Function()? connectionError,
-  }) {
-    return error?.call(displayMessage);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(T value)? success,
-    TResult Function(String displayMessage)? error,
-    TResult Function()? unknownError,
-    TResult Function()? connectionError,
-    required TResult orElse(),
-  }) {
-    if (error != null) {
-      return error(displayMessage);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(NetworkResultSuccess<T> value) success,
-    required TResult Function(NetworkResultError<T> value) error,
-    required TResult Function(NetworkResultUnknownError<T> value) unknownError,
-    required TResult Function(NetworkResultConnectionError<T> value)
-        connectionError,
-  }) {
-    return error(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(NetworkResultSuccess<T> value)? success,
-    TResult? Function(NetworkResultError<T> value)? error,
-    TResult? Function(NetworkResultUnknownError<T> value)? unknownError,
-    TResult? Function(NetworkResultConnectionError<T> value)? connectionError,
-  }) {
-    return error?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(NetworkResultSuccess<T> value)? success,
-    TResult Function(NetworkResultError<T> value)? error,
-    TResult Function(NetworkResultUnknownError<T> value)? unknownError,
-    TResult Function(NetworkResultConnectionError<T> value)? connectionError,
-    required TResult orElse(),
-  }) {
-    if (error != null) {
-      return error(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class NetworkResultError<T> implements NetworkResult<T> {
-  const factory NetworkResultError(final String displayMessage) =
-      _$NetworkResultError<T>;
-
-  String get displayMessage;
-  @JsonKey(ignore: true)
-  _$$NetworkResultErrorCopyWith<T, _$NetworkResultError<T>> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -426,7 +265,6 @@ class _$NetworkResultUnknownError<T> implements NetworkResultUnknownError<T> {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(T value) success,
-    required TResult Function(String displayMessage) error,
     required TResult Function() unknownError,
     required TResult Function() connectionError,
   }) {
@@ -437,7 +275,6 @@ class _$NetworkResultUnknownError<T> implements NetworkResultUnknownError<T> {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(T value)? success,
-    TResult? Function(String displayMessage)? error,
     TResult? Function()? unknownError,
     TResult? Function()? connectionError,
   }) {
@@ -448,7 +285,6 @@ class _$NetworkResultUnknownError<T> implements NetworkResultUnknownError<T> {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(T value)? success,
-    TResult Function(String displayMessage)? error,
     TResult Function()? unknownError,
     TResult Function()? connectionError,
     required TResult orElse(),
@@ -463,7 +299,6 @@ class _$NetworkResultUnknownError<T> implements NetworkResultUnknownError<T> {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(NetworkResultSuccess<T> value) success,
-    required TResult Function(NetworkResultError<T> value) error,
     required TResult Function(NetworkResultUnknownError<T> value) unknownError,
     required TResult Function(NetworkResultConnectionError<T> value)
         connectionError,
@@ -475,7 +310,6 @@ class _$NetworkResultUnknownError<T> implements NetworkResultUnknownError<T> {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(NetworkResultSuccess<T> value)? success,
-    TResult? Function(NetworkResultError<T> value)? error,
     TResult? Function(NetworkResultUnknownError<T> value)? unknownError,
     TResult? Function(NetworkResultConnectionError<T> value)? connectionError,
   }) {
@@ -486,7 +320,6 @@ class _$NetworkResultUnknownError<T> implements NetworkResultUnknownError<T> {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(NetworkResultSuccess<T> value)? success,
-    TResult Function(NetworkResultError<T> value)? error,
     TResult Function(NetworkResultUnknownError<T> value)? unknownError,
     TResult Function(NetworkResultConnectionError<T> value)? connectionError,
     required TResult orElse(),
@@ -546,7 +379,6 @@ class _$NetworkResultConnectionError<T>
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(T value) success,
-    required TResult Function(String displayMessage) error,
     required TResult Function() unknownError,
     required TResult Function() connectionError,
   }) {
@@ -557,7 +389,6 @@ class _$NetworkResultConnectionError<T>
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(T value)? success,
-    TResult? Function(String displayMessage)? error,
     TResult? Function()? unknownError,
     TResult? Function()? connectionError,
   }) {
@@ -568,7 +399,6 @@ class _$NetworkResultConnectionError<T>
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(T value)? success,
-    TResult Function(String displayMessage)? error,
     TResult Function()? unknownError,
     TResult Function()? connectionError,
     required TResult orElse(),
@@ -583,7 +413,6 @@ class _$NetworkResultConnectionError<T>
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(NetworkResultSuccess<T> value) success,
-    required TResult Function(NetworkResultError<T> value) error,
     required TResult Function(NetworkResultUnknownError<T> value) unknownError,
     required TResult Function(NetworkResultConnectionError<T> value)
         connectionError,
@@ -595,7 +424,6 @@ class _$NetworkResultConnectionError<T>
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(NetworkResultSuccess<T> value)? success,
-    TResult? Function(NetworkResultError<T> value)? error,
     TResult? Function(NetworkResultUnknownError<T> value)? unknownError,
     TResult? Function(NetworkResultConnectionError<T> value)? connectionError,
   }) {
@@ -606,7 +434,6 @@ class _$NetworkResultConnectionError<T>
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(NetworkResultSuccess<T> value)? success,
-    TResult Function(NetworkResultError<T> value)? error,
     TResult Function(NetworkResultUnknownError<T> value)? unknownError,
     TResult Function(NetworkResultConnectionError<T> value)? connectionError,
     required TResult orElse(),
@@ -621,4 +448,665 @@ class _$NetworkResultConnectionError<T>
 abstract class NetworkResultConnectionError<T> implements NetworkResult<T> {
   const factory NetworkResultConnectionError() =
       _$NetworkResultConnectionError<T>;
+}
+
+/// @nodoc
+mixin _$NetworkResultWithError<V, E> {
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(V value) success,
+    required TResult Function(E error) error,
+    required TResult Function() unknownError,
+    required TResult Function() connectionError,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(V value)? success,
+    TResult? Function(E error)? error,
+    TResult? Function()? unknownError,
+    TResult? Function()? connectionError,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(V value)? success,
+    TResult Function(E error)? error,
+    TResult Function()? unknownError,
+    TResult Function()? connectionError,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(NetworkResultWithErrorSuccess<V, E> value)
+        success,
+    required TResult Function(NetworkResultWithErrorError<V, E> value) error,
+    required TResult Function(NetworkResultWithErrorUnknownError<V, E> value)
+        unknownError,
+    required TResult Function(NetworkResultWithErrorConnectionError<V, E> value)
+        connectionError,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(NetworkResultWithErrorSuccess<V, E> value)? success,
+    TResult? Function(NetworkResultWithErrorError<V, E> value)? error,
+    TResult? Function(NetworkResultWithErrorUnknownError<V, E> value)?
+        unknownError,
+    TResult? Function(NetworkResultWithErrorConnectionError<V, E> value)?
+        connectionError,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(NetworkResultWithErrorSuccess<V, E> value)? success,
+    TResult Function(NetworkResultWithErrorError<V, E> value)? error,
+    TResult Function(NetworkResultWithErrorUnknownError<V, E> value)?
+        unknownError,
+    TResult Function(NetworkResultWithErrorConnectionError<V, E> value)?
+        connectionError,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $NetworkResultWithErrorCopyWith<V, E, $Res> {
+  factory $NetworkResultWithErrorCopyWith(NetworkResultWithError<V, E> value,
+          $Res Function(NetworkResultWithError<V, E>) then) =
+      _$NetworkResultWithErrorCopyWithImpl<V, E, $Res,
+          NetworkResultWithError<V, E>>;
+}
+
+/// @nodoc
+class _$NetworkResultWithErrorCopyWithImpl<V, E, $Res,
+        $Val extends NetworkResultWithError<V, E>>
+    implements $NetworkResultWithErrorCopyWith<V, E, $Res> {
+  _$NetworkResultWithErrorCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+}
+
+/// @nodoc
+abstract class _$$NetworkResultWithErrorSuccessCopyWith<V, E, $Res> {
+  factory _$$NetworkResultWithErrorSuccessCopyWith(
+          _$NetworkResultWithErrorSuccess<V, E> value,
+          $Res Function(_$NetworkResultWithErrorSuccess<V, E>) then) =
+      __$$NetworkResultWithErrorSuccessCopyWithImpl<V, E, $Res>;
+  @useResult
+  $Res call({V value});
+}
+
+/// @nodoc
+class __$$NetworkResultWithErrorSuccessCopyWithImpl<V, E, $Res>
+    extends _$NetworkResultWithErrorCopyWithImpl<V, E, $Res,
+        _$NetworkResultWithErrorSuccess<V, E>>
+    implements _$$NetworkResultWithErrorSuccessCopyWith<V, E, $Res> {
+  __$$NetworkResultWithErrorSuccessCopyWithImpl(
+      _$NetworkResultWithErrorSuccess<V, E> _value,
+      $Res Function(_$NetworkResultWithErrorSuccess<V, E>) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? value = freezed,
+  }) {
+    return _then(_$NetworkResultWithErrorSuccess<V, E>(
+      freezed == value
+          ? _value.value
+          : value // ignore: cast_nullable_to_non_nullable
+              as V,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$NetworkResultWithErrorSuccess<V, E>
+    implements NetworkResultWithErrorSuccess<V, E> {
+  const _$NetworkResultWithErrorSuccess(this.value);
+
+  @override
+  final V value;
+
+  @override
+  String toString() {
+    return 'NetworkResultWithError<$V, $E>.success(value: $value)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$NetworkResultWithErrorSuccess<V, E> &&
+            const DeepCollectionEquality().equals(other.value, value));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(value));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$NetworkResultWithErrorSuccessCopyWith<V, E,
+          _$NetworkResultWithErrorSuccess<V, E>>
+      get copyWith => __$$NetworkResultWithErrorSuccessCopyWithImpl<V, E,
+          _$NetworkResultWithErrorSuccess<V, E>>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(V value) success,
+    required TResult Function(E error) error,
+    required TResult Function() unknownError,
+    required TResult Function() connectionError,
+  }) {
+    return success(value);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(V value)? success,
+    TResult? Function(E error)? error,
+    TResult? Function()? unknownError,
+    TResult? Function()? connectionError,
+  }) {
+    return success?.call(value);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(V value)? success,
+    TResult Function(E error)? error,
+    TResult Function()? unknownError,
+    TResult Function()? connectionError,
+    required TResult orElse(),
+  }) {
+    if (success != null) {
+      return success(value);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(NetworkResultWithErrorSuccess<V, E> value)
+        success,
+    required TResult Function(NetworkResultWithErrorError<V, E> value) error,
+    required TResult Function(NetworkResultWithErrorUnknownError<V, E> value)
+        unknownError,
+    required TResult Function(NetworkResultWithErrorConnectionError<V, E> value)
+        connectionError,
+  }) {
+    return success(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(NetworkResultWithErrorSuccess<V, E> value)? success,
+    TResult? Function(NetworkResultWithErrorError<V, E> value)? error,
+    TResult? Function(NetworkResultWithErrorUnknownError<V, E> value)?
+        unknownError,
+    TResult? Function(NetworkResultWithErrorConnectionError<V, E> value)?
+        connectionError,
+  }) {
+    return success?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(NetworkResultWithErrorSuccess<V, E> value)? success,
+    TResult Function(NetworkResultWithErrorError<V, E> value)? error,
+    TResult Function(NetworkResultWithErrorUnknownError<V, E> value)?
+        unknownError,
+    TResult Function(NetworkResultWithErrorConnectionError<V, E> value)?
+        connectionError,
+    required TResult orElse(),
+  }) {
+    if (success != null) {
+      return success(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class NetworkResultWithErrorSuccess<V, E>
+    implements NetworkResultWithError<V, E> {
+  const factory NetworkResultWithErrorSuccess(final V value) =
+      _$NetworkResultWithErrorSuccess<V, E>;
+
+  V get value;
+  @JsonKey(ignore: true)
+  _$$NetworkResultWithErrorSuccessCopyWith<V, E,
+          _$NetworkResultWithErrorSuccess<V, E>>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$NetworkResultWithErrorErrorCopyWith<V, E, $Res> {
+  factory _$$NetworkResultWithErrorErrorCopyWith(
+          _$NetworkResultWithErrorError<V, E> value,
+          $Res Function(_$NetworkResultWithErrorError<V, E>) then) =
+      __$$NetworkResultWithErrorErrorCopyWithImpl<V, E, $Res>;
+  @useResult
+  $Res call({E error});
+}
+
+/// @nodoc
+class __$$NetworkResultWithErrorErrorCopyWithImpl<V, E, $Res>
+    extends _$NetworkResultWithErrorCopyWithImpl<V, E, $Res,
+        _$NetworkResultWithErrorError<V, E>>
+    implements _$$NetworkResultWithErrorErrorCopyWith<V, E, $Res> {
+  __$$NetworkResultWithErrorErrorCopyWithImpl(
+      _$NetworkResultWithErrorError<V, E> _value,
+      $Res Function(_$NetworkResultWithErrorError<V, E>) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? error = freezed,
+  }) {
+    return _then(_$NetworkResultWithErrorError<V, E>(
+      freezed == error
+          ? _value.error
+          : error // ignore: cast_nullable_to_non_nullable
+              as E,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$NetworkResultWithErrorError<V, E>
+    implements NetworkResultWithErrorError<V, E> {
+  const _$NetworkResultWithErrorError(this.error);
+
+  @override
+  final E error;
+
+  @override
+  String toString() {
+    return 'NetworkResultWithError<$V, $E>.error(error: $error)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$NetworkResultWithErrorError<V, E> &&
+            const DeepCollectionEquality().equals(other.error, error));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(error));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$NetworkResultWithErrorErrorCopyWith<V, E,
+          _$NetworkResultWithErrorError<V, E>>
+      get copyWith => __$$NetworkResultWithErrorErrorCopyWithImpl<V, E,
+          _$NetworkResultWithErrorError<V, E>>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(V value) success,
+    required TResult Function(E error) error,
+    required TResult Function() unknownError,
+    required TResult Function() connectionError,
+  }) {
+    return error(this.error);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(V value)? success,
+    TResult? Function(E error)? error,
+    TResult? Function()? unknownError,
+    TResult? Function()? connectionError,
+  }) {
+    return error?.call(this.error);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(V value)? success,
+    TResult Function(E error)? error,
+    TResult Function()? unknownError,
+    TResult Function()? connectionError,
+    required TResult orElse(),
+  }) {
+    if (error != null) {
+      return error(this.error);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(NetworkResultWithErrorSuccess<V, E> value)
+        success,
+    required TResult Function(NetworkResultWithErrorError<V, E> value) error,
+    required TResult Function(NetworkResultWithErrorUnknownError<V, E> value)
+        unknownError,
+    required TResult Function(NetworkResultWithErrorConnectionError<V, E> value)
+        connectionError,
+  }) {
+    return error(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(NetworkResultWithErrorSuccess<V, E> value)? success,
+    TResult? Function(NetworkResultWithErrorError<V, E> value)? error,
+    TResult? Function(NetworkResultWithErrorUnknownError<V, E> value)?
+        unknownError,
+    TResult? Function(NetworkResultWithErrorConnectionError<V, E> value)?
+        connectionError,
+  }) {
+    return error?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(NetworkResultWithErrorSuccess<V, E> value)? success,
+    TResult Function(NetworkResultWithErrorError<V, E> value)? error,
+    TResult Function(NetworkResultWithErrorUnknownError<V, E> value)?
+        unknownError,
+    TResult Function(NetworkResultWithErrorConnectionError<V, E> value)?
+        connectionError,
+    required TResult orElse(),
+  }) {
+    if (error != null) {
+      return error(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class NetworkResultWithErrorError<V, E>
+    implements NetworkResultWithError<V, E> {
+  const factory NetworkResultWithErrorError(final E error) =
+      _$NetworkResultWithErrorError<V, E>;
+
+  E get error;
+  @JsonKey(ignore: true)
+  _$$NetworkResultWithErrorErrorCopyWith<V, E,
+          _$NetworkResultWithErrorError<V, E>>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$NetworkResultWithErrorUnknownErrorCopyWith<V, E, $Res> {
+  factory _$$NetworkResultWithErrorUnknownErrorCopyWith(
+          _$NetworkResultWithErrorUnknownError<V, E> value,
+          $Res Function(_$NetworkResultWithErrorUnknownError<V, E>) then) =
+      __$$NetworkResultWithErrorUnknownErrorCopyWithImpl<V, E, $Res>;
+}
+
+/// @nodoc
+class __$$NetworkResultWithErrorUnknownErrorCopyWithImpl<V, E, $Res>
+    extends _$NetworkResultWithErrorCopyWithImpl<V, E, $Res,
+        _$NetworkResultWithErrorUnknownError<V, E>>
+    implements _$$NetworkResultWithErrorUnknownErrorCopyWith<V, E, $Res> {
+  __$$NetworkResultWithErrorUnknownErrorCopyWithImpl(
+      _$NetworkResultWithErrorUnknownError<V, E> _value,
+      $Res Function(_$NetworkResultWithErrorUnknownError<V, E>) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$NetworkResultWithErrorUnknownError<V, E>
+    implements NetworkResultWithErrorUnknownError<V, E> {
+  const _$NetworkResultWithErrorUnknownError();
+
+  @override
+  String toString() {
+    return 'NetworkResultWithError<$V, $E>.unknownError()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$NetworkResultWithErrorUnknownError<V, E>);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(V value) success,
+    required TResult Function(E error) error,
+    required TResult Function() unknownError,
+    required TResult Function() connectionError,
+  }) {
+    return unknownError();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(V value)? success,
+    TResult? Function(E error)? error,
+    TResult? Function()? unknownError,
+    TResult? Function()? connectionError,
+  }) {
+    return unknownError?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(V value)? success,
+    TResult Function(E error)? error,
+    TResult Function()? unknownError,
+    TResult Function()? connectionError,
+    required TResult orElse(),
+  }) {
+    if (unknownError != null) {
+      return unknownError();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(NetworkResultWithErrorSuccess<V, E> value)
+        success,
+    required TResult Function(NetworkResultWithErrorError<V, E> value) error,
+    required TResult Function(NetworkResultWithErrorUnknownError<V, E> value)
+        unknownError,
+    required TResult Function(NetworkResultWithErrorConnectionError<V, E> value)
+        connectionError,
+  }) {
+    return unknownError(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(NetworkResultWithErrorSuccess<V, E> value)? success,
+    TResult? Function(NetworkResultWithErrorError<V, E> value)? error,
+    TResult? Function(NetworkResultWithErrorUnknownError<V, E> value)?
+        unknownError,
+    TResult? Function(NetworkResultWithErrorConnectionError<V, E> value)?
+        connectionError,
+  }) {
+    return unknownError?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(NetworkResultWithErrorSuccess<V, E> value)? success,
+    TResult Function(NetworkResultWithErrorError<V, E> value)? error,
+    TResult Function(NetworkResultWithErrorUnknownError<V, E> value)?
+        unknownError,
+    TResult Function(NetworkResultWithErrorConnectionError<V, E> value)?
+        connectionError,
+    required TResult orElse(),
+  }) {
+    if (unknownError != null) {
+      return unknownError(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class NetworkResultWithErrorUnknownError<V, E>
+    implements NetworkResultWithError<V, E> {
+  const factory NetworkResultWithErrorUnknownError() =
+      _$NetworkResultWithErrorUnknownError<V, E>;
+}
+
+/// @nodoc
+abstract class _$$NetworkResultWithErrorConnectionErrorCopyWith<V, E, $Res> {
+  factory _$$NetworkResultWithErrorConnectionErrorCopyWith(
+          _$NetworkResultWithErrorConnectionError<V, E> value,
+          $Res Function(_$NetworkResultWithErrorConnectionError<V, E>) then) =
+      __$$NetworkResultWithErrorConnectionErrorCopyWithImpl<V, E, $Res>;
+}
+
+/// @nodoc
+class __$$NetworkResultWithErrorConnectionErrorCopyWithImpl<V, E, $Res>
+    extends _$NetworkResultWithErrorCopyWithImpl<V, E, $Res,
+        _$NetworkResultWithErrorConnectionError<V, E>>
+    implements _$$NetworkResultWithErrorConnectionErrorCopyWith<V, E, $Res> {
+  __$$NetworkResultWithErrorConnectionErrorCopyWithImpl(
+      _$NetworkResultWithErrorConnectionError<V, E> _value,
+      $Res Function(_$NetworkResultWithErrorConnectionError<V, E>) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$NetworkResultWithErrorConnectionError<V, E>
+    implements NetworkResultWithErrorConnectionError<V, E> {
+  const _$NetworkResultWithErrorConnectionError();
+
+  @override
+  String toString() {
+    return 'NetworkResultWithError<$V, $E>.connectionError()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$NetworkResultWithErrorConnectionError<V, E>);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(V value) success,
+    required TResult Function(E error) error,
+    required TResult Function() unknownError,
+    required TResult Function() connectionError,
+  }) {
+    return connectionError();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(V value)? success,
+    TResult? Function(E error)? error,
+    TResult? Function()? unknownError,
+    TResult? Function()? connectionError,
+  }) {
+    return connectionError?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(V value)? success,
+    TResult Function(E error)? error,
+    TResult Function()? unknownError,
+    TResult Function()? connectionError,
+    required TResult orElse(),
+  }) {
+    if (connectionError != null) {
+      return connectionError();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(NetworkResultWithErrorSuccess<V, E> value)
+        success,
+    required TResult Function(NetworkResultWithErrorError<V, E> value) error,
+    required TResult Function(NetworkResultWithErrorUnknownError<V, E> value)
+        unknownError,
+    required TResult Function(NetworkResultWithErrorConnectionError<V, E> value)
+        connectionError,
+  }) {
+    return connectionError(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(NetworkResultWithErrorSuccess<V, E> value)? success,
+    TResult? Function(NetworkResultWithErrorError<V, E> value)? error,
+    TResult? Function(NetworkResultWithErrorUnknownError<V, E> value)?
+        unknownError,
+    TResult? Function(NetworkResultWithErrorConnectionError<V, E> value)?
+        connectionError,
+  }) {
+    return connectionError?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(NetworkResultWithErrorSuccess<V, E> value)? success,
+    TResult Function(NetworkResultWithErrorError<V, E> value)? error,
+    TResult Function(NetworkResultWithErrorUnknownError<V, E> value)?
+        unknownError,
+    TResult Function(NetworkResultWithErrorConnectionError<V, E> value)?
+        connectionError,
+    required TResult orElse(),
+  }) {
+    if (connectionError != null) {
+      return connectionError(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class NetworkResultWithErrorConnectionError<V, E>
+    implements NetworkResultWithError<V, E> {
+  const factory NetworkResultWithErrorConnectionError() =
+      _$NetworkResultWithErrorConnectionError<V, E>;
 }

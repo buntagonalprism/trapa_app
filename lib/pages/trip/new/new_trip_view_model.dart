@@ -32,7 +32,6 @@ abstract class _NewTripViewModel with Store {
   }
 
   Future<OperationResult<Trip>> _createTrip() async {
-    await Future.delayed(const Duration(seconds: 3));
     final result = await tripStore.createTrip(
       name: form.tripName.value,
       startDate: form.startDate.value!,

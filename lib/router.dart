@@ -29,6 +29,10 @@ class AppRouter {
     context.go('/trips/new');
   }
 
+  void goToTrip(BuildContext context, String tripId) {
+    context.go('/trips/$tripId');
+  }
+
   late final goRouter = GoRouter(
     routes: [
       GoRoute(
