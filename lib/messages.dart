@@ -10,4 +10,12 @@ extension MessagesExtension on AppMessages {
   String get homeNewTrip => 'New Trip';
   String get newTripTitle => 'New Trip';
   String get newTripErrorTripNameMissing => 'Trip name is required';
+  String get connectionErrorTitle => 'Connection Error';
+  String get connectionErrorBody => 'Please try again';
+  String get unknownErrorTitle => 'Unknown Error';
+  String get unknownErrorBody => 'An unexpected error has occured. Please contact support';
+  String get actionOk => 'Ok';
+  String get actionClose => 'Close';
+  String get actionCancel => 'Cancel';
+  String get actionRetry => 'Retry';
 }
