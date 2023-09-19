@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 
 import '../../messages.dart';
+import '../../models/api/network_observable.dart';
+import '../../models/trip/trip.dart';
 import '../../widgets/home_icon.dart';
 import '../../widgets/settings_icon.dart';
 import 'trip_view_model.dart';
@@ -30,14 +33,17 @@ class TripPage extends StatelessWidget {
               size: 20,
             ),
             const SizedBox(width: 12),
-            Text(
-              messages.newTripTitle,
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 20,
-                color: Colors.white,
-              ),
-            ),
+            Observer(builder: (context) {
+              final trip = vm.tripObservable.valueOrNull();
+              return Text(
+                trip?.name ?? '',
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                  color: Colors.white,
+                ),
+              );
+            }),
           ],
         ),
         actions: [
@@ -45,8 +51,26 @@ class TripPage extends StatelessWidget {
         ],
       ),
       body: Center(
-        child: Text(vm.tripId),
+        child: Observer(builder: (context) {
+          return vm.tripObservable.value.when(
+            data: (trip, _) => TripView(trip: trip),
+            unknownError: () => const Text('Unknown error'),
+            loading: () => const CircularProgressIndicator(),
+            notFound: () => Text('No trip found with id ${vm.tripId}'),
+          );
+        }),
       ),
     );
+  }
+}
+
+class TripView extends StatelessWidget {
+  const TripView({required this.trip, super.key});
+
+  final Trip trip;
+
+  @override
+  Widget build(BuildContext context) {
+    return const Placeholder();
   }
 }

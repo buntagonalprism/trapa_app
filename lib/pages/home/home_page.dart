@@ -118,22 +118,26 @@ class TripTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final duration = trip.endDate.difference(trip.startDate).inDays;
     return Card(
-      child: Container(
-        height: 180,
-        width: 300,
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(trip.name, style: Theme.of(context).textTheme.headlineSmall),
-            const SizedBox(height: 12),
-            Text('Departing: ${_dateFormat.format(trip.startDate)}'),
-            const SizedBox(height: 12),
-            Text('Returning: ${_dateFormat.format(trip.endDate)}'),
-            const SizedBox(height: 12),
-            Text('Duration: $duration day${duration == 1 ? '' : 's'}'),
-          ],
+      clipBehavior: Clip.hardEdge,
+      child: InkWell(
+        onTap: () => getIt<AppRouter>().goToTrip(context, trip.id),
+        child: Container(
+          height: 180,
+          width: 300,
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(trip.name, style: Theme.of(context).textTheme.headlineSmall),
+              const SizedBox(height: 12),
+              Text('Departing: ${_dateFormat.format(trip.startDate)}'),
+              const SizedBox(height: 12),
+              Text('Returning: ${_dateFormat.format(trip.endDate)}'),
+              const SizedBox(height: 12),
+              Text('Duration: $duration day${duration == 1 ? '' : 's'}'),
+            ],
+          ),
         ),
       ),
     );

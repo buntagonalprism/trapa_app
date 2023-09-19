@@ -2,6 +2,7 @@ import 'package:country_picker/country_picker.dart';
 import 'package:injectable/injectable.dart';
 import 'package:mobx/mobx.dart';
 
+import '../models/api/network_observable.dart';
 import '../models/api/network_result.dart';
 import '../models/json_converters.dart';
 import '../models/trip/api/create_trip_request.dart';
@@ -34,7 +35,7 @@ abstract class _TripStore with Store {
   static const tripsFirestoreCollection = 'trips';
 
   @computed
-  ObservableStream<List<Trip>>? get _userTrips {
+  NetworkObservable<List<Trip>>? get _userTripsObservable {
     final user = authService.user;
     if (user == null) {
       return null;
@@ -53,15 +54,7 @@ abstract class _TripStore with Store {
   }
 
   @computed
-  List<Trip> get userTrips {
-    if (_userTrips == null) {
-      return [];
-    }
-    if (_userTrips!.value == null) {
-      return [];
-    }
-    return _userTrips!.value!;
-  }
+  List<Trip> get userTrips => _userTripsObservable?.valueOrNull() ?? [];
 
   Future<NetworkResult<Trip>> createTrip({
     required String name,
@@ -88,5 +81,12 @@ abstract class _TripStore with Store {
       crashReporter.report(e, t);
       return const NetworkResult.unknownError();
     }
+  }
+
+  ObservableValue<NetworkDataSnapshot<Trip>> getTrip(String tripId) {
+    return firestoreService.documentSnapshots<Trip>(
+      path: '$tripsFirestoreCollection/$tripId',
+      fromJson: Trip.fromJson,
+    );
   }
 }

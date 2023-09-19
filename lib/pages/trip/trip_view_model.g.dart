@@ -25,6 +25,22 @@ mixin _$TripViewModel on _TripViewModel, Store {
     });
   }
 
+  late final _$tripObservableAtom =
+      Atom(name: '_TripViewModel.tripObservable', context: context);
+
+  @override
+  ObservableValue<NetworkDataSnapshot<Trip>> get tripObservable {
+    _$tripObservableAtom.reportRead();
+    return super.tripObservable;
+  }
+
+  @override
+  set tripObservable(ObservableValue<NetworkDataSnapshot<Trip>> value) {
+    _$tripObservableAtom.reportWrite(value, super.tripObservable, () {
+      super.tripObservable = value;
+    });
+  }
+
   late final _$_TripViewModelActionController =
       ActionController(name: '_TripViewModel', context: context);
 
@@ -42,7 +58,8 @@ mixin _$TripViewModel on _TripViewModel, Store {
   @override
   String toString() {
     return '''
-tripId: ${tripId}
+tripId: ${tripId},
+tripObservable: ${tripObservable}
     ''';
   }
 }

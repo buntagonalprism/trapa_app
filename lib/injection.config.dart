@@ -49,7 +49,8 @@ extension GetItInjectableX on _i1.GetIt {
       firestoreService: gh<_i6.FirestoreService>(),
       authService: gh<_i3.AuthService>(),
     ));
-    gh.factory<_i10.TripViewModel>(() => _i10.TripViewModel());
+    gh.factory<_i10.TripViewModel>(
+        () => _i10.TripViewModel(tripStore: gh<_i9.TripStore>()));
     gh.singleton<_i11.AppRouter>(
         _i11.AppRouter(authService: gh<_i3.AuthService>()));
     gh.factory<_i12.HomeViewModel>(
