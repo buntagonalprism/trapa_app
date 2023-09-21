@@ -27,6 +27,10 @@ mixin _$Attraction {
   PriceRating? get priceRating => throw _privateConstructorUsedError;
   InterestRating? get interestRating => throw _privateConstructorUsedError;
   AttractionType? get type => throw _privateConstructorUsedError;
+  DateRange? get openDateRange => throw _privateConstructorUsedError;
+  OpenDaysSchedule? get openDays => throw _privateConstructorUsedError;
+  Map<DayOfWeek, List<TimeRange>>? get openingHours =>
+      throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -47,11 +51,16 @@ abstract class $AttractionCopyWith<$Res> {
       Coordinates? coordinates,
       PriceRating? priceRating,
       InterestRating? interestRating,
-      AttractionType? type});
+      AttractionType? type,
+      DateRange? openDateRange,
+      OpenDaysSchedule? openDays,
+      Map<DayOfWeek, List<TimeRange>>? openingHours});
 
   $RegionCopyWith<$Res> get region;
   $DetailsCopyWith<$Res>? get details;
   $CoordinatesCopyWith<$Res>? get coordinates;
+  $DateRangeCopyWith<$Res>? get openDateRange;
+  $OpenDaysScheduleCopyWith<$Res>? get openDays;
 }
 
 /// @nodoc
@@ -74,6 +83,9 @@ class _$AttractionCopyWithImpl<$Res, $Val extends Attraction>
     Object? priceRating = freezed,
     Object? interestRating = freezed,
     Object? type = freezed,
+    Object? openDateRange = freezed,
+    Object? openDays = freezed,
+    Object? openingHours = freezed,
   }) {
     return _then(_value.copyWith(
       name: null == name
@@ -104,6 +116,18 @@ class _$AttractionCopyWithImpl<$Res, $Val extends Attraction>
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as AttractionType?,
+      openDateRange: freezed == openDateRange
+          ? _value.openDateRange
+          : openDateRange // ignore: cast_nullable_to_non_nullable
+              as DateRange?,
+      openDays: freezed == openDays
+          ? _value.openDays
+          : openDays // ignore: cast_nullable_to_non_nullable
+              as OpenDaysSchedule?,
+      openingHours: freezed == openingHours
+          ? _value.openingHours
+          : openingHours // ignore: cast_nullable_to_non_nullable
+              as Map<DayOfWeek, List<TimeRange>>?,
     ) as $Val);
   }
 
@@ -138,6 +162,30 @@ class _$AttractionCopyWithImpl<$Res, $Val extends Attraction>
       return _then(_value.copyWith(coordinates: value) as $Val);
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $DateRangeCopyWith<$Res>? get openDateRange {
+    if (_value.openDateRange == null) {
+      return null;
+    }
+
+    return $DateRangeCopyWith<$Res>(_value.openDateRange!, (value) {
+      return _then(_value.copyWith(openDateRange: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $OpenDaysScheduleCopyWith<$Res>? get openDays {
+    if (_value.openDays == null) {
+      return null;
+    }
+
+    return $OpenDaysScheduleCopyWith<$Res>(_value.openDays!, (value) {
+      return _then(_value.copyWith(openDays: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -155,7 +203,10 @@ abstract class _$$_AttractionCopyWith<$Res>
       Coordinates? coordinates,
       PriceRating? priceRating,
       InterestRating? interestRating,
-      AttractionType? type});
+      AttractionType? type,
+      DateRange? openDateRange,
+      OpenDaysSchedule? openDays,
+      Map<DayOfWeek, List<TimeRange>>? openingHours});
 
   @override
   $RegionCopyWith<$Res> get region;
@@ -163,6 +214,10 @@ abstract class _$$_AttractionCopyWith<$Res>
   $DetailsCopyWith<$Res>? get details;
   @override
   $CoordinatesCopyWith<$Res>? get coordinates;
+  @override
+  $DateRangeCopyWith<$Res>? get openDateRange;
+  @override
+  $OpenDaysScheduleCopyWith<$Res>? get openDays;
 }
 
 /// @nodoc
@@ -183,6 +238,9 @@ class __$$_AttractionCopyWithImpl<$Res>
     Object? priceRating = freezed,
     Object? interestRating = freezed,
     Object? type = freezed,
+    Object? openDateRange = freezed,
+    Object? openDays = freezed,
+    Object? openingHours = freezed,
   }) {
     return _then(_$_Attraction(
       name: null == name
@@ -213,6 +271,18 @@ class __$$_AttractionCopyWithImpl<$Res>
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as AttractionType?,
+      openDateRange: freezed == openDateRange
+          ? _value.openDateRange
+          : openDateRange // ignore: cast_nullable_to_non_nullable
+              as DateRange?,
+      openDays: freezed == openDays
+          ? _value.openDays
+          : openDays // ignore: cast_nullable_to_non_nullable
+              as OpenDaysSchedule?,
+      openingHours: freezed == openingHours
+          ? _value._openingHours
+          : openingHours // ignore: cast_nullable_to_non_nullable
+              as Map<DayOfWeek, List<TimeRange>>?,
     ));
   }
 }
@@ -227,8 +297,12 @@ class _$_Attraction extends _Attraction {
       this.coordinates,
       this.priceRating,
       this.interestRating,
-      this.type})
-      : super._();
+      this.type,
+      this.openDateRange,
+      this.openDays,
+      final Map<DayOfWeek, List<TimeRange>>? openingHours})
+      : _openingHours = openingHours,
+        super._();
 
   factory _$_Attraction.fromJson(Map<String, dynamic> json) =>
       _$$_AttractionFromJson(json);
@@ -247,10 +321,23 @@ class _$_Attraction extends _Attraction {
   final InterestRating? interestRating;
   @override
   final AttractionType? type;
+  @override
+  final DateRange? openDateRange;
+  @override
+  final OpenDaysSchedule? openDays;
+  final Map<DayOfWeek, List<TimeRange>>? _openingHours;
+  @override
+  Map<DayOfWeek, List<TimeRange>>? get openingHours {
+    final value = _openingHours;
+    if (value == null) return null;
+    if (_openingHours is EqualUnmodifiableMapView) return _openingHours;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(value);
+  }
 
   @override
   String toString() {
-    return 'Attraction(name: $name, region: $region, details: $details, coordinates: $coordinates, priceRating: $priceRating, interestRating: $interestRating, type: $type)';
+    return 'Attraction(name: $name, region: $region, details: $details, coordinates: $coordinates, priceRating: $priceRating, interestRating: $interestRating, type: $type, openDateRange: $openDateRange, openDays: $openDays, openingHours: $openingHours)';
   }
 
   @override
@@ -267,13 +354,29 @@ class _$_Attraction extends _Attraction {
                 other.priceRating == priceRating) &&
             (identical(other.interestRating, interestRating) ||
                 other.interestRating == interestRating) &&
-            (identical(other.type, type) || other.type == type));
+            (identical(other.type, type) || other.type == type) &&
+            (identical(other.openDateRange, openDateRange) ||
+                other.openDateRange == openDateRange) &&
+            (identical(other.openDays, openDays) ||
+                other.openDays == openDays) &&
+            const DeepCollectionEquality()
+                .equals(other._openingHours, _openingHours));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, name, region, details,
-      coordinates, priceRating, interestRating, type);
+  int get hashCode => Object.hash(
+      runtimeType,
+      name,
+      region,
+      details,
+      coordinates,
+      priceRating,
+      interestRating,
+      type,
+      openDateRange,
+      openDays,
+      const DeepCollectionEquality().hash(_openingHours));
 
   @JsonKey(ignore: true)
   @override
@@ -297,7 +400,10 @@ abstract class _Attraction extends Attraction {
       final Coordinates? coordinates,
       final PriceRating? priceRating,
       final InterestRating? interestRating,
-      final AttractionType? type}) = _$_Attraction;
+      final AttractionType? type,
+      final DateRange? openDateRange,
+      final OpenDaysSchedule? openDays,
+      final Map<DayOfWeek, List<TimeRange>>? openingHours}) = _$_Attraction;
   const _Attraction._() : super._();
 
   factory _Attraction.fromJson(Map<String, dynamic> json) =
@@ -317,6 +423,12 @@ abstract class _Attraction extends Attraction {
   InterestRating? get interestRating;
   @override
   AttractionType? get type;
+  @override
+  DateRange? get openDateRange;
+  @override
+  OpenDaysSchedule? get openDays;
+  @override
+  Map<DayOfWeek, List<TimeRange>>? get openingHours;
   @override
   @JsonKey(ignore: true)
   _$$_AttractionCopyWith<_$_Attraction> get copyWith =>

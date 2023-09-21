@@ -1,7 +1,11 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../common/coordinates.dart';
+import '../common/date_range.dart';
+import '../common/day_of_week.dart';
 import '../common/details.dart';
+import '../common/open_days_schedule.dart';
+import '../common/time_range.dart';
 import '../locations/region.dart';
 import 'attraction_type.dart';
 import 'interest_rating.dart';
@@ -22,6 +26,9 @@ class Attraction with _$Attraction {
     PriceRating? priceRating,
     InterestRating? interestRating,
     AttractionType? type,
+    DateRange? openDateRange,
+    OpenDaysSchedule? openDays,
+    Map<DayOfWeek, List<TimeRange>>? openingHours,
   }) = _Attraction;
 
   factory Attraction.fromJson(Map<String, dynamic> json) => _$AttractionFromJson(json);

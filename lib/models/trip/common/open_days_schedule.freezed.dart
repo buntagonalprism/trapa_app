@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'schedule.dart';
+part of 'open_days_schedule.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,43 +14,43 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-Schedule _$ScheduleFromJson(Map<String, dynamic> json) {
+OpenDaysSchedule _$OpenDaysScheduleFromJson(Map<String, dynamic> json) {
   switch (json['runtimeType']) {
     case 'weekly':
       return _WeeklySchedule.fromJson(json);
     case 'monthly':
       return _MonthlySchedule.fromJson(json);
-    case 'occurrenceInMonth':
+    case 'occurrencesInMonth':
       return _OccurrenceInMonthSchedule.fromJson(json);
 
     default:
-      throw CheckedFromJsonException(json, 'runtimeType', 'Schedule',
+      throw CheckedFromJsonException(json, 'runtimeType', 'OpenDaysSchedule',
           'Invalid union type "${json['runtimeType']}"!');
   }
 }
 
 /// @nodoc
-mixin _$Schedule {
-  Object get days => throw _privateConstructorUsedError;
+mixin _$OpenDaysSchedule {
+  List<Object> get days => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(List<DayOfWeek> days) weekly,
     required TResult Function(List<int> days) monthly,
-    required TResult Function(Map<int, DayOfWeek> days) occurrenceInMonth,
+    required TResult Function(List<OccurrenceInMonth> days) occurrencesInMonth,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(List<DayOfWeek> days)? weekly,
     TResult? Function(List<int> days)? monthly,
-    TResult? Function(Map<int, DayOfWeek> days)? occurrenceInMonth,
+    TResult? Function(List<OccurrenceInMonth> days)? occurrencesInMonth,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(List<DayOfWeek> days)? weekly,
     TResult Function(List<int> days)? monthly,
-    TResult Function(Map<int, DayOfWeek> days)? occurrenceInMonth,
+    TResult Function(List<OccurrenceInMonth> days)? occurrencesInMonth,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -59,21 +59,21 @@ mixin _$Schedule {
     required TResult Function(_WeeklySchedule value) weekly,
     required TResult Function(_MonthlySchedule value) monthly,
     required TResult Function(_OccurrenceInMonthSchedule value)
-        occurrenceInMonth,
+        occurrencesInMonth,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_WeeklySchedule value)? weekly,
     TResult? Function(_MonthlySchedule value)? monthly,
-    TResult? Function(_OccurrenceInMonthSchedule value)? occurrenceInMonth,
+    TResult? Function(_OccurrenceInMonthSchedule value)? occurrencesInMonth,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_WeeklySchedule value)? weekly,
     TResult Function(_MonthlySchedule value)? monthly,
-    TResult Function(_OccurrenceInMonthSchedule value)? occurrenceInMonth,
+    TResult Function(_OccurrenceInMonthSchedule value)? occurrencesInMonth,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -81,15 +81,16 @@ mixin _$Schedule {
 }
 
 /// @nodoc
-abstract class $ScheduleCopyWith<$Res> {
-  factory $ScheduleCopyWith(Schedule value, $Res Function(Schedule) then) =
-      _$ScheduleCopyWithImpl<$Res, Schedule>;
+abstract class $OpenDaysScheduleCopyWith<$Res> {
+  factory $OpenDaysScheduleCopyWith(
+          OpenDaysSchedule value, $Res Function(OpenDaysSchedule) then) =
+      _$OpenDaysScheduleCopyWithImpl<$Res, OpenDaysSchedule>;
 }
 
 /// @nodoc
-class _$ScheduleCopyWithImpl<$Res, $Val extends Schedule>
-    implements $ScheduleCopyWith<$Res> {
-  _$ScheduleCopyWithImpl(this._value, this._then);
+class _$OpenDaysScheduleCopyWithImpl<$Res, $Val extends OpenDaysSchedule>
+    implements $OpenDaysScheduleCopyWith<$Res> {
+  _$OpenDaysScheduleCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -108,7 +109,7 @@ abstract class _$$_WeeklyScheduleCopyWith<$Res> {
 
 /// @nodoc
 class __$$_WeeklyScheduleCopyWithImpl<$Res>
-    extends _$ScheduleCopyWithImpl<$Res, _$_WeeklySchedule>
+    extends _$OpenDaysScheduleCopyWithImpl<$Res, _$_WeeklySchedule>
     implements _$$_WeeklyScheduleCopyWith<$Res> {
   __$$_WeeklyScheduleCopyWithImpl(
       _$_WeeklySchedule _value, $Res Function(_$_WeeklySchedule) _then)
@@ -151,7 +152,7 @@ class _$_WeeklySchedule implements _WeeklySchedule {
 
   @override
   String toString() {
-    return 'Schedule.weekly(days: $days)';
+    return 'OpenDaysSchedule.weekly(days: $days)';
   }
 
   @override
@@ -178,7 +179,7 @@ class _$_WeeklySchedule implements _WeeklySchedule {
   TResult when<TResult extends Object?>({
     required TResult Function(List<DayOfWeek> days) weekly,
     required TResult Function(List<int> days) monthly,
-    required TResult Function(Map<int, DayOfWeek> days) occurrenceInMonth,
+    required TResult Function(List<OccurrenceInMonth> days) occurrencesInMonth,
   }) {
     return weekly(days);
   }
@@ -188,7 +189,7 @@ class _$_WeeklySchedule implements _WeeklySchedule {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(List<DayOfWeek> days)? weekly,
     TResult? Function(List<int> days)? monthly,
-    TResult? Function(Map<int, DayOfWeek> days)? occurrenceInMonth,
+    TResult? Function(List<OccurrenceInMonth> days)? occurrencesInMonth,
   }) {
     return weekly?.call(days);
   }
@@ -198,7 +199,7 @@ class _$_WeeklySchedule implements _WeeklySchedule {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(List<DayOfWeek> days)? weekly,
     TResult Function(List<int> days)? monthly,
-    TResult Function(Map<int, DayOfWeek> days)? occurrenceInMonth,
+    TResult Function(List<OccurrenceInMonth> days)? occurrencesInMonth,
     required TResult orElse(),
   }) {
     if (weekly != null) {
@@ -213,7 +214,7 @@ class _$_WeeklySchedule implements _WeeklySchedule {
     required TResult Function(_WeeklySchedule value) weekly,
     required TResult Function(_MonthlySchedule value) monthly,
     required TResult Function(_OccurrenceInMonthSchedule value)
-        occurrenceInMonth,
+        occurrencesInMonth,
   }) {
     return weekly(this);
   }
@@ -223,7 +224,7 @@ class _$_WeeklySchedule implements _WeeklySchedule {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_WeeklySchedule value)? weekly,
     TResult? Function(_MonthlySchedule value)? monthly,
-    TResult? Function(_OccurrenceInMonthSchedule value)? occurrenceInMonth,
+    TResult? Function(_OccurrenceInMonthSchedule value)? occurrencesInMonth,
   }) {
     return weekly?.call(this);
   }
@@ -233,7 +234,7 @@ class _$_WeeklySchedule implements _WeeklySchedule {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_WeeklySchedule value)? weekly,
     TResult Function(_MonthlySchedule value)? monthly,
-    TResult Function(_OccurrenceInMonthSchedule value)? occurrenceInMonth,
+    TResult Function(_OccurrenceInMonthSchedule value)? occurrencesInMonth,
     required TResult orElse(),
   }) {
     if (weekly != null) {
@@ -250,7 +251,7 @@ class _$_WeeklySchedule implements _WeeklySchedule {
   }
 }
 
-abstract class _WeeklySchedule implements Schedule {
+abstract class _WeeklySchedule implements OpenDaysSchedule {
   const factory _WeeklySchedule(final List<DayOfWeek> days) = _$_WeeklySchedule;
 
   factory _WeeklySchedule.fromJson(Map<String, dynamic> json) =
@@ -274,7 +275,7 @@ abstract class _$$_MonthlyScheduleCopyWith<$Res> {
 
 /// @nodoc
 class __$$_MonthlyScheduleCopyWithImpl<$Res>
-    extends _$ScheduleCopyWithImpl<$Res, _$_MonthlySchedule>
+    extends _$OpenDaysScheduleCopyWithImpl<$Res, _$_MonthlySchedule>
     implements _$$_MonthlyScheduleCopyWith<$Res> {
   __$$_MonthlyScheduleCopyWithImpl(
       _$_MonthlySchedule _value, $Res Function(_$_MonthlySchedule) _then)
@@ -317,7 +318,7 @@ class _$_MonthlySchedule implements _MonthlySchedule {
 
   @override
   String toString() {
-    return 'Schedule.monthly(days: $days)';
+    return 'OpenDaysSchedule.monthly(days: $days)';
   }
 
   @override
@@ -344,7 +345,7 @@ class _$_MonthlySchedule implements _MonthlySchedule {
   TResult when<TResult extends Object?>({
     required TResult Function(List<DayOfWeek> days) weekly,
     required TResult Function(List<int> days) monthly,
-    required TResult Function(Map<int, DayOfWeek> days) occurrenceInMonth,
+    required TResult Function(List<OccurrenceInMonth> days) occurrencesInMonth,
   }) {
     return monthly(days);
   }
@@ -354,7 +355,7 @@ class _$_MonthlySchedule implements _MonthlySchedule {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(List<DayOfWeek> days)? weekly,
     TResult? Function(List<int> days)? monthly,
-    TResult? Function(Map<int, DayOfWeek> days)? occurrenceInMonth,
+    TResult? Function(List<OccurrenceInMonth> days)? occurrencesInMonth,
   }) {
     return monthly?.call(days);
   }
@@ -364,7 +365,7 @@ class _$_MonthlySchedule implements _MonthlySchedule {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(List<DayOfWeek> days)? weekly,
     TResult Function(List<int> days)? monthly,
-    TResult Function(Map<int, DayOfWeek> days)? occurrenceInMonth,
+    TResult Function(List<OccurrenceInMonth> days)? occurrencesInMonth,
     required TResult orElse(),
   }) {
     if (monthly != null) {
@@ -379,7 +380,7 @@ class _$_MonthlySchedule implements _MonthlySchedule {
     required TResult Function(_WeeklySchedule value) weekly,
     required TResult Function(_MonthlySchedule value) monthly,
     required TResult Function(_OccurrenceInMonthSchedule value)
-        occurrenceInMonth,
+        occurrencesInMonth,
   }) {
     return monthly(this);
   }
@@ -389,7 +390,7 @@ class _$_MonthlySchedule implements _MonthlySchedule {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_WeeklySchedule value)? weekly,
     TResult? Function(_MonthlySchedule value)? monthly,
-    TResult? Function(_OccurrenceInMonthSchedule value)? occurrenceInMonth,
+    TResult? Function(_OccurrenceInMonthSchedule value)? occurrencesInMonth,
   }) {
     return monthly?.call(this);
   }
@@ -399,7 +400,7 @@ class _$_MonthlySchedule implements _MonthlySchedule {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_WeeklySchedule value)? weekly,
     TResult Function(_MonthlySchedule value)? monthly,
-    TResult Function(_OccurrenceInMonthSchedule value)? occurrenceInMonth,
+    TResult Function(_OccurrenceInMonthSchedule value)? occurrencesInMonth,
     required TResult orElse(),
   }) {
     if (monthly != null) {
@@ -416,7 +417,7 @@ class _$_MonthlySchedule implements _MonthlySchedule {
   }
 }
 
-abstract class _MonthlySchedule implements Schedule {
+abstract class _MonthlySchedule implements OpenDaysSchedule {
   const factory _MonthlySchedule(final List<int> days) = _$_MonthlySchedule;
 
   factory _MonthlySchedule.fromJson(Map<String, dynamic> json) =
@@ -436,12 +437,12 @@ abstract class _$$_OccurrenceInMonthScheduleCopyWith<$Res> {
           $Res Function(_$_OccurrenceInMonthSchedule) then) =
       __$$_OccurrenceInMonthScheduleCopyWithImpl<$Res>;
   @useResult
-  $Res call({Map<int, DayOfWeek> days});
+  $Res call({List<OccurrenceInMonth> days});
 }
 
 /// @nodoc
 class __$$_OccurrenceInMonthScheduleCopyWithImpl<$Res>
-    extends _$ScheduleCopyWithImpl<$Res, _$_OccurrenceInMonthSchedule>
+    extends _$OpenDaysScheduleCopyWithImpl<$Res, _$_OccurrenceInMonthSchedule>
     implements _$$_OccurrenceInMonthScheduleCopyWith<$Res> {
   __$$_OccurrenceInMonthScheduleCopyWithImpl(
       _$_OccurrenceInMonthSchedule _value,
@@ -457,7 +458,7 @@ class __$$_OccurrenceInMonthScheduleCopyWithImpl<$Res>
       null == days
           ? _value._days
           : days // ignore: cast_nullable_to_non_nullable
-              as Map<int, DayOfWeek>,
+              as List<OccurrenceInMonth>,
     ));
   }
 }
@@ -465,20 +466,20 @@ class __$$_OccurrenceInMonthScheduleCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_OccurrenceInMonthSchedule implements _OccurrenceInMonthSchedule {
-  const _$_OccurrenceInMonthSchedule(final Map<int, DayOfWeek> days,
+  const _$_OccurrenceInMonthSchedule(final List<OccurrenceInMonth> days,
       {final String? $type})
       : _days = days,
-        $type = $type ?? 'occurrenceInMonth';
+        $type = $type ?? 'occurrencesInMonth';
 
   factory _$_OccurrenceInMonthSchedule.fromJson(Map<String, dynamic> json) =>
       _$$_OccurrenceInMonthScheduleFromJson(json);
 
-  final Map<int, DayOfWeek> _days;
+  final List<OccurrenceInMonth> _days;
   @override
-  Map<int, DayOfWeek> get days {
-    if (_days is EqualUnmodifiableMapView) return _days;
+  List<OccurrenceInMonth> get days {
+    if (_days is EqualUnmodifiableListView) return _days;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(_days);
+    return EqualUnmodifiableListView(_days);
   }
 
   @JsonKey(name: 'runtimeType')
@@ -486,7 +487,7 @@ class _$_OccurrenceInMonthSchedule implements _OccurrenceInMonthSchedule {
 
   @override
   String toString() {
-    return 'Schedule.occurrenceInMonth(days: $days)';
+    return 'OpenDaysSchedule.occurrencesInMonth(days: $days)';
   }
 
   @override
@@ -514,9 +515,9 @@ class _$_OccurrenceInMonthSchedule implements _OccurrenceInMonthSchedule {
   TResult when<TResult extends Object?>({
     required TResult Function(List<DayOfWeek> days) weekly,
     required TResult Function(List<int> days) monthly,
-    required TResult Function(Map<int, DayOfWeek> days) occurrenceInMonth,
+    required TResult Function(List<OccurrenceInMonth> days) occurrencesInMonth,
   }) {
-    return occurrenceInMonth(days);
+    return occurrencesInMonth(days);
   }
 
   @override
@@ -524,9 +525,9 @@ class _$_OccurrenceInMonthSchedule implements _OccurrenceInMonthSchedule {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(List<DayOfWeek> days)? weekly,
     TResult? Function(List<int> days)? monthly,
-    TResult? Function(Map<int, DayOfWeek> days)? occurrenceInMonth,
+    TResult? Function(List<OccurrenceInMonth> days)? occurrencesInMonth,
   }) {
-    return occurrenceInMonth?.call(days);
+    return occurrencesInMonth?.call(days);
   }
 
   @override
@@ -534,11 +535,11 @@ class _$_OccurrenceInMonthSchedule implements _OccurrenceInMonthSchedule {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(List<DayOfWeek> days)? weekly,
     TResult Function(List<int> days)? monthly,
-    TResult Function(Map<int, DayOfWeek> days)? occurrenceInMonth,
+    TResult Function(List<OccurrenceInMonth> days)? occurrencesInMonth,
     required TResult orElse(),
   }) {
-    if (occurrenceInMonth != null) {
-      return occurrenceInMonth(days);
+    if (occurrencesInMonth != null) {
+      return occurrencesInMonth(days);
     }
     return orElse();
   }
@@ -549,9 +550,9 @@ class _$_OccurrenceInMonthSchedule implements _OccurrenceInMonthSchedule {
     required TResult Function(_WeeklySchedule value) weekly,
     required TResult Function(_MonthlySchedule value) monthly,
     required TResult Function(_OccurrenceInMonthSchedule value)
-        occurrenceInMonth,
+        occurrencesInMonth,
   }) {
-    return occurrenceInMonth(this);
+    return occurrencesInMonth(this);
   }
 
   @override
@@ -559,9 +560,9 @@ class _$_OccurrenceInMonthSchedule implements _OccurrenceInMonthSchedule {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_WeeklySchedule value)? weekly,
     TResult? Function(_MonthlySchedule value)? monthly,
-    TResult? Function(_OccurrenceInMonthSchedule value)? occurrenceInMonth,
+    TResult? Function(_OccurrenceInMonthSchedule value)? occurrencesInMonth,
   }) {
-    return occurrenceInMonth?.call(this);
+    return occurrencesInMonth?.call(this);
   }
 
   @override
@@ -569,11 +570,11 @@ class _$_OccurrenceInMonthSchedule implements _OccurrenceInMonthSchedule {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_WeeklySchedule value)? weekly,
     TResult Function(_MonthlySchedule value)? monthly,
-    TResult Function(_OccurrenceInMonthSchedule value)? occurrenceInMonth,
+    TResult Function(_OccurrenceInMonthSchedule value)? occurrencesInMonth,
     required TResult orElse(),
   }) {
-    if (occurrenceInMonth != null) {
-      return occurrenceInMonth(this);
+    if (occurrencesInMonth != null) {
+      return occurrencesInMonth(this);
     }
     return orElse();
   }
@@ -586,16 +587,175 @@ class _$_OccurrenceInMonthSchedule implements _OccurrenceInMonthSchedule {
   }
 }
 
-abstract class _OccurrenceInMonthSchedule implements Schedule {
-  const factory _OccurrenceInMonthSchedule(final Map<int, DayOfWeek> days) =
+abstract class _OccurrenceInMonthSchedule implements OpenDaysSchedule {
+  const factory _OccurrenceInMonthSchedule(final List<OccurrenceInMonth> days) =
       _$_OccurrenceInMonthSchedule;
 
   factory _OccurrenceInMonthSchedule.fromJson(Map<String, dynamic> json) =
       _$_OccurrenceInMonthSchedule.fromJson;
 
   @override
-  Map<int, DayOfWeek> get days;
+  List<OccurrenceInMonth> get days;
   @JsonKey(ignore: true)
   _$$_OccurrenceInMonthScheduleCopyWith<_$_OccurrenceInMonthSchedule>
       get copyWith => throw _privateConstructorUsedError;
+}
+
+OccurrenceInMonth _$OccurrenceInMonthFromJson(Map<String, dynamic> json) {
+  return _OccurrenceInMonth.fromJson(json);
+}
+
+/// @nodoc
+mixin _$OccurrenceInMonth {
+  int get occurence => throw _privateConstructorUsedError;
+  DayOfWeek get dayOfWeek => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $OccurrenceInMonthCopyWith<OccurrenceInMonth> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $OccurrenceInMonthCopyWith<$Res> {
+  factory $OccurrenceInMonthCopyWith(
+          OccurrenceInMonth value, $Res Function(OccurrenceInMonth) then) =
+      _$OccurrenceInMonthCopyWithImpl<$Res, OccurrenceInMonth>;
+  @useResult
+  $Res call({int occurence, DayOfWeek dayOfWeek});
+}
+
+/// @nodoc
+class _$OccurrenceInMonthCopyWithImpl<$Res, $Val extends OccurrenceInMonth>
+    implements $OccurrenceInMonthCopyWith<$Res> {
+  _$OccurrenceInMonthCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? occurence = null,
+    Object? dayOfWeek = null,
+  }) {
+    return _then(_value.copyWith(
+      occurence: null == occurence
+          ? _value.occurence
+          : occurence // ignore: cast_nullable_to_non_nullable
+              as int,
+      dayOfWeek: null == dayOfWeek
+          ? _value.dayOfWeek
+          : dayOfWeek // ignore: cast_nullable_to_non_nullable
+              as DayOfWeek,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_OccurrenceInMonthCopyWith<$Res>
+    implements $OccurrenceInMonthCopyWith<$Res> {
+  factory _$$_OccurrenceInMonthCopyWith(_$_OccurrenceInMonth value,
+          $Res Function(_$_OccurrenceInMonth) then) =
+      __$$_OccurrenceInMonthCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({int occurence, DayOfWeek dayOfWeek});
+}
+
+/// @nodoc
+class __$$_OccurrenceInMonthCopyWithImpl<$Res>
+    extends _$OccurrenceInMonthCopyWithImpl<$Res, _$_OccurrenceInMonth>
+    implements _$$_OccurrenceInMonthCopyWith<$Res> {
+  __$$_OccurrenceInMonthCopyWithImpl(
+      _$_OccurrenceInMonth _value, $Res Function(_$_OccurrenceInMonth) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? occurence = null,
+    Object? dayOfWeek = null,
+  }) {
+    return _then(_$_OccurrenceInMonth(
+      occurence: null == occurence
+          ? _value.occurence
+          : occurence // ignore: cast_nullable_to_non_nullable
+              as int,
+      dayOfWeek: null == dayOfWeek
+          ? _value.dayOfWeek
+          : dayOfWeek // ignore: cast_nullable_to_non_nullable
+              as DayOfWeek,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_OccurrenceInMonth extends _OccurrenceInMonth {
+  const _$_OccurrenceInMonth({required this.occurence, required this.dayOfWeek})
+      : super._();
+
+  factory _$_OccurrenceInMonth.fromJson(Map<String, dynamic> json) =>
+      _$$_OccurrenceInMonthFromJson(json);
+
+  @override
+  final int occurence;
+  @override
+  final DayOfWeek dayOfWeek;
+
+  @override
+  String toString() {
+    return 'OccurrenceInMonth(occurence: $occurence, dayOfWeek: $dayOfWeek)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_OccurrenceInMonth &&
+            (identical(other.occurence, occurence) ||
+                other.occurence == occurence) &&
+            (identical(other.dayOfWeek, dayOfWeek) ||
+                other.dayOfWeek == dayOfWeek));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, occurence, dayOfWeek);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_OccurrenceInMonthCopyWith<_$_OccurrenceInMonth> get copyWith =>
+      __$$_OccurrenceInMonthCopyWithImpl<_$_OccurrenceInMonth>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_OccurrenceInMonthToJson(
+      this,
+    );
+  }
+}
+
+abstract class _OccurrenceInMonth extends OccurrenceInMonth {
+  const factory _OccurrenceInMonth(
+      {required final int occurence,
+      required final DayOfWeek dayOfWeek}) = _$_OccurrenceInMonth;
+  const _OccurrenceInMonth._() : super._();
+
+  factory _OccurrenceInMonth.fromJson(Map<String, dynamic> json) =
+      _$_OccurrenceInMonth.fromJson;
+
+  @override
+  int get occurence;
+  @override
+  DayOfWeek get dayOfWeek;
+  @override
+  @JsonKey(ignore: true)
+  _$$_OccurrenceInMonthCopyWith<_$_OccurrenceInMonth> get copyWith =>
+      throw _privateConstructorUsedError;
 }
