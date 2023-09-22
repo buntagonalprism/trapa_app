@@ -86,6 +86,13 @@ class FirestoreService {
       }
     });
   }
+
+  Future<void> updateDocument({
+    required String path,
+    required Map<String, dynamic> data,
+  }) async {
+    await _fs.doc(path).update(data);
+  }
 }
 
 class FirestoreFieldQuery {

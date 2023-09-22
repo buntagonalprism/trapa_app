@@ -58,10 +58,19 @@ enum DataSource {
 
 extension NetworkObservableExtension<T> on NetworkObservable<T> {
   /// Return value if it is available, otherwise return null
-  T? valueOrNull() {
+  T? dataOrNull() {
     return value.maybeWhen(
       data: (data, _) => data,
       orElse: () => null,
+    );
+  }
+
+  /// Return the value or thrown an exception
+  T requireData() {
+    return value.maybeWhen(
+      data: (data, _) => data,
+      orElse: () => throw NetworkObservableException(
+          'Expected data in NetworkObservable. Instead state was: $value'),
     );
   }
 
@@ -74,5 +83,16 @@ extension NetworkObservableExtension<T> on NetworkObservable<T> {
         orElse: () => this as NetworkDataSnapshot<V>,
       );
     });
+  }
+}
+
+class NetworkObservableException implements Exception {
+  NetworkObservableException(this.message);
+
+  final String message;
+
+  @override
+  String toString() {
+    return 'NetworkObservableException: $message';
   }
 }

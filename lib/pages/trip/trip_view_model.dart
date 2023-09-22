@@ -2,6 +2,7 @@ import 'package:injectable/injectable.dart';
 import 'package:mobx/mobx.dart';
 
 import '../../models/api/network_observable.dart';
+import '../../models/trip/common/country.dart';
 import '../../models/trip/trip.dart';
 import '../../stores/trip_store.dart';
 
@@ -28,4 +29,9 @@ abstract class _TripViewModel with Store {
 
   @observable
   NetworkObservable<Trip> tripObservable = loadingNetworkObservable<Trip>();
+
+  void setTripCountries(List<Country> countries) {
+    final trip = tripObservable.dataOrNull()!;
+    _tripStore.setTripCountries(trip, countries);
+  }
 }

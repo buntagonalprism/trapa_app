@@ -1,3 +1,4 @@
+import 'package:country_picker/country_picker.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:firebase_ui_oauth_google/firebase_ui_oauth_google.dart';
@@ -40,6 +41,7 @@ class MainApp extends StatelessWidget {
       debugShowCheckedModeBanner: !kIsWeb,
       localizationsDelegates: const [
         AppMessages.delegate,
+        CountryLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
@@ -50,11 +52,14 @@ class MainApp extends StatelessWidget {
       onGenerateTitle: (context) => getIt<Config>().appNamePrefix + Messages.of(context)!.title,
       routerConfig: getIt<AppRouter>().goRouter,
       theme: ThemeData(
+        useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(
           seedColor: Colors.green,
           error: Colors.red,
         ),
         primarySwatch: Colors.green,
+        iconButtonTheme:
+            const IconButtonThemeData(style: ButtonStyle(splashFactory: InkSplash.splashFactory)),
         inputDecorationTheme: InputDecorationTheme(
           border: const OutlineInputBorder(),
           enabledBorder: OutlineInputBorder(

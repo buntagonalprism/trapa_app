@@ -1,4 +1,3 @@
-import 'package:country_picker/country_picker.dart';
 import 'package:injectable/injectable.dart';
 import 'package:mobx/mobx.dart';
 
@@ -6,6 +5,7 @@ import '../models/api/network_observable.dart';
 import '../models/api/network_result.dart';
 import '../models/json_converters.dart';
 import '../models/trip/api/create_trip_request.dart';
+import '../models/trip/common/country.dart';
 import '../models/trip/trip.dart';
 import '../services/auth_service.dart';
 import '../services/crash_report_service.dart';
@@ -54,7 +54,7 @@ abstract class _TripStore with Store {
   }
 
   @computed
-  List<Trip> get userTrips => _userTripsObservable?.valueOrNull() ?? [];
+  List<Trip> get userTrips => _userTripsObservable?.dataOrNull() ?? [];
 
   Future<NetworkResult<Trip>> createTrip({
     required String name,
@@ -69,7 +69,7 @@ abstract class _TripStore with Store {
           name: name,
           startDate: DateConverter.dateFormat.format(startDate),
           endDate: DateConverter.dateFormat.format(endDate),
-          singleCountryCode: singleCountry?.countryCode,
+          singleCountryCode: singleCountry?.code,
         ),
       );
       final trip = response.parseSuccessBody(Trip.fromJson);
@@ -87,6 +87,15 @@ abstract class _TripStore with Store {
     return firestoreService.documentSnapshots<Trip>(
       path: '$tripsFirestoreCollection/$tripId',
       fromJson: Trip.fromJson,
+    );
+  }
+
+  void setTripCountries(Trip trip, List<Country> countryCodes) {
+    firestoreService.updateDocument(
+      path: '$tripsFirestoreCollection/${trip.id}',
+      data: {
+        'countries': countryCodes.map((country) => country.toJson()),
+      },
     );
   }
 }

@@ -23,6 +23,7 @@ class TripPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final messages = Messages.of(context)!;
+    final theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -31,21 +32,17 @@ class TripPage extends StatelessWidget {
           children: [
             const HomeIcon(),
             const SizedBox(width: 8),
-            const Icon(
+            Icon(
               Icons.chevron_right,
-              color: Colors.white,
+              color: theme.colorScheme.onSurface,
               size: 20,
             ),
             const SizedBox(width: 12),
             Observer(builder: (context) {
-              final trip = vm.tripObservable.valueOrNull();
+              final trip = vm.tripObservable.dataOrNull();
               return Text(
                 trip?.name ?? '',
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                  color: Colors.white,
-                ),
+                style: theme.textTheme.titleLarge?.copyWith(fontSize: 20),
               );
             }),
           ],
@@ -57,7 +54,7 @@ class TripPage extends StatelessWidget {
       body: Center(
         child: Observer(builder: (context) {
           return vm.tripObservable.value.when(
-            data: (trip, _) => TripView(trip: trip),
+            data: (trip, _) => TripView(vm: vm, trip: trip),
             unknownError: () => const Text('Unknown error'),
             loading: () => const CircularProgressIndicator(),
             notFound: () => Text('No trip found with id ${vm.tripId}'),
@@ -69,8 +66,13 @@ class TripPage extends StatelessWidget {
 }
 
 class TripView extends StatefulWidget {
-  const TripView({required this.trip, super.key});
+  const TripView({
+    required this.vm,
+    required this.trip,
+    super.key,
+  });
 
+  final TripViewModel vm;
   final Trip trip;
 
   @override
@@ -80,10 +82,10 @@ class TripView extends StatefulWidget {
 class _TripViewState extends State<TripView> {
   int _selectedIndex = 0;
 
-  final _children = [
-    const ItineraryView(),
+  late final _children = [
+    LocationsView(vm: widget.vm),
     const GuidebookView(),
-    const LocationsView(),
+    const ItineraryView(),
     const BudgetView(),
   ];
 
@@ -97,16 +99,16 @@ class _TripViewState extends State<TripView> {
           labelType: NavigationRailLabelType.all,
           destinations: const <NavigationRailDestination>[
             NavigationRailDestination(
-              icon: Icon(Icons.calendar_month),
-              label: Text('Itinerary'),
+              icon: Icon(Icons.map),
+              label: Text('Locations'),
             ),
             NavigationRailDestination(
               icon: Icon(Icons.book),
               label: Text('Guidebook'),
             ),
             NavigationRailDestination(
-              icon: Icon(Icons.map),
-              label: Text('Locations'),
+              icon: Icon(Icons.calendar_month),
+              label: Text('Itinerary'),
             ),
             NavigationRailDestination(
               icon: Icon(Icons.attach_money),

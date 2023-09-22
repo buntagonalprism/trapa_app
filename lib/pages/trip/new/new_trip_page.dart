@@ -1,4 +1,4 @@
-import 'package:country_picker/country_picker.dart';
+import 'package:country_picker/country_picker.dart' as picker;
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:intl/intl.dart';
@@ -313,7 +313,7 @@ class _TripCountriesSelector extends StatelessWidget {
                     const Icon(Icons.map),
                     const SizedBox(width: 8),
                     Text(
-                      vm.form.country?.displayName ?? 'Select country',
+                      vm.form.country?.name(context) ?? 'Select country',
                     ),
                   ]),
                 )
@@ -330,10 +330,10 @@ class _TripCountriesSelector extends StatelessWidget {
   }
 
   void selectSingleCountry(BuildContext context) {
-    showCountryPicker(
+    picker.showCountryPicker(
       context: context,
       showPhoneCode: false,
-      onSelect: (Country country) {
+      onSelect: (picker.Country country) {
         vm.form.singleCountryCode.set(country.countryCode);
       },
     );

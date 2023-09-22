@@ -60,7 +60,10 @@ class _HomePageState extends State<HomePage> {
             const SizedBox(height: 36),
             Text(
               'Travel Research And Planning App',
-              style: Theme.of(context).textTheme.headlineSmall,
+              style: Theme.of(context)
+                  .textTheme
+                  .headlineSmall!
+                  .copyWith(color: theme.colorScheme.primary),
             ),
             const SizedBox(height: 48),
             Card(

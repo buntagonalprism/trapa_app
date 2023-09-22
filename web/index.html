@@ -48,7 +48,13 @@
           serviceWorkerVersion: serviceWorkerVersion,
         },
         onEntrypointLoaded: function(engineInitializer) {
-          engineInitializer.initializeEngine().then(function(appRunner) {
+          // the addition of `useColorEmoji: true` is required to enable country flag emoji icons on web. 
+          // Unfortunately this adds a 24MB file download, so it would be good to find a better workaround
+          // for the 200-ish flag icons we actually care about
+          // See this issue for details: https://github.com/flutter/flutter/issues/119536
+          engineInitializer.initializeEngine({
+            useColorEmoji: true,
+          }).then(function(appRunner) {
             appRunner.runApp();
           });
         }

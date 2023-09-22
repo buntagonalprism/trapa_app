@@ -1,10 +1,10 @@
-import 'package:country_picker/country_picker.dart';
 import 'package:flutter/widgets.dart';
 import 'package:injectable/injectable.dart';
 import 'package:mobx/mobx.dart';
 
 import '../../../messages.dart';
 import '../../../models/operations.dart';
+import '../../../models/trip/common/country.dart';
 import '../../../models/trip/trip.dart';
 import '../../../stores/trip_store.dart';
 import '../../../utils/form_store.dart';
@@ -153,7 +153,7 @@ abstract class _NewTripForm extends FormStore with Store {
 
   @computed
   Country? get country =>
-      singleCountryCode.value != null ? Country.parse(singleCountryCode.value!) : null;
+      singleCountryCode.value != null ? Country(countryCode: singleCountryCode.value!) : null;
 
   @computed
   int get tripDuration => endDate.value != null && startDate.value != null

@@ -20,7 +20,7 @@ Country _$CountryFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Country {
-  String get countryCode => throw _privateConstructorUsedError;
+  String get code => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -32,7 +32,7 @@ abstract class $CountryCopyWith<$Res> {
   factory $CountryCopyWith(Country value, $Res Function(Country) then) =
       _$CountryCopyWithImpl<$Res, Country>;
   @useResult
-  $Res call({String countryCode});
+  $Res call({String code});
 }
 
 /// @nodoc
@@ -48,12 +48,12 @@ class _$CountryCopyWithImpl<$Res, $Val extends Country>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? countryCode = null,
+    Object? code = null,
   }) {
     return _then(_value.copyWith(
-      countryCode: null == countryCode
-          ? _value.countryCode
-          : countryCode // ignore: cast_nullable_to_non_nullable
+      code: null == code
+          ? _value.code
+          : code // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
   }
@@ -66,7 +66,7 @@ abstract class _$$_CountryCopyWith<$Res> implements $CountryCopyWith<$Res> {
       __$$_CountryCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String countryCode});
+  $Res call({String code});
 }
 
 /// @nodoc
@@ -79,12 +79,12 @@ class __$$_CountryCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? countryCode = null,
+    Object? code = null,
   }) {
     return _then(_$_Country(
-      countryCode: null == countryCode
-          ? _value.countryCode
-          : countryCode // ignore: cast_nullable_to_non_nullable
+      code: null == code
+          ? _value.code
+          : code // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -93,17 +93,17 @@ class __$$_CountryCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_Country extends _Country {
-  const _$_Country({required this.countryCode}) : super._();
+  const _$_Country({required this.code}) : super._();
 
   factory _$_Country.fromJson(Map<String, dynamic> json) =>
       _$$_CountryFromJson(json);
 
   @override
-  final String countryCode;
+  final String code;
 
   @override
   String toString() {
-    return 'Country(countryCode: $countryCode)';
+    return 'Country._internal(code: $code)';
   }
 
   @override
@@ -111,13 +111,12 @@ class _$_Country extends _Country {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Country &&
-            (identical(other.countryCode, countryCode) ||
-                other.countryCode == countryCode));
+            (identical(other.code, code) || other.code == code));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, countryCode);
+  int get hashCode => Object.hash(runtimeType, code);
 
   @JsonKey(ignore: true)
   @override
@@ -134,13 +133,13 @@ class _$_Country extends _Country {
 }
 
 abstract class _Country extends Country {
-  const factory _Country({required final String countryCode}) = _$_Country;
+  const factory _Country({required final String code}) = _$_Country;
   const _Country._() : super._();
 
   factory _Country.fromJson(Map<String, dynamic> json) = _$_Country.fromJson;
 
   @override
-  String get countryCode;
+  String get code;
   @override
   @JsonKey(ignore: true)
   _$$_CountryCopyWith<_$_Country> get copyWith =>

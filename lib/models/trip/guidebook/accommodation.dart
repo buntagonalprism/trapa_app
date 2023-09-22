@@ -2,10 +2,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../common/address.dart';
 import '../common/coordinates.dart';
-import '../common/date_range.dart';
-import '../common/day_of_week.dart';
 import '../common/details.dart';
-import '../common/open_days_schedule.dart';
 import '../locations/region.dart';
 import 'accommodation_type.dart';
 import 'price_rating.dart';

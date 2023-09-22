@@ -10,6 +10,8 @@ class HomeIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return InkWell(
       onTap: () => getIt<AppRouter>().goToHome(context),
       child: Padding(
@@ -17,19 +19,16 @@ class HomeIcon extends StatelessWidget {
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Icon(
+            Icon(
               Icons.travel_explore,
-              color: Colors.white,
+              color: theme.colorScheme.onSurface,
               size: 24,
             ),
             const SizedBox(width: 8),
             Text(
               Messages.of(context)!.title,
               style: GoogleFonts.audiowide(
-                textStyle: const TextStyle(
-                  fontSize: 24,
-                  color: Colors.white,
-                ),
+                textStyle: theme.textTheme.titleLarge,
               ),
             ),
           ],
