@@ -12,7 +12,7 @@ class Region with _$Region {
   const factory Region({
     required String name,
     required Region parentRegion,
-    required String country,
+    required String countryCode,
     Details? details,
   }) = _Region;
 

@@ -1,24 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
-import '../../../models/api/network_observable.dart';
 import '../../../models/trip/common/country.dart';
-import '../trip_view_model.dart';
-import 'edit_countries_dialog.dart';
+import '../../../models/trip/trip.dart';
+import '../edit_countries_dialog.dart';
+import 'locations_view_model.dart';
 
 class LocationsView extends StatelessWidget {
   const LocationsView({required this.vm, super.key});
 
-  final TripViewModel vm;
+  final LocationsViewModel vm;
 
   @override
   Widget build(BuildContext context) {
     return Observer(builder: (context) {
-      final trip = vm.tripObservable.requireData();
-      if (trip.countries?.isNotEmpty ?? false) {
-        return LocationEditorView(vm: vm);
-      }
-      return NoCountriesSelectedView(vm: vm);
+      return vm.tripObservable.value.when(
+        data: (trip, _) {
+          if (trip.countries?.isNotEmpty ?? false) {
+            return LocationEditorView(trip: trip, vm: vm);
+          }
+          return NoCountriesSelectedView(trip: trip, vm: vm);
+        },
+        unknownError: () => const Text('Unknown error'),
+        loading: () => const CircularProgressIndicator(),
+        notFound: () => Text('No trip found with id ${vm.tripId}'),
+      );
     });
   }
 }
@@ -27,9 +33,11 @@ class NoCountriesSelectedView extends StatelessWidget {
   const NoCountriesSelectedView({
     super.key,
     required this.vm,
+    required this.trip,
   });
 
-  final TripViewModel vm;
+  final LocationsViewModel vm;
+  final Trip trip;
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +50,11 @@ class NoCountriesSelectedView extends StatelessWidget {
           const Text('You can always change this later'),
           const SizedBox(height: 16),
           FilledButton(
-            onPressed: () => EditCountriesDialog.show(context, vm),
+            onPressed: () => EditCountriesDialog.show(
+              context: context,
+              trip: trip,
+              onCountriesSelected: vm.setTripCountries,
+            ),
             child: const Text('Select Countries'),
           ),
         ],
@@ -52,9 +64,14 @@ class NoCountriesSelectedView extends StatelessWidget {
 }
 
 class LocationEditorView extends StatefulWidget {
-  const LocationEditorView({required this.vm, super.key});
+  const LocationEditorView({
+    required this.trip,
+    required this.vm,
+    super.key,
+  });
 
-  final TripViewModel vm;
+  final Trip trip;
+  final LocationsViewModel vm;
 
   @override
   State<LocationEditorView> createState() => _LocationEditorViewState();
@@ -75,18 +92,21 @@ class _LocationEditorViewState extends State<LocationEditorView> {
                   const Text('Countries you are visiting:'),
                   const Spacer(),
                   TextButton(
-                    onPressed: () => EditCountriesDialog.show(context, widget.vm),
+                    onPressed: () => EditCountriesDialog.show(
+                      context: context,
+                      trip: widget.trip,
+                      onCountriesSelected: widget.vm.setTripCountries,
+                    ),
                     child: const Text('Edit'),
                   ),
                 ],
               ),
               Expanded(
                 child: Observer(builder: (context) {
-                  final trip = widget.vm.tripObservable.requireData();
                   return ListView.builder(
-                    itemCount: trip.countries!.length,
+                    itemCount: widget.trip.countries!.length,
                     itemBuilder: (context, index) {
-                      final country = trip.countries![index];
+                      final country = widget.trip.countries![index];
                       return CountryTile(country: country);
                     },
                   );

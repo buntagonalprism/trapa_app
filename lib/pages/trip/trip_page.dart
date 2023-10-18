@@ -3,7 +3,6 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 
 import '../../messages.dart';
 import '../../models/api/network_observable.dart';
-import '../../models/trip/trip.dart';
 import '../../widgets/home_icon.dart';
 import '../../widgets/settings_icon.dart';
 import 'budget/budget_view.dart';
@@ -54,7 +53,7 @@ class TripPage extends StatelessWidget {
       body: Center(
         child: Observer(builder: (context) {
           return vm.tripObservable.value.when(
-            data: (trip, _) => TripView(vm: vm, trip: trip),
+            data: (trip, _) => TripView(vm: vm, key: Key('trip_view_${trip.id}')),
             unknownError: () => const Text('Unknown error'),
             loading: () => const CircularProgressIndicator(),
             notFound: () => Text('No trip found with id ${vm.tripId}'),
@@ -68,12 +67,10 @@ class TripPage extends StatelessWidget {
 class TripView extends StatefulWidget {
   const TripView({
     required this.vm,
-    required this.trip,
     super.key,
   });
 
   final TripViewModel vm;
-  final Trip trip;
 
   @override
   State<TripView> createState() => _TripViewState();
@@ -83,7 +80,7 @@ class _TripViewState extends State<TripView> {
   int _selectedIndex = 0;
 
   late final _children = [
-    LocationsView(vm: widget.vm),
+    LocationsView(vm: widget.vm.tabViewModels!.tripViewModel),
     const GuidebookView(),
     const ItineraryView(),
     const BudgetView(),
@@ -118,7 +115,10 @@ class _TripViewState extends State<TripView> {
         ),
         const VerticalDivider(thickness: 1, width: 1),
         Expanded(
-          child: _children[_selectedIndex],
+          child: IndexedStack(
+            index: _selectedIndex,
+            children: _children,
+          ),
         ),
       ],
     );

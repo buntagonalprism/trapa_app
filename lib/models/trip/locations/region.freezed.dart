@@ -22,7 +22,7 @@ Region _$RegionFromJson(Map<String, dynamic> json) {
 mixin _$Region {
   String get name => throw _privateConstructorUsedError;
   Region get parentRegion => throw _privateConstructorUsedError;
-  String get country => throw _privateConstructorUsedError;
+  String get countryCode => throw _privateConstructorUsedError;
   Details? get details => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -36,7 +36,7 @@ abstract class $RegionCopyWith<$Res> {
       _$RegionCopyWithImpl<$Res, Region>;
   @useResult
   $Res call(
-      {String name, Region parentRegion, String country, Details? details});
+      {String name, Region parentRegion, String countryCode, Details? details});
 
   $RegionCopyWith<$Res> get parentRegion;
   $DetailsCopyWith<$Res>? get details;
@@ -57,7 +57,7 @@ class _$RegionCopyWithImpl<$Res, $Val extends Region>
   $Res call({
     Object? name = null,
     Object? parentRegion = null,
-    Object? country = null,
+    Object? countryCode = null,
     Object? details = freezed,
   }) {
     return _then(_value.copyWith(
@@ -69,9 +69,9 @@ class _$RegionCopyWithImpl<$Res, $Val extends Region>
           ? _value.parentRegion
           : parentRegion // ignore: cast_nullable_to_non_nullable
               as Region,
-      country: null == country
-          ? _value.country
-          : country // ignore: cast_nullable_to_non_nullable
+      countryCode: null == countryCode
+          ? _value.countryCode
+          : countryCode // ignore: cast_nullable_to_non_nullable
               as String,
       details: freezed == details
           ? _value.details
@@ -108,7 +108,7 @@ abstract class _$$_RegionCopyWith<$Res> implements $RegionCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {String name, Region parentRegion, String country, Details? details});
+      {String name, Region parentRegion, String countryCode, Details? details});
 
   @override
   $RegionCopyWith<$Res> get parentRegion;
@@ -128,7 +128,7 @@ class __$$_RegionCopyWithImpl<$Res>
   $Res call({
     Object? name = null,
     Object? parentRegion = null,
-    Object? country = null,
+    Object? countryCode = null,
     Object? details = freezed,
   }) {
     return _then(_$_Region(
@@ -140,9 +140,9 @@ class __$$_RegionCopyWithImpl<$Res>
           ? _value.parentRegion
           : parentRegion // ignore: cast_nullable_to_non_nullable
               as Region,
-      country: null == country
-          ? _value.country
-          : country // ignore: cast_nullable_to_non_nullable
+      countryCode: null == countryCode
+          ? _value.countryCode
+          : countryCode // ignore: cast_nullable_to_non_nullable
               as String,
       details: freezed == details
           ? _value.details
@@ -158,7 +158,7 @@ class _$_Region extends _Region {
   const _$_Region(
       {required this.name,
       required this.parentRegion,
-      required this.country,
+      required this.countryCode,
       this.details})
       : super._();
 
@@ -170,13 +170,13 @@ class _$_Region extends _Region {
   @override
   final Region parentRegion;
   @override
-  final String country;
+  final String countryCode;
   @override
   final Details? details;
 
   @override
   String toString() {
-    return 'Region(name: $name, parentRegion: $parentRegion, country: $country, details: $details)';
+    return 'Region(name: $name, parentRegion: $parentRegion, countryCode: $countryCode, details: $details)';
   }
 
   @override
@@ -187,14 +187,15 @@ class _$_Region extends _Region {
             (identical(other.name, name) || other.name == name) &&
             (identical(other.parentRegion, parentRegion) ||
                 other.parentRegion == parentRegion) &&
-            (identical(other.country, country) || other.country == country) &&
+            (identical(other.countryCode, countryCode) ||
+                other.countryCode == countryCode) &&
             (identical(other.details, details) || other.details == details));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, name, parentRegion, country, details);
+      Object.hash(runtimeType, name, parentRegion, countryCode, details);
 
   @JsonKey(ignore: true)
   @override
@@ -214,7 +215,7 @@ abstract class _Region extends Region {
   const factory _Region(
       {required final String name,
       required final Region parentRegion,
-      required final String country,
+      required final String countryCode,
       final Details? details}) = _$_Region;
   const _Region._() : super._();
 
@@ -225,7 +226,7 @@ abstract class _Region extends Region {
   @override
   Region get parentRegion;
   @override
-  String get country;
+  String get countryCode;
   @override
   Details? get details;
   @override

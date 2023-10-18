@@ -41,6 +41,22 @@ mixin _$TripViewModel on _TripViewModel, Store {
     });
   }
 
+  late final _$tabViewModelsAtom =
+      Atom(name: '_TripViewModel.tabViewModels', context: context);
+
+  @override
+  TripTabViewModels? get tabViewModels {
+    _$tabViewModelsAtom.reportRead();
+    return super.tabViewModels;
+  }
+
+  @override
+  set tabViewModels(TripTabViewModels? value) {
+    _$tabViewModelsAtom.reportWrite(value, super.tabViewModels, () {
+      super.tabViewModels = value;
+    });
+  }
+
   late final _$_TripViewModelActionController =
       ActionController(name: '_TripViewModel', context: context);
 
@@ -59,7 +75,8 @@ mixin _$TripViewModel on _TripViewModel, Store {
   String toString() {
     return '''
 tripId: ${tripId},
-tripObservable: ${tripObservable}
+tripObservable: ${tripObservable},
+tabViewModels: ${tabViewModels}
     ''';
   }
 }

@@ -17,6 +17,8 @@ part 'trip_store.g.dart';
 @singleton
 class TripStore = _TripStore with _$TripStore;
 
+const tripsFirestoreCollection = 'trips';
+
 abstract class _TripStore with Store {
   _TripStore({
     required this.apiService,
@@ -31,8 +33,6 @@ abstract class _TripStore with Store {
   final AuthService authService;
 
   static const tripsApiPath = 'v1/trips';
-
-  static const tripsFirestoreCollection = 'trips';
 
   @computed
   NetworkObservable<List<Trip>>? get _userTripsObservable {

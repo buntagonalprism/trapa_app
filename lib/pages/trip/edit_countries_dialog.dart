@@ -1,30 +1,28 @@
 import 'package:flutter/material.dart';
 
-import '../../../models/api/network_observable.dart';
-import '../../../models/trip/common/country.dart';
-import '../../../models/trip/trip.dart';
-import '../trip_view_model.dart';
+import '../../models/trip/common/country.dart';
+import '../../models/trip/trip.dart';
 
 class EditCountriesDialog extends StatefulWidget {
   const EditCountriesDialog({
     required this.trip,
-    required this.onSelectedCountriesChanged,
+    required this.onCountriesSelected,
     super.key,
   });
 
   final Trip trip;
-  final Function(List<Country> countries) onSelectedCountriesChanged;
+  final Function(List<Country> countries) onCountriesSelected;
 
-  static void show(BuildContext context, TripViewModel vm) {
-    final trip = vm.tripObservable.dataOrNull();
-    if (trip == null) {
-      throw "Trip is null, can't show country selection view. Trip state ${vm.tripObservable.value}}";
-    }
+  static void show({
+    required BuildContext context,
+    required Trip trip,
+    required Function(List<Country> country) onCountriesSelected,
+  }) {
     showDialog(
       context: context,
       builder: (context) => EditCountriesDialog(
         trip: trip,
-        onSelectedCountriesChanged: (countries) => vm.setTripCountries(countries),
+        onCountriesSelected: (countries) => onCountriesSelected(countries),
       ),
     );
   }
@@ -61,7 +59,7 @@ class _EditCountriesDialogState extends State<EditCountriesDialog> {
         ),
         FilledButton(
           onPressed: () {
-            widget.onSelectedCountriesChanged(_selectedCountries);
+            widget.onCountriesSelected(_selectedCountries);
             Navigator.of(context).pop();
           },
           child: const Text('Save'),

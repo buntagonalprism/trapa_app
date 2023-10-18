@@ -1,10 +1,11 @@
 import 'package:injectable/injectable.dart';
 import 'package:mobx/mobx.dart';
 
+import '../../injection.dart';
 import '../../models/api/network_observable.dart';
-import '../../models/trip/common/country.dart';
 import '../../models/trip/trip.dart';
 import '../../stores/trip_store.dart';
+import 'locations/locations_view_model.dart';
 
 part 'trip_view_model.g.dart';
 
@@ -25,13 +26,20 @@ abstract class _TripViewModel with Store {
   void setTripId(String id) {
     tripId = id;
     tripObservable = _tripStore.getTrip(tripId);
+    tabViewModels = TripTabViewModels(tripId: id);
   }
 
   @observable
   NetworkObservable<Trip> tripObservable = loadingNetworkObservable<Trip>();
 
-  void setTripCountries(List<Country> countries) {
-    final trip = tripObservable.dataOrNull()!;
-    _tripStore.setTripCountries(trip, countries);
-  }
+  @observable
+  TripTabViewModels? tabViewModels;
+}
+
+class TripTabViewModels {
+  TripTabViewModels({required this.tripId});
+
+  final String tripId;
+
+  late final LocationsViewModel tripViewModel = getIt<LocationsViewModel>()..setTripId(tripId);
 }
