@@ -102,21 +102,19 @@ class _LocationEditorViewState extends State<LocationEditorView> {
                 ],
               ),
               Expanded(
-                child: Observer(builder: (context) {
-                  return ListView.builder(
-                    itemCount: widget.trip.countries!.length,
-                    itemBuilder: (context, index) {
-                      final country = widget.trip.countries![index];
-                      return CountryTile(country: country);
-                    },
-                  );
-                }),
+                child: ListView.builder(
+                  itemCount: widget.trip.countries!.length,
+                  itemBuilder: (context, index) {
+                    final country = widget.trip.countries![index];
+                    return CountryTile(country: country, vm: widget.vm);
+                  },
+                ),
               ),
             ],
           ),
         ),
         const VerticalDivider(),
-        const Placeholder(),
+        Expanded(child: CountryRegionsView(vm: widget.vm)),
       ],
     );
   }
@@ -125,21 +123,53 @@ class _LocationEditorViewState extends State<LocationEditorView> {
 class CountryTile extends StatelessWidget {
   const CountryTile({
     required this.country,
+    required this.vm,
     super.key,
   });
 
   final Country country;
+  final LocationsViewModel vm;
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
       dense: true,
       leading: country.flagIcon(),
+      onTap: () => vm.selectCountry(country),
       contentPadding: const EdgeInsets.only(left: 16, right: 12),
       title: Text(
         country.name(context),
         style: const TextStyle(fontSize: 14),
       ),
     );
+  }
+}
+
+class CountryRegionsView extends StatefulWidget {
+  const CountryRegionsView({required this.vm, super.key});
+
+  final LocationsViewModel vm;
+
+  @override
+  State<CountryRegionsView> createState() => _CountryRegionsViewState();
+}
+
+class _CountryRegionsViewState extends State<CountryRegionsView> {
+  @override
+  Widget build(BuildContext context) {
+    return Observer(builder: (context) {
+      final country = widget.vm.selectedCountry;
+      if (country == null) {
+        return const Center(child: Text('Please select a country to start adding regions'));
+      }
+      return Column(
+        children: [
+          Text('Adding locations for: ${country.name(context)}'),
+          const Expanded(
+            child: Placeholder(),
+          ),
+        ],
+      );
+    });
   }
 }

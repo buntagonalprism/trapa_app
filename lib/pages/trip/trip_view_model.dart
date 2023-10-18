@@ -24,9 +24,11 @@ abstract class _TripViewModel with Store {
 
   @action
   void setTripId(String id) {
-    tripId = id;
-    tripObservable = _tripStore.getTrip(tripId);
-    tabViewModels = TripTabViewModels(tripId: id);
+    if (id != tripId) {
+      tripId = id;
+      tripObservable = _tripStore.getTrip(tripId);
+      tabViewModels = TripTabViewModels(tripId: id);
+    }
   }
 
   @observable
