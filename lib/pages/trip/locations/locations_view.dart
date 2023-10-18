@@ -114,7 +114,9 @@ class _LocationEditorViewState extends State<LocationEditorView> {
           ),
         ),
         const VerticalDivider(),
-        Expanded(child: CountryRegionsView(vm: widget.vm)),
+        Expanded(
+          child: CountryRegionsView(vm: widget.vm),
+        ),
       ],
     );
   }
@@ -132,16 +134,20 @@ class CountryTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      dense: true,
-      leading: country.flagIcon(),
-      onTap: () => vm.selectCountry(country),
-      contentPadding: const EdgeInsets.only(left: 16, right: 12),
-      title: Text(
-        country.name(context),
-        style: const TextStyle(fontSize: 14),
-      ),
-    );
+    return Observer(builder: (context) {
+      return ListTile(
+        dense: true,
+        selected: vm.selectedCountry == country,
+        selectedColor: Theme.of(context).colorScheme.primary,
+        leading: country.flagIcon(),
+        onTap: () => vm.selectCountry(country),
+        contentPadding: const EdgeInsets.only(left: 16, right: 12),
+        title: Text(
+          country.name(context),
+          style: const TextStyle(fontSize: 14),
+        ),
+      );
+    });
   }
 }
 
@@ -163,10 +169,48 @@ class _CountryRegionsViewState extends State<CountryRegionsView> {
         return const Center(child: Text('Please select a country to start adding regions'));
       }
       return Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Text('Adding locations for: ${country.name(context)}'),
-          const Expanded(
-            child: Placeholder(),
+          Text.rich(
+            TextSpan(children: [
+              const TextSpan(text: 'Editing locations in '),
+              TextSpan(
+                text: country.name(context),
+                style: const TextStyle(fontWeight: FontWeight.bold),
+              ),
+            ]),
+            textAlign: TextAlign.start,
+          ),
+          TextField(
+            decoration: const InputDecoration(
+              hintText: 'Start typing a new location...',
+              prefixIcon: Icon(Icons.search),
+            ),
+            onChanged: (value) => widget.vm.setLocationSearchQuery(value),
+          ),
+          Expanded(
+            child: Observer(builder: (context) {
+              return widget.vm.searchResults.when(
+                pending: () => const SizedBox(),
+                inProgress: () => const Center(child: CircularProgressIndicator()),
+                result: (result) => result.when(
+                  error: (error) => Center(
+                    child: ListTile(
+                      title: Text(error.titleText(context)),
+                      subtitle: Text(error.bodyText(context)),
+                    ),
+                  ),
+                  success: (suggestions) => ListView.builder(
+                    itemCount: suggestions.length,
+                    itemBuilder: (context, index) => ListTile(
+                      dense: true,
+                      title: Text(suggestions[index].name),
+                      onTap: () => print('Selected region ${suggestions[index].name}'),
+                    ),
+                  ),
+                ),
+              );
+            }),
           ),
         ],
       );

@@ -344,3 +344,439 @@ abstract class OperationResultError<T> implements OperationResult<T> {
   _$$OperationResultErrorCopyWith<T, _$OperationResultError<T>> get copyWith =>
       throw _privateConstructorUsedError;
 }
+
+/// @nodoc
+mixin _$OperationState<T> {
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() pending,
+    required TResult Function() inProgress,
+    required TResult Function(OperationResult<T> result) result,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? pending,
+    TResult? Function()? inProgress,
+    TResult? Function(OperationResult<T> result)? result,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? pending,
+    TResult Function()? inProgress,
+    TResult Function(OperationResult<T> result)? result,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(OperationStatePending<T> value) pending,
+    required TResult Function(OperationStateInProgress<T> value) inProgress,
+    required TResult Function(OperationStateResult<T> value) result,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(OperationStatePending<T> value)? pending,
+    TResult? Function(OperationStateInProgress<T> value)? inProgress,
+    TResult? Function(OperationStateResult<T> value)? result,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(OperationStatePending<T> value)? pending,
+    TResult Function(OperationStateInProgress<T> value)? inProgress,
+    TResult Function(OperationStateResult<T> value)? result,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $OperationStateCopyWith<T, $Res> {
+  factory $OperationStateCopyWith(
+          OperationState<T> value, $Res Function(OperationState<T>) then) =
+      _$OperationStateCopyWithImpl<T, $Res, OperationState<T>>;
+}
+
+/// @nodoc
+class _$OperationStateCopyWithImpl<T, $Res, $Val extends OperationState<T>>
+    implements $OperationStateCopyWith<T, $Res> {
+  _$OperationStateCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+}
+
+/// @nodoc
+abstract class _$$OperationStatePendingCopyWith<T, $Res> {
+  factory _$$OperationStatePendingCopyWith(_$OperationStatePending<T> value,
+          $Res Function(_$OperationStatePending<T>) then) =
+      __$$OperationStatePendingCopyWithImpl<T, $Res>;
+}
+
+/// @nodoc
+class __$$OperationStatePendingCopyWithImpl<T, $Res>
+    extends _$OperationStateCopyWithImpl<T, $Res, _$OperationStatePending<T>>
+    implements _$$OperationStatePendingCopyWith<T, $Res> {
+  __$$OperationStatePendingCopyWithImpl(_$OperationStatePending<T> _value,
+      $Res Function(_$OperationStatePending<T>) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$OperationStatePending<T> implements OperationStatePending<T> {
+  const _$OperationStatePending();
+
+  @override
+  String toString() {
+    return 'OperationState<$T>.pending()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$OperationStatePending<T>);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() pending,
+    required TResult Function() inProgress,
+    required TResult Function(OperationResult<T> result) result,
+  }) {
+    return pending();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? pending,
+    TResult? Function()? inProgress,
+    TResult? Function(OperationResult<T> result)? result,
+  }) {
+    return pending?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? pending,
+    TResult Function()? inProgress,
+    TResult Function(OperationResult<T> result)? result,
+    required TResult orElse(),
+  }) {
+    if (pending != null) {
+      return pending();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(OperationStatePending<T> value) pending,
+    required TResult Function(OperationStateInProgress<T> value) inProgress,
+    required TResult Function(OperationStateResult<T> value) result,
+  }) {
+    return pending(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(OperationStatePending<T> value)? pending,
+    TResult? Function(OperationStateInProgress<T> value)? inProgress,
+    TResult? Function(OperationStateResult<T> value)? result,
+  }) {
+    return pending?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(OperationStatePending<T> value)? pending,
+    TResult Function(OperationStateInProgress<T> value)? inProgress,
+    TResult Function(OperationStateResult<T> value)? result,
+    required TResult orElse(),
+  }) {
+    if (pending != null) {
+      return pending(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class OperationStatePending<T> implements OperationState<T> {
+  const factory OperationStatePending() = _$OperationStatePending<T>;
+}
+
+/// @nodoc
+abstract class _$$OperationStateInProgressCopyWith<T, $Res> {
+  factory _$$OperationStateInProgressCopyWith(
+          _$OperationStateInProgress<T> value,
+          $Res Function(_$OperationStateInProgress<T>) then) =
+      __$$OperationStateInProgressCopyWithImpl<T, $Res>;
+}
+
+/// @nodoc
+class __$$OperationStateInProgressCopyWithImpl<T, $Res>
+    extends _$OperationStateCopyWithImpl<T, $Res, _$OperationStateInProgress<T>>
+    implements _$$OperationStateInProgressCopyWith<T, $Res> {
+  __$$OperationStateInProgressCopyWithImpl(_$OperationStateInProgress<T> _value,
+      $Res Function(_$OperationStateInProgress<T>) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$OperationStateInProgress<T> implements OperationStateInProgress<T> {
+  const _$OperationStateInProgress();
+
+  @override
+  String toString() {
+    return 'OperationState<$T>.inProgress()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$OperationStateInProgress<T>);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() pending,
+    required TResult Function() inProgress,
+    required TResult Function(OperationResult<T> result) result,
+  }) {
+    return inProgress();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? pending,
+    TResult? Function()? inProgress,
+    TResult? Function(OperationResult<T> result)? result,
+  }) {
+    return inProgress?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? pending,
+    TResult Function()? inProgress,
+    TResult Function(OperationResult<T> result)? result,
+    required TResult orElse(),
+  }) {
+    if (inProgress != null) {
+      return inProgress();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(OperationStatePending<T> value) pending,
+    required TResult Function(OperationStateInProgress<T> value) inProgress,
+    required TResult Function(OperationStateResult<T> value) result,
+  }) {
+    return inProgress(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(OperationStatePending<T> value)? pending,
+    TResult? Function(OperationStateInProgress<T> value)? inProgress,
+    TResult? Function(OperationStateResult<T> value)? result,
+  }) {
+    return inProgress?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(OperationStatePending<T> value)? pending,
+    TResult Function(OperationStateInProgress<T> value)? inProgress,
+    TResult Function(OperationStateResult<T> value)? result,
+    required TResult orElse(),
+  }) {
+    if (inProgress != null) {
+      return inProgress(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class OperationStateInProgress<T> implements OperationState<T> {
+  const factory OperationStateInProgress() = _$OperationStateInProgress<T>;
+}
+
+/// @nodoc
+abstract class _$$OperationStateResultCopyWith<T, $Res> {
+  factory _$$OperationStateResultCopyWith(_$OperationStateResult<T> value,
+          $Res Function(_$OperationStateResult<T>) then) =
+      __$$OperationStateResultCopyWithImpl<T, $Res>;
+  @useResult
+  $Res call({OperationResult<T> result});
+
+  $OperationResultCopyWith<T, $Res> get result;
+}
+
+/// @nodoc
+class __$$OperationStateResultCopyWithImpl<T, $Res>
+    extends _$OperationStateCopyWithImpl<T, $Res, _$OperationStateResult<T>>
+    implements _$$OperationStateResultCopyWith<T, $Res> {
+  __$$OperationStateResultCopyWithImpl(_$OperationStateResult<T> _value,
+      $Res Function(_$OperationStateResult<T>) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? result = null,
+  }) {
+    return _then(_$OperationStateResult<T>(
+      null == result
+          ? _value.result
+          : result // ignore: cast_nullable_to_non_nullable
+              as OperationResult<T>,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $OperationResultCopyWith<T, $Res> get result {
+    return $OperationResultCopyWith<T, $Res>(_value.result, (value) {
+      return _then(_value.copyWith(result: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$OperationStateResult<T> implements OperationStateResult<T> {
+  const _$OperationStateResult(this.result);
+
+  @override
+  final OperationResult<T> result;
+
+  @override
+  String toString() {
+    return 'OperationState<$T>.result(result: $result)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$OperationStateResult<T> &&
+            (identical(other.result, result) || other.result == result));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, result);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$OperationStateResultCopyWith<T, _$OperationStateResult<T>> get copyWith =>
+      __$$OperationStateResultCopyWithImpl<T, _$OperationStateResult<T>>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() pending,
+    required TResult Function() inProgress,
+    required TResult Function(OperationResult<T> result) result,
+  }) {
+    return result(this.result);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? pending,
+    TResult? Function()? inProgress,
+    TResult? Function(OperationResult<T> result)? result,
+  }) {
+    return result?.call(this.result);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? pending,
+    TResult Function()? inProgress,
+    TResult Function(OperationResult<T> result)? result,
+    required TResult orElse(),
+  }) {
+    if (result != null) {
+      return result(this.result);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(OperationStatePending<T> value) pending,
+    required TResult Function(OperationStateInProgress<T> value) inProgress,
+    required TResult Function(OperationStateResult<T> value) result,
+  }) {
+    return result(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(OperationStatePending<T> value)? pending,
+    TResult? Function(OperationStateInProgress<T> value)? inProgress,
+    TResult? Function(OperationStateResult<T> value)? result,
+  }) {
+    return result?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(OperationStatePending<T> value)? pending,
+    TResult Function(OperationStateInProgress<T> value)? inProgress,
+    TResult Function(OperationStateResult<T> value)? result,
+    required TResult orElse(),
+  }) {
+    if (result != null) {
+      return result(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class OperationStateResult<T> implements OperationState<T> {
+  const factory OperationStateResult(final OperationResult<T> result) =
+      _$OperationStateResult<T>;
+
+  OperationResult<T> get result;
+  @JsonKey(ignore: true)
+  _$$OperationStateResultCopyWith<T, _$OperationStateResult<T>> get copyWith =>
+      throw _privateConstructorUsedError;
+}

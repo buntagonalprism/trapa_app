@@ -16,6 +16,15 @@ mixin _$LocationsViewModel on _LocationsViewModel, Store {
           Computed<List<Region>>(() => super.regionsInCountry,
               name: '_LocationsViewModel.regionsInCountry'))
       .value;
+  Computed<OperationState<List<RegionSuggestion>>>? _$searchResultsComputed;
+
+  @override
+  OperationState<List<RegionSuggestion>> get searchResults =>
+      (_$searchResultsComputed ??=
+              Computed<OperationState<List<RegionSuggestion>>>(
+                  () => super.searchResults,
+                  name: '_LocationsViewModel.searchResults'))
+          .value;
 
   late final _$selectedCountryAtom =
       Atom(name: '_LocationsViewModel.selectedCountry', context: context);
@@ -46,6 +55,22 @@ mixin _$LocationsViewModel on _LocationsViewModel, Store {
   set tripId(String? value) {
     _$tripIdAtom.reportWrite(value, super.tripId, () {
       super.tripId = value;
+    });
+  }
+
+  late final _$locationSearchQueryAtom =
+      Atom(name: '_LocationsViewModel.locationSearchQuery', context: context);
+
+  @override
+  String? get locationSearchQuery {
+    _$locationSearchQueryAtom.reportRead();
+    return super.locationSearchQuery;
+  }
+
+  @override
+  set locationSearchQuery(String? value) {
+    _$locationSearchQueryAtom.reportWrite(value, super.locationSearchQuery, () {
+      super.locationSearchQuery = value;
     });
   }
 
@@ -82,6 +107,23 @@ mixin _$LocationsViewModel on _LocationsViewModel, Store {
     });
   }
 
+  late final _$_searchResultsFutureAtom =
+      Atom(name: '_LocationsViewModel._searchResultsFuture', context: context);
+
+  @override
+  ObservableFuture<List<RegionSuggestion>>? get _searchResultsFuture {
+    _$_searchResultsFutureAtom.reportRead();
+    return super._searchResultsFuture;
+  }
+
+  @override
+  set _searchResultsFuture(ObservableFuture<List<RegionSuggestion>>? value) {
+    _$_searchResultsFutureAtom.reportWrite(value, super._searchResultsFuture,
+        () {
+      super._searchResultsFuture = value;
+    });
+  }
+
   late final _$_LocationsViewModelActionController =
       ActionController(name: '_LocationsViewModel', context: context);
 
@@ -108,13 +150,26 @@ mixin _$LocationsViewModel on _LocationsViewModel, Store {
   }
 
   @override
+  void setLocationSearchQuery(String query) {
+    final _$actionInfo = _$_LocationsViewModelActionController.startAction(
+        name: '_LocationsViewModel.setLocationSearchQuery');
+    try {
+      return super.setLocationSearchQuery(query);
+    } finally {
+      _$_LocationsViewModelActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 selectedCountry: ${selectedCountry},
 tripId: ${tripId},
+locationSearchQuery: ${locationSearchQuery},
 tripObservable: ${tripObservable},
 regionObservable: ${regionObservable},
-regionsInCountry: ${regionsInCountry}
+regionsInCountry: ${regionsInCountry},
+searchResults: ${searchResults}
     ''';
   }
 }

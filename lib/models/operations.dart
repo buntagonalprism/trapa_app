@@ -3,10 +3,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'operations.freezed.dart';
 
-/// An error from an asynchronous operation.
-///
-/// The error is displayed in a dialog with a title and a body. If the error is [retryable]
-/// then the dialog also has a retry button to re-run the operation.
+/// A user-friendly description of an error from an asynchronous operation.
 ///
 /// Implement this class to provide custom error messages for your operations. For example:
 ///
@@ -54,4 +51,17 @@ class OperationResult<T> with _$OperationResult<T> {
   const factory OperationResult.success(T value) = OperationResultSuccess;
 
   const factory OperationResult.error(OperationError error) = OperationResultError;
+}
+
+/// The state of an asynchronous operation.
+@freezed
+class OperationState<T> with _$OperationState<T> {
+  /// The operation has not started
+  const factory OperationState.pending() = OperationStatePending;
+
+  /// The operation is in progress
+  const factory OperationState.inProgress() = OperationStateInProgress;
+
+  /// The operation has completed with a result
+  const factory OperationState.result(OperationResult<T> result) = OperationStateResult;
 }

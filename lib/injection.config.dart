@@ -62,6 +62,8 @@ extension GetItInjectableX on _i1.GetIt {
     gh.factory<_i14.LocationsViewModel>(() => _i14.LocationsViewModel(
           locationStore: gh<_i7.LocationStore>(),
           tripStore: gh<_i10.TripStore>(),
+          apiService: gh<_i9.TrapaApiService>(),
+          crashReporter: gh<_i5.CrashReportService>(),
         ));
     gh.factory<_i8.NewTripViewModel>(
         () => _i8.NewTripViewModel(tripStore: gh<_i10.TripStore>()));
