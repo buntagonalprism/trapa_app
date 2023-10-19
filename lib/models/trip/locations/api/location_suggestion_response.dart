@@ -4,14 +4,14 @@ part 'location_suggestion_response.freezed.dart';
 part 'location_suggestion_response.g.dart';
 
 @freezed
-class LocationSuggestion with _$LocationSuggestion {
-  const LocationSuggestion._();
+class LocationSuggestionResponse with _$LocationSuggestionResponse {
+  const LocationSuggestionResponse._();
 
-  const factory LocationSuggestion({
+  const factory LocationSuggestionResponse({
     required String id,
     required String name,
-  }) = _RegionSuggestion;
+  }) = _LocationSuggestionResponse;
 
-  factory LocationSuggestion.fromJson(Map<String, dynamic> json) =>
-      _$LocationSuggestionFromJson(json);
+  factory LocationSuggestionResponse.fromJson(Map<String, dynamic> json) =>
+      _$LocationSuggestionResponseFromJson(json);
 }

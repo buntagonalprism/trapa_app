@@ -10,11 +10,11 @@ class LocationDetailsResponse with _$LocationDetailsResponse {
   const LocationDetailsResponse._();
 
   const factory LocationDetailsResponse({
-    required LocationSuggestion place,
+    required LocationSuggestionResponse place,
     required CoordinatesResposne coordinates,
     required String website,
     required int id,
-  }) = _RegionDetails;
+  }) = _LocationDetailsResponse;
 
   factory LocationDetailsResponse.fromJson(Map<String, dynamic> json) =>
       _$LocationDetailsResponseFromJson(json);

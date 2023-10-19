@@ -13,16 +13,16 @@ _$_Tour _$$_TourFromJson(Map<String, dynamic> json) => _$_Tour(
       cost: json['cost'] == null
           ? null
           : OngoingExpense.fromJson(json['cost'] as Map<String, dynamic>),
-      regionsVisited: (json['regionsVisited'] as List<dynamic>?)
+      locationsVisited: (json['locationsVisited'] as List<dynamic>?)
           ?.map((e) => Location.fromJson(e as Map<String, dynamic>))
           .toList(),
-      departureRegion: json['departureRegion'] == null
+      depatureLocation: json['depatureLocation'] == null
           ? null
-          : Location.fromJson(json['departureRegion'] as Map<String, dynamic>),
-      destinationRegion: json['destinationRegion'] == null
+          : Location.fromJson(json['depatureLocation'] as Map<String, dynamic>),
+      destinationLocation: json['destinationLocation'] == null
           ? null
           : Location.fromJson(
-              json['destinationRegion'] as Map<String, dynamic>),
+              json['destinationLocation'] as Map<String, dynamic>),
       departureTime: json['departureTime'] == null
           ? null
           : DateTime.parse(json['departureTime'] as String),
@@ -36,9 +36,9 @@ Map<String, dynamic> _$$_TourToJson(_$_Tour instance) => <String, dynamic>{
       'startDate': instance.startDate.toIso8601String(),
       'endDate': instance.endDate.toIso8601String(),
       'cost': instance.cost,
-      'regionsVisited': instance.regionsVisited,
-      'departureRegion': instance.departureRegion,
-      'destinationRegion': instance.destinationRegion,
+      'locationsVisited': instance.locationsVisited,
+      'depatureLocation': instance.depatureLocation,
+      'destinationLocation': instance.destinationLocation,
       'departureTime': instance.departureTime?.toIso8601String(),
       'arrivalTime': instance.arrivalTime?.toIso8601String(),
     };

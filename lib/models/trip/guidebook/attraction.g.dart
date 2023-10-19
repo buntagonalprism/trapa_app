@@ -9,7 +9,7 @@ part of 'attraction.dart';
 _$_Attraction _$$_AttractionFromJson(Map<String, dynamic> json) =>
     _$_Attraction(
       name: json['name'] as String,
-      region: Location.fromJson(json['region'] as Map<String, dynamic>),
+      location: Location.fromJson(json['location'] as Map<String, dynamic>),
       details: json['details'] == null
           ? null
           : Details.fromJson(json['details'] as Map<String, dynamic>),
@@ -39,7 +39,7 @@ _$_Attraction _$$_AttractionFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$_AttractionToJson(_$_Attraction instance) =>
     <String, dynamic>{
       'name': instance.name,
-      'region': instance.region,
+      'location': instance.location,
       'details': instance.details,
       'coordinates': instance.coordinates,
       'priceRating': _$PriceRatingEnumMap[instance.priceRating],

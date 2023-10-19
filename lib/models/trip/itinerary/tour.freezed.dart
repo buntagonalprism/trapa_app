@@ -24,9 +24,9 @@ mixin _$Tour {
   DateTime get startDate => throw _privateConstructorUsedError;
   DateTime get endDate => throw _privateConstructorUsedError;
   OngoingExpense? get cost => throw _privateConstructorUsedError;
-  List<Location>? get regionsVisited => throw _privateConstructorUsedError;
-  Location? get departureRegion => throw _privateConstructorUsedError;
-  Location? get destinationRegion => throw _privateConstructorUsedError;
+  List<Location>? get locationsVisited => throw _privateConstructorUsedError;
+  Location? get depatureLocation => throw _privateConstructorUsedError;
+  Location? get destinationLocation => throw _privateConstructorUsedError;
   DateTime? get departureTime => throw _privateConstructorUsedError;
   DateTime? get arrivalTime => throw _privateConstructorUsedError;
 
@@ -45,15 +45,15 @@ abstract class $TourCopyWith<$Res> {
       DateTime startDate,
       DateTime endDate,
       OngoingExpense? cost,
-      List<Location>? regionsVisited,
-      Location? departureRegion,
-      Location? destinationRegion,
+      List<Location>? locationsVisited,
+      Location? depatureLocation,
+      Location? destinationLocation,
       DateTime? departureTime,
       DateTime? arrivalTime});
 
   $OngoingExpenseCopyWith<$Res>? get cost;
-  $LocationCopyWith<$Res>? get departureRegion;
-  $LocationCopyWith<$Res>? get destinationRegion;
+  $LocationCopyWith<$Res>? get depatureLocation;
+  $LocationCopyWith<$Res>? get destinationLocation;
 }
 
 /// @nodoc
@@ -73,9 +73,9 @@ class _$TourCopyWithImpl<$Res, $Val extends Tour>
     Object? startDate = null,
     Object? endDate = null,
     Object? cost = freezed,
-    Object? regionsVisited = freezed,
-    Object? departureRegion = freezed,
-    Object? destinationRegion = freezed,
+    Object? locationsVisited = freezed,
+    Object? depatureLocation = freezed,
+    Object? destinationLocation = freezed,
     Object? departureTime = freezed,
     Object? arrivalTime = freezed,
   }) {
@@ -96,17 +96,17 @@ class _$TourCopyWithImpl<$Res, $Val extends Tour>
           ? _value.cost
           : cost // ignore: cast_nullable_to_non_nullable
               as OngoingExpense?,
-      regionsVisited: freezed == regionsVisited
-          ? _value.regionsVisited
-          : regionsVisited // ignore: cast_nullable_to_non_nullable
+      locationsVisited: freezed == locationsVisited
+          ? _value.locationsVisited
+          : locationsVisited // ignore: cast_nullable_to_non_nullable
               as List<Location>?,
-      departureRegion: freezed == departureRegion
-          ? _value.departureRegion
-          : departureRegion // ignore: cast_nullable_to_non_nullable
+      depatureLocation: freezed == depatureLocation
+          ? _value.depatureLocation
+          : depatureLocation // ignore: cast_nullable_to_non_nullable
               as Location?,
-      destinationRegion: freezed == destinationRegion
-          ? _value.destinationRegion
-          : destinationRegion // ignore: cast_nullable_to_non_nullable
+      destinationLocation: freezed == destinationLocation
+          ? _value.destinationLocation
+          : destinationLocation // ignore: cast_nullable_to_non_nullable
               as Location?,
       departureTime: freezed == departureTime
           ? _value.departureTime
@@ -133,25 +133,25 @@ class _$TourCopyWithImpl<$Res, $Val extends Tour>
 
   @override
   @pragma('vm:prefer-inline')
-  $LocationCopyWith<$Res>? get departureRegion {
-    if (_value.departureRegion == null) {
+  $LocationCopyWith<$Res>? get depatureLocation {
+    if (_value.depatureLocation == null) {
       return null;
     }
 
-    return $LocationCopyWith<$Res>(_value.departureRegion!, (value) {
-      return _then(_value.copyWith(departureRegion: value) as $Val);
+    return $LocationCopyWith<$Res>(_value.depatureLocation!, (value) {
+      return _then(_value.copyWith(depatureLocation: value) as $Val);
     });
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $LocationCopyWith<$Res>? get destinationRegion {
-    if (_value.destinationRegion == null) {
+  $LocationCopyWith<$Res>? get destinationLocation {
+    if (_value.destinationLocation == null) {
       return null;
     }
 
-    return $LocationCopyWith<$Res>(_value.destinationRegion!, (value) {
-      return _then(_value.copyWith(destinationRegion: value) as $Val);
+    return $LocationCopyWith<$Res>(_value.destinationLocation!, (value) {
+      return _then(_value.copyWith(destinationLocation: value) as $Val);
     });
   }
 }
@@ -167,18 +167,18 @@ abstract class _$$_TourCopyWith<$Res> implements $TourCopyWith<$Res> {
       DateTime startDate,
       DateTime endDate,
       OngoingExpense? cost,
-      List<Location>? regionsVisited,
-      Location? departureRegion,
-      Location? destinationRegion,
+      List<Location>? locationsVisited,
+      Location? depatureLocation,
+      Location? destinationLocation,
       DateTime? departureTime,
       DateTime? arrivalTime});
 
   @override
   $OngoingExpenseCopyWith<$Res>? get cost;
   @override
-  $LocationCopyWith<$Res>? get departureRegion;
+  $LocationCopyWith<$Res>? get depatureLocation;
   @override
-  $LocationCopyWith<$Res>? get destinationRegion;
+  $LocationCopyWith<$Res>? get destinationLocation;
 }
 
 /// @nodoc
@@ -194,9 +194,9 @@ class __$$_TourCopyWithImpl<$Res> extends _$TourCopyWithImpl<$Res, _$_Tour>
     Object? startDate = null,
     Object? endDate = null,
     Object? cost = freezed,
-    Object? regionsVisited = freezed,
-    Object? departureRegion = freezed,
-    Object? destinationRegion = freezed,
+    Object? locationsVisited = freezed,
+    Object? depatureLocation = freezed,
+    Object? destinationLocation = freezed,
     Object? departureTime = freezed,
     Object? arrivalTime = freezed,
   }) {
@@ -217,17 +217,17 @@ class __$$_TourCopyWithImpl<$Res> extends _$TourCopyWithImpl<$Res, _$_Tour>
           ? _value.cost
           : cost // ignore: cast_nullable_to_non_nullable
               as OngoingExpense?,
-      regionsVisited: freezed == regionsVisited
-          ? _value._regionsVisited
-          : regionsVisited // ignore: cast_nullable_to_non_nullable
+      locationsVisited: freezed == locationsVisited
+          ? _value._locationsVisited
+          : locationsVisited // ignore: cast_nullable_to_non_nullable
               as List<Location>?,
-      departureRegion: freezed == departureRegion
-          ? _value.departureRegion
-          : departureRegion // ignore: cast_nullable_to_non_nullable
+      depatureLocation: freezed == depatureLocation
+          ? _value.depatureLocation
+          : depatureLocation // ignore: cast_nullable_to_non_nullable
               as Location?,
-      destinationRegion: freezed == destinationRegion
-          ? _value.destinationRegion
-          : destinationRegion // ignore: cast_nullable_to_non_nullable
+      destinationLocation: freezed == destinationLocation
+          ? _value.destinationLocation
+          : destinationLocation // ignore: cast_nullable_to_non_nullable
               as Location?,
       departureTime: freezed == departureTime
           ? _value.departureTime
@@ -249,12 +249,12 @@ class _$_Tour extends _Tour {
       required this.startDate,
       required this.endDate,
       this.cost,
-      final List<Location>? regionsVisited,
-      this.departureRegion,
-      this.destinationRegion,
+      final List<Location>? locationsVisited,
+      this.depatureLocation,
+      this.destinationLocation,
       this.departureTime,
       this.arrivalTime})
-      : _regionsVisited = regionsVisited,
+      : _locationsVisited = locationsVisited,
         super._();
 
   factory _$_Tour.fromJson(Map<String, dynamic> json) => _$$_TourFromJson(json);
@@ -267,20 +267,21 @@ class _$_Tour extends _Tour {
   final DateTime endDate;
   @override
   final OngoingExpense? cost;
-  final List<Location>? _regionsVisited;
+  final List<Location>? _locationsVisited;
   @override
-  List<Location>? get regionsVisited {
-    final value = _regionsVisited;
+  List<Location>? get locationsVisited {
+    final value = _locationsVisited;
     if (value == null) return null;
-    if (_regionsVisited is EqualUnmodifiableListView) return _regionsVisited;
+    if (_locationsVisited is EqualUnmodifiableListView)
+      return _locationsVisited;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
 
   @override
-  final Location? departureRegion;
+  final Location? depatureLocation;
   @override
-  final Location? destinationRegion;
+  final Location? destinationLocation;
   @override
   final DateTime? departureTime;
   @override
@@ -288,7 +289,7 @@ class _$_Tour extends _Tour {
 
   @override
   String toString() {
-    return 'Tour(name: $name, startDate: $startDate, endDate: $endDate, cost: $cost, regionsVisited: $regionsVisited, departureRegion: $departureRegion, destinationRegion: $destinationRegion, departureTime: $departureTime, arrivalTime: $arrivalTime)';
+    return 'Tour(name: $name, startDate: $startDate, endDate: $endDate, cost: $cost, locationsVisited: $locationsVisited, depatureLocation: $depatureLocation, destinationLocation: $destinationLocation, departureTime: $departureTime, arrivalTime: $arrivalTime)';
   }
 
   @override
@@ -302,11 +303,11 @@ class _$_Tour extends _Tour {
             (identical(other.endDate, endDate) || other.endDate == endDate) &&
             (identical(other.cost, cost) || other.cost == cost) &&
             const DeepCollectionEquality()
-                .equals(other._regionsVisited, _regionsVisited) &&
-            (identical(other.departureRegion, departureRegion) ||
-                other.departureRegion == departureRegion) &&
-            (identical(other.destinationRegion, destinationRegion) ||
-                other.destinationRegion == destinationRegion) &&
+                .equals(other._locationsVisited, _locationsVisited) &&
+            (identical(other.depatureLocation, depatureLocation) ||
+                other.depatureLocation == depatureLocation) &&
+            (identical(other.destinationLocation, destinationLocation) ||
+                other.destinationLocation == destinationLocation) &&
             (identical(other.departureTime, departureTime) ||
                 other.departureTime == departureTime) &&
             (identical(other.arrivalTime, arrivalTime) ||
@@ -321,9 +322,9 @@ class _$_Tour extends _Tour {
       startDate,
       endDate,
       cost,
-      const DeepCollectionEquality().hash(_regionsVisited),
-      departureRegion,
-      destinationRegion,
+      const DeepCollectionEquality().hash(_locationsVisited),
+      depatureLocation,
+      destinationLocation,
       departureTime,
       arrivalTime);
 
@@ -347,9 +348,9 @@ abstract class _Tour extends Tour {
       required final DateTime startDate,
       required final DateTime endDate,
       final OngoingExpense? cost,
-      final List<Location>? regionsVisited,
-      final Location? departureRegion,
-      final Location? destinationRegion,
+      final List<Location>? locationsVisited,
+      final Location? depatureLocation,
+      final Location? destinationLocation,
       final DateTime? departureTime,
       final DateTime? arrivalTime}) = _$_Tour;
   const _Tour._() : super._();
@@ -365,11 +366,11 @@ abstract class _Tour extends Tour {
   @override
   OngoingExpense? get cost;
   @override
-  List<Location>? get regionsVisited;
+  List<Location>? get locationsVisited;
   @override
-  Location? get departureRegion;
+  Location? get depatureLocation;
   @override
-  Location? get destinationRegion;
+  Location? get destinationLocation;
   @override
   DateTime? get departureTime;
   @override

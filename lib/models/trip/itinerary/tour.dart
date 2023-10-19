@@ -15,9 +15,9 @@ class Tour with _$Tour {
     required DateTime startDate,
     required DateTime endDate,
     OngoingExpense? cost,
-    List<Location>? regionsVisited,
-    Location? departureRegion,
-    Location? destinationRegion,
+    List<Location>? locationsVisited,
+    Location? depatureLocation,
+    Location? destinationLocation,
     DateTime? departureTime,
     DateTime? arrivalTime,
   }) = _Tour;

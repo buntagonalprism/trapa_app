@@ -10,8 +10,8 @@ class DayTrip with _$DayTrip {
   const DayTrip._();
 
   const factory DayTrip({
-    required Location baseRegion,
-    required Location targetRegion,
+    required Location baseLocation,
+    required Location targetLocation,
     required DateTime date,
   }) = _DayTrip;
 

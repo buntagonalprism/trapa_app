@@ -9,7 +9,7 @@ part of 'accommodation.dart';
 _$_Accommodation _$$_AccommodationFromJson(Map<String, dynamic> json) =>
     _$_Accommodation(
       name: json['name'] as String,
-      region: Location.fromJson(json['region'] as Map<String, dynamic>),
+      location: Location.fromJson(json['location'] as Map<String, dynamic>),
       details: json['details'] == null
           ? null
           : Details.fromJson(json['details'] as Map<String, dynamic>),
@@ -27,7 +27,7 @@ _$_Accommodation _$$_AccommodationFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$_AccommodationToJson(_$_Accommodation instance) =>
     <String, dynamic>{
       'name': instance.name,
-      'region': instance.region,
+      'location': instance.location,
       'details': instance.details,
       'address': instance.address,
       'coordinates': instance.coordinates,

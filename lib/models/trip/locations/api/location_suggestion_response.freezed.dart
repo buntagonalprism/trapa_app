@@ -14,34 +14,37 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-LocationSuggestion _$LocationSuggestionFromJson(Map<String, dynamic> json) {
-  return _RegionSuggestion.fromJson(json);
+LocationSuggestionResponse _$LocationSuggestionResponseFromJson(
+    Map<String, dynamic> json) {
+  return _LocationSuggestionResponse.fromJson(json);
 }
 
 /// @nodoc
-mixin _$LocationSuggestion {
+mixin _$LocationSuggestionResponse {
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $LocationSuggestionCopyWith<LocationSuggestion> get copyWith =>
-      throw _privateConstructorUsedError;
+  $LocationSuggestionResponseCopyWith<LocationSuggestionResponse>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $LocationSuggestionCopyWith<$Res> {
-  factory $LocationSuggestionCopyWith(
-          LocationSuggestion value, $Res Function(LocationSuggestion) then) =
-      _$LocationSuggestionCopyWithImpl<$Res, LocationSuggestion>;
+abstract class $LocationSuggestionResponseCopyWith<$Res> {
+  factory $LocationSuggestionResponseCopyWith(LocationSuggestionResponse value,
+          $Res Function(LocationSuggestionResponse) then) =
+      _$LocationSuggestionResponseCopyWithImpl<$Res,
+          LocationSuggestionResponse>;
   @useResult
   $Res call({String id, String name});
 }
 
 /// @nodoc
-class _$LocationSuggestionCopyWithImpl<$Res, $Val extends LocationSuggestion>
-    implements $LocationSuggestionCopyWith<$Res> {
-  _$LocationSuggestionCopyWithImpl(this._value, this._then);
+class _$LocationSuggestionResponseCopyWithImpl<$Res,
+        $Val extends LocationSuggestionResponse>
+    implements $LocationSuggestionResponseCopyWith<$Res> {
+  _$LocationSuggestionResponseCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -68,22 +71,25 @@ class _$LocationSuggestionCopyWithImpl<$Res, $Val extends LocationSuggestion>
 }
 
 /// @nodoc
-abstract class _$$_RegionSuggestionCopyWith<$Res>
-    implements $LocationSuggestionCopyWith<$Res> {
-  factory _$$_RegionSuggestionCopyWith(
-          _$_RegionSuggestion value, $Res Function(_$_RegionSuggestion) then) =
-      __$$_RegionSuggestionCopyWithImpl<$Res>;
+abstract class _$$_LocationSuggestionResponseCopyWith<$Res>
+    implements $LocationSuggestionResponseCopyWith<$Res> {
+  factory _$$_LocationSuggestionResponseCopyWith(
+          _$_LocationSuggestionResponse value,
+          $Res Function(_$_LocationSuggestionResponse) then) =
+      __$$_LocationSuggestionResponseCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String id, String name});
 }
 
 /// @nodoc
-class __$$_RegionSuggestionCopyWithImpl<$Res>
-    extends _$LocationSuggestionCopyWithImpl<$Res, _$_RegionSuggestion>
-    implements _$$_RegionSuggestionCopyWith<$Res> {
-  __$$_RegionSuggestionCopyWithImpl(
-      _$_RegionSuggestion _value, $Res Function(_$_RegionSuggestion) _then)
+class __$$_LocationSuggestionResponseCopyWithImpl<$Res>
+    extends _$LocationSuggestionResponseCopyWithImpl<$Res,
+        _$_LocationSuggestionResponse>
+    implements _$$_LocationSuggestionResponseCopyWith<$Res> {
+  __$$_LocationSuggestionResponseCopyWithImpl(
+      _$_LocationSuggestionResponse _value,
+      $Res Function(_$_LocationSuggestionResponse) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -92,7 +98,7 @@ class __$$_RegionSuggestionCopyWithImpl<$Res>
     Object? id = null,
     Object? name = null,
   }) {
-    return _then(_$_RegionSuggestion(
+    return _then(_$_LocationSuggestionResponse(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -107,11 +113,12 @@ class __$$_RegionSuggestionCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_RegionSuggestion extends _RegionSuggestion {
-  const _$_RegionSuggestion({required this.id, required this.name}) : super._();
+class _$_LocationSuggestionResponse extends _LocationSuggestionResponse {
+  const _$_LocationSuggestionResponse({required this.id, required this.name})
+      : super._();
 
-  factory _$_RegionSuggestion.fromJson(Map<String, dynamic> json) =>
-      _$$_RegionSuggestionFromJson(json);
+  factory _$_LocationSuggestionResponse.fromJson(Map<String, dynamic> json) =>
+      _$$_LocationSuggestionResponseFromJson(json);
 
   @override
   final String id;
@@ -120,14 +127,14 @@ class _$_RegionSuggestion extends _RegionSuggestion {
 
   @override
   String toString() {
-    return 'LocationSuggestion(id: $id, name: $name)';
+    return 'LocationSuggestionResponse(id: $id, name: $name)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_RegionSuggestion &&
+            other is _$_LocationSuggestionResponse &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name));
   }
@@ -139,25 +146,26 @@ class _$_RegionSuggestion extends _RegionSuggestion {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_RegionSuggestionCopyWith<_$_RegionSuggestion> get copyWith =>
-      __$$_RegionSuggestionCopyWithImpl<_$_RegionSuggestion>(this, _$identity);
+  _$$_LocationSuggestionResponseCopyWith<_$_LocationSuggestionResponse>
+      get copyWith => __$$_LocationSuggestionResponseCopyWithImpl<
+          _$_LocationSuggestionResponse>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_RegionSuggestionToJson(
+    return _$$_LocationSuggestionResponseToJson(
       this,
     );
   }
 }
 
-abstract class _RegionSuggestion extends LocationSuggestion {
-  const factory _RegionSuggestion(
+abstract class _LocationSuggestionResponse extends LocationSuggestionResponse {
+  const factory _LocationSuggestionResponse(
       {required final String id,
-      required final String name}) = _$_RegionSuggestion;
-  const _RegionSuggestion._() : super._();
+      required final String name}) = _$_LocationSuggestionResponse;
+  const _LocationSuggestionResponse._() : super._();
 
-  factory _RegionSuggestion.fromJson(Map<String, dynamic> json) =
-      _$_RegionSuggestion.fromJson;
+  factory _LocationSuggestionResponse.fromJson(Map<String, dynamic> json) =
+      _$_LocationSuggestionResponse.fromJson;
 
   @override
   String get id;
@@ -165,6 +173,6 @@ abstract class _RegionSuggestion extends LocationSuggestion {
   String get name;
   @override
   @JsonKey(ignore: true)
-  _$$_RegionSuggestionCopyWith<_$_RegionSuggestion> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$_LocationSuggestionResponseCopyWith<_$_LocationSuggestionResponse>
+      get copyWith => throw _privateConstructorUsedError;
 }

@@ -20,7 +20,7 @@ class Attraction with _$Attraction {
 
   const factory Attraction({
     required String name,
-    required Location region,
+    required Location location,
     Details? details,
     Coordinates? coordinates,
     PriceRating? priceRating,

@@ -21,7 +21,7 @@ Attraction _$AttractionFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Attraction {
   String get name => throw _privateConstructorUsedError;
-  Location get region => throw _privateConstructorUsedError;
+  Location get location => throw _privateConstructorUsedError;
   Details? get details => throw _privateConstructorUsedError;
   Coordinates? get coordinates => throw _privateConstructorUsedError;
   PriceRating? get priceRating => throw _privateConstructorUsedError;
@@ -46,7 +46,7 @@ abstract class $AttractionCopyWith<$Res> {
   @useResult
   $Res call(
       {String name,
-      Location region,
+      Location location,
       Details? details,
       Coordinates? coordinates,
       PriceRating? priceRating,
@@ -56,7 +56,7 @@ abstract class $AttractionCopyWith<$Res> {
       OpenDaysSchedule? openDays,
       Map<DayOfWeek, List<TimeRange>>? openingHours});
 
-  $LocationCopyWith<$Res> get region;
+  $LocationCopyWith<$Res> get location;
   $DetailsCopyWith<$Res>? get details;
   $CoordinatesCopyWith<$Res>? get coordinates;
   $DateRangeCopyWith<$Res>? get openDateRange;
@@ -77,7 +77,7 @@ class _$AttractionCopyWithImpl<$Res, $Val extends Attraction>
   @override
   $Res call({
     Object? name = null,
-    Object? region = null,
+    Object? location = null,
     Object? details = freezed,
     Object? coordinates = freezed,
     Object? priceRating = freezed,
@@ -92,9 +92,9 @@ class _$AttractionCopyWithImpl<$Res, $Val extends Attraction>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      region: null == region
-          ? _value.region
-          : region // ignore: cast_nullable_to_non_nullable
+      location: null == location
+          ? _value.location
+          : location // ignore: cast_nullable_to_non_nullable
               as Location,
       details: freezed == details
           ? _value.details
@@ -133,9 +133,9 @@ class _$AttractionCopyWithImpl<$Res, $Val extends Attraction>
 
   @override
   @pragma('vm:prefer-inline')
-  $LocationCopyWith<$Res> get region {
-    return $LocationCopyWith<$Res>(_value.region, (value) {
-      return _then(_value.copyWith(region: value) as $Val);
+  $LocationCopyWith<$Res> get location {
+    return $LocationCopyWith<$Res>(_value.location, (value) {
+      return _then(_value.copyWith(location: value) as $Val);
     });
   }
 
@@ -198,7 +198,7 @@ abstract class _$$_AttractionCopyWith<$Res>
   @useResult
   $Res call(
       {String name,
-      Location region,
+      Location location,
       Details? details,
       Coordinates? coordinates,
       PriceRating? priceRating,
@@ -209,7 +209,7 @@ abstract class _$$_AttractionCopyWith<$Res>
       Map<DayOfWeek, List<TimeRange>>? openingHours});
 
   @override
-  $LocationCopyWith<$Res> get region;
+  $LocationCopyWith<$Res> get location;
   @override
   $DetailsCopyWith<$Res>? get details;
   @override
@@ -232,7 +232,7 @@ class __$$_AttractionCopyWithImpl<$Res>
   @override
   $Res call({
     Object? name = null,
-    Object? region = null,
+    Object? location = null,
     Object? details = freezed,
     Object? coordinates = freezed,
     Object? priceRating = freezed,
@@ -247,9 +247,9 @@ class __$$_AttractionCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      region: null == region
-          ? _value.region
-          : region // ignore: cast_nullable_to_non_nullable
+      location: null == location
+          ? _value.location
+          : location // ignore: cast_nullable_to_non_nullable
               as Location,
       details: freezed == details
           ? _value.details
@@ -292,7 +292,7 @@ class __$$_AttractionCopyWithImpl<$Res>
 class _$_Attraction extends _Attraction {
   const _$_Attraction(
       {required this.name,
-      required this.region,
+      required this.location,
       this.details,
       this.coordinates,
       this.priceRating,
@@ -310,7 +310,7 @@ class _$_Attraction extends _Attraction {
   @override
   final String name;
   @override
-  final Location region;
+  final Location location;
   @override
   final Details? details;
   @override
@@ -337,7 +337,7 @@ class _$_Attraction extends _Attraction {
 
   @override
   String toString() {
-    return 'Attraction(name: $name, region: $region, details: $details, coordinates: $coordinates, priceRating: $priceRating, interestRating: $interestRating, type: $type, openDateRange: $openDateRange, openDays: $openDays, openingHours: $openingHours)';
+    return 'Attraction(name: $name, location: $location, details: $details, coordinates: $coordinates, priceRating: $priceRating, interestRating: $interestRating, type: $type, openDateRange: $openDateRange, openDays: $openDays, openingHours: $openingHours)';
   }
 
   @override
@@ -346,7 +346,8 @@ class _$_Attraction extends _Attraction {
         (other.runtimeType == runtimeType &&
             other is _$_Attraction &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.region, region) || other.region == region) &&
+            (identical(other.location, location) ||
+                other.location == location) &&
             (identical(other.details, details) || other.details == details) &&
             (identical(other.coordinates, coordinates) ||
                 other.coordinates == coordinates) &&
@@ -368,7 +369,7 @@ class _$_Attraction extends _Attraction {
   int get hashCode => Object.hash(
       runtimeType,
       name,
-      region,
+      location,
       details,
       coordinates,
       priceRating,
@@ -395,7 +396,7 @@ class _$_Attraction extends _Attraction {
 abstract class _Attraction extends Attraction {
   const factory _Attraction(
       {required final String name,
-      required final Location region,
+      required final Location location,
       final Details? details,
       final Coordinates? coordinates,
       final PriceRating? priceRating,
@@ -412,7 +413,7 @@ abstract class _Attraction extends Attraction {
   @override
   String get name;
   @override
-  Location get region;
+  Location get location;
   @override
   Details? get details;
   @override

@@ -16,7 +16,7 @@ class Accommodation with _$Accommodation {
 
   const factory Accommodation({
     required String name,
-    required Location region,
+    required Location location,
     Details? details,
     Address? address,
     Coordinates? coordinates,

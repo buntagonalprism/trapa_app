@@ -13,7 +13,7 @@ class Destination with _$Destination {
   const Destination._();
 
   const factory Destination({
-    required Location region,
+    required Location location,
     required DateTime arrivalDate,
     required DateTime departureDate,
     required List<Reservation> reservations,

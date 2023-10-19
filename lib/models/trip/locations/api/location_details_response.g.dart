@@ -6,16 +6,19 @@ part of 'location_details_response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_RegionDetails _$$_RegionDetailsFromJson(Map<String, dynamic> json) =>
-    _$_RegionDetails(
-      place: LocationSuggestion.fromJson(json['place'] as Map<String, dynamic>),
+_$_LocationDetailsResponse _$$_LocationDetailsResponseFromJson(
+        Map<String, dynamic> json) =>
+    _$_LocationDetailsResponse(
+      place: LocationSuggestionResponse.fromJson(
+          json['place'] as Map<String, dynamic>),
       coordinates: CoordinatesResposne.fromJson(
           json['coordinates'] as Map<String, dynamic>),
       website: json['website'] as String,
       id: json['id'] as int,
     );
 
-Map<String, dynamic> _$$_RegionDetailsToJson(_$_RegionDetails instance) =>
+Map<String, dynamic> _$$_LocationDetailsResponseToJson(
+        _$_LocationDetailsResponse instance) =>
     <String, dynamic>{
       'place': instance.place,
       'coordinates': instance.coordinates,

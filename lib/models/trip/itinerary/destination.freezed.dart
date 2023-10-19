@@ -20,7 +20,7 @@ Destination _$DestinationFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Destination {
-  Location get region => throw _privateConstructorUsedError;
+  Location get location => throw _privateConstructorUsedError;
   DateTime get arrivalDate => throw _privateConstructorUsedError;
   DateTime get departureDate => throw _privateConstructorUsedError;
   List<Reservation> get reservations => throw _privateConstructorUsedError;
@@ -40,14 +40,14 @@ abstract class $DestinationCopyWith<$Res> {
       _$DestinationCopyWithImpl<$Res, Destination>;
   @useResult
   $Res call(
-      {Location region,
+      {Location location,
       DateTime arrivalDate,
       DateTime departureDate,
       List<Reservation> reservations,
       List<Activity> activities,
       List<DayTrip> dayTrips});
 
-  $LocationCopyWith<$Res> get region;
+  $LocationCopyWith<$Res> get location;
 }
 
 /// @nodoc
@@ -63,7 +63,7 @@ class _$DestinationCopyWithImpl<$Res, $Val extends Destination>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? region = null,
+    Object? location = null,
     Object? arrivalDate = null,
     Object? departureDate = null,
     Object? reservations = null,
@@ -71,9 +71,9 @@ class _$DestinationCopyWithImpl<$Res, $Val extends Destination>
     Object? dayTrips = null,
   }) {
     return _then(_value.copyWith(
-      region: null == region
-          ? _value.region
-          : region // ignore: cast_nullable_to_non_nullable
+      location: null == location
+          ? _value.location
+          : location // ignore: cast_nullable_to_non_nullable
               as Location,
       arrivalDate: null == arrivalDate
           ? _value.arrivalDate
@@ -100,9 +100,9 @@ class _$DestinationCopyWithImpl<$Res, $Val extends Destination>
 
   @override
   @pragma('vm:prefer-inline')
-  $LocationCopyWith<$Res> get region {
-    return $LocationCopyWith<$Res>(_value.region, (value) {
-      return _then(_value.copyWith(region: value) as $Val);
+  $LocationCopyWith<$Res> get location {
+    return $LocationCopyWith<$Res>(_value.location, (value) {
+      return _then(_value.copyWith(location: value) as $Val);
     });
   }
 }
@@ -116,7 +116,7 @@ abstract class _$$_DestinationCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {Location region,
+      {Location location,
       DateTime arrivalDate,
       DateTime departureDate,
       List<Reservation> reservations,
@@ -124,7 +124,7 @@ abstract class _$$_DestinationCopyWith<$Res>
       List<DayTrip> dayTrips});
 
   @override
-  $LocationCopyWith<$Res> get region;
+  $LocationCopyWith<$Res> get location;
 }
 
 /// @nodoc
@@ -138,7 +138,7 @@ class __$$_DestinationCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? region = null,
+    Object? location = null,
     Object? arrivalDate = null,
     Object? departureDate = null,
     Object? reservations = null,
@@ -146,9 +146,9 @@ class __$$_DestinationCopyWithImpl<$Res>
     Object? dayTrips = null,
   }) {
     return _then(_$_Destination(
-      region: null == region
-          ? _value.region
-          : region // ignore: cast_nullable_to_non_nullable
+      location: null == location
+          ? _value.location
+          : location // ignore: cast_nullable_to_non_nullable
               as Location,
       arrivalDate: null == arrivalDate
           ? _value.arrivalDate
@@ -178,7 +178,7 @@ class __$$_DestinationCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_Destination extends _Destination {
   const _$_Destination(
-      {required this.region,
+      {required this.location,
       required this.arrivalDate,
       required this.departureDate,
       required final List<Reservation> reservations,
@@ -193,7 +193,7 @@ class _$_Destination extends _Destination {
       _$$_DestinationFromJson(json);
 
   @override
-  final Location region;
+  final Location location;
   @override
   final DateTime arrivalDate;
   @override
@@ -224,7 +224,7 @@ class _$_Destination extends _Destination {
 
   @override
   String toString() {
-    return 'Destination(region: $region, arrivalDate: $arrivalDate, departureDate: $departureDate, reservations: $reservations, activities: $activities, dayTrips: $dayTrips)';
+    return 'Destination(location: $location, arrivalDate: $arrivalDate, departureDate: $departureDate, reservations: $reservations, activities: $activities, dayTrips: $dayTrips)';
   }
 
   @override
@@ -232,7 +232,8 @@ class _$_Destination extends _Destination {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Destination &&
-            (identical(other.region, region) || other.region == region) &&
+            (identical(other.location, location) ||
+                other.location == location) &&
             (identical(other.arrivalDate, arrivalDate) ||
                 other.arrivalDate == arrivalDate) &&
             (identical(other.departureDate, departureDate) ||
@@ -248,7 +249,7 @@ class _$_Destination extends _Destination {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      region,
+      location,
       arrivalDate,
       departureDate,
       const DeepCollectionEquality().hash(_reservations),
@@ -271,7 +272,7 @@ class _$_Destination extends _Destination {
 
 abstract class _Destination extends Destination {
   const factory _Destination(
-      {required final Location region,
+      {required final Location location,
       required final DateTime arrivalDate,
       required final DateTime departureDate,
       required final List<Reservation> reservations,
@@ -283,7 +284,7 @@ abstract class _Destination extends Destination {
       _$_Destination.fromJson;
 
   @override
-  Location get region;
+  Location get location;
   @override
   DateTime get arrivalDate;
   @override

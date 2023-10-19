@@ -16,12 +16,12 @@ final _privateConstructorUsedError = UnsupportedError(
 
 LocationDetailsResponse _$LocationDetailsResponseFromJson(
     Map<String, dynamic> json) {
-  return _RegionDetails.fromJson(json);
+  return _LocationDetailsResponse.fromJson(json);
 }
 
 /// @nodoc
 mixin _$LocationDetailsResponse {
-  LocationSuggestion get place => throw _privateConstructorUsedError;
+  LocationSuggestionResponse get place => throw _privateConstructorUsedError;
   CoordinatesResposne get coordinates => throw _privateConstructorUsedError;
   String get website => throw _privateConstructorUsedError;
   int get id => throw _privateConstructorUsedError;
@@ -39,12 +39,12 @@ abstract class $LocationDetailsResponseCopyWith<$Res> {
       _$LocationDetailsResponseCopyWithImpl<$Res, LocationDetailsResponse>;
   @useResult
   $Res call(
-      {LocationSuggestion place,
+      {LocationSuggestionResponse place,
       CoordinatesResposne coordinates,
       String website,
       int id});
 
-  $LocationSuggestionCopyWith<$Res> get place;
+  $LocationSuggestionResponseCopyWith<$Res> get place;
   $CoordinatesResposneCopyWith<$Res> get coordinates;
 }
 
@@ -71,7 +71,7 @@ class _$LocationDetailsResponseCopyWithImpl<$Res,
       place: null == place
           ? _value.place
           : place // ignore: cast_nullable_to_non_nullable
-              as LocationSuggestion,
+              as LocationSuggestionResponse,
       coordinates: null == coordinates
           ? _value.coordinates
           : coordinates // ignore: cast_nullable_to_non_nullable
@@ -89,8 +89,8 @@ class _$LocationDetailsResponseCopyWithImpl<$Res,
 
   @override
   @pragma('vm:prefer-inline')
-  $LocationSuggestionCopyWith<$Res> get place {
-    return $LocationSuggestionCopyWith<$Res>(_value.place, (value) {
+  $LocationSuggestionResponseCopyWith<$Res> get place {
+    return $LocationSuggestionResponseCopyWith<$Res>(_value.place, (value) {
       return _then(_value.copyWith(place: value) as $Val);
     });
   }
@@ -105,31 +105,32 @@ class _$LocationDetailsResponseCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_RegionDetailsCopyWith<$Res>
+abstract class _$$_LocationDetailsResponseCopyWith<$Res>
     implements $LocationDetailsResponseCopyWith<$Res> {
-  factory _$$_RegionDetailsCopyWith(
-          _$_RegionDetails value, $Res Function(_$_RegionDetails) then) =
-      __$$_RegionDetailsCopyWithImpl<$Res>;
+  factory _$$_LocationDetailsResponseCopyWith(_$_LocationDetailsResponse value,
+          $Res Function(_$_LocationDetailsResponse) then) =
+      __$$_LocationDetailsResponseCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
-      {LocationSuggestion place,
+      {LocationSuggestionResponse place,
       CoordinatesResposne coordinates,
       String website,
       int id});
 
   @override
-  $LocationSuggestionCopyWith<$Res> get place;
+  $LocationSuggestionResponseCopyWith<$Res> get place;
   @override
   $CoordinatesResposneCopyWith<$Res> get coordinates;
 }
 
 /// @nodoc
-class __$$_RegionDetailsCopyWithImpl<$Res>
-    extends _$LocationDetailsResponseCopyWithImpl<$Res, _$_RegionDetails>
-    implements _$$_RegionDetailsCopyWith<$Res> {
-  __$$_RegionDetailsCopyWithImpl(
-      _$_RegionDetails _value, $Res Function(_$_RegionDetails) _then)
+class __$$_LocationDetailsResponseCopyWithImpl<$Res>
+    extends _$LocationDetailsResponseCopyWithImpl<$Res,
+        _$_LocationDetailsResponse>
+    implements _$$_LocationDetailsResponseCopyWith<$Res> {
+  __$$_LocationDetailsResponseCopyWithImpl(_$_LocationDetailsResponse _value,
+      $Res Function(_$_LocationDetailsResponse) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -140,11 +141,11 @@ class __$$_RegionDetailsCopyWithImpl<$Res>
     Object? website = null,
     Object? id = null,
   }) {
-    return _then(_$_RegionDetails(
+    return _then(_$_LocationDetailsResponse(
       place: null == place
           ? _value.place
           : place // ignore: cast_nullable_to_non_nullable
-              as LocationSuggestion,
+              as LocationSuggestionResponse,
       coordinates: null == coordinates
           ? _value.coordinates
           : coordinates // ignore: cast_nullable_to_non_nullable
@@ -163,19 +164,19 @@ class __$$_RegionDetailsCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_RegionDetails extends _RegionDetails {
-  const _$_RegionDetails(
+class _$_LocationDetailsResponse extends _LocationDetailsResponse {
+  const _$_LocationDetailsResponse(
       {required this.place,
       required this.coordinates,
       required this.website,
       required this.id})
       : super._();
 
-  factory _$_RegionDetails.fromJson(Map<String, dynamic> json) =>
-      _$$_RegionDetailsFromJson(json);
+  factory _$_LocationDetailsResponse.fromJson(Map<String, dynamic> json) =>
+      _$$_LocationDetailsResponseFromJson(json);
 
   @override
-  final LocationSuggestion place;
+  final LocationSuggestionResponse place;
   @override
   final CoordinatesResposne coordinates;
   @override
@@ -192,7 +193,7 @@ class _$_RegionDetails extends _RegionDetails {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_RegionDetails &&
+            other is _$_LocationDetailsResponse &&
             (identical(other.place, place) || other.place == place) &&
             (identical(other.coordinates, coordinates) ||
                 other.coordinates == coordinates) &&
@@ -207,30 +208,32 @@ class _$_RegionDetails extends _RegionDetails {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_RegionDetailsCopyWith<_$_RegionDetails> get copyWith =>
-      __$$_RegionDetailsCopyWithImpl<_$_RegionDetails>(this, _$identity);
+  _$$_LocationDetailsResponseCopyWith<_$_LocationDetailsResponse>
+      get copyWith =>
+          __$$_LocationDetailsResponseCopyWithImpl<_$_LocationDetailsResponse>(
+              this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_RegionDetailsToJson(
+    return _$$_LocationDetailsResponseToJson(
       this,
     );
   }
 }
 
-abstract class _RegionDetails extends LocationDetailsResponse {
-  const factory _RegionDetails(
-      {required final LocationSuggestion place,
+abstract class _LocationDetailsResponse extends LocationDetailsResponse {
+  const factory _LocationDetailsResponse(
+      {required final LocationSuggestionResponse place,
       required final CoordinatesResposne coordinates,
       required final String website,
-      required final int id}) = _$_RegionDetails;
-  const _RegionDetails._() : super._();
+      required final int id}) = _$_LocationDetailsResponse;
+  const _LocationDetailsResponse._() : super._();
 
-  factory _RegionDetails.fromJson(Map<String, dynamic> json) =
-      _$_RegionDetails.fromJson;
+  factory _LocationDetailsResponse.fromJson(Map<String, dynamic> json) =
+      _$_LocationDetailsResponse.fromJson;
 
   @override
-  LocationSuggestion get place;
+  LocationSuggestionResponse get place;
   @override
   CoordinatesResposne get coordinates;
   @override
@@ -239,8 +242,8 @@ abstract class _RegionDetails extends LocationDetailsResponse {
   int get id;
   @override
   @JsonKey(ignore: true)
-  _$$_RegionDetailsCopyWith<_$_RegionDetails> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$_LocationDetailsResponseCopyWith<_$_LocationDetailsResponse>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 CoordinatesResposne _$CoordinatesResposneFromJson(Map<String, dynamic> json) {
