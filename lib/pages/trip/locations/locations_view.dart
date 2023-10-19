@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
+import '../../../models/operations.dart';
 import '../../../models/trip/common/country.dart';
+import '../../../models/trip/locations/api/location_suggestion_response.dart';
 import '../../../models/trip/trip.dart';
+import '../../../widgets/operation_buttons.dart';
 import '../edit_countries_dialog.dart';
 import 'locations_view_model.dart';
 
@@ -106,7 +109,11 @@ class _LocationEditorViewState extends State<LocationEditorView> {
                   itemCount: widget.trip.countries!.length,
                   itemBuilder: (context, index) {
                     final country = widget.trip.countries![index];
-                    return CountryTile(country: country, vm: widget.vm);
+                    return CountryTile(
+                      country: country,
+                      vm: widget.vm,
+                      onSelect: () => onSelectCountry(country),
+                    );
                   },
                 ),
               ),
@@ -115,10 +122,14 @@ class _LocationEditorViewState extends State<LocationEditorView> {
         ),
         const VerticalDivider(),
         Expanded(
-          child: CountryRegionsView(vm: widget.vm),
+          child: CountryLocationsView(vm: widget.vm),
         ),
       ],
     );
+  }
+
+  void onSelectCountry(Country country) {
+    return widget.vm.selectCountry(country);
   }
 }
 
@@ -126,11 +137,13 @@ class CountryTile extends StatelessWidget {
   const CountryTile({
     required this.country,
     required this.vm,
+    required this.onSelect,
     super.key,
   });
 
   final Country country;
   final LocationsViewModel vm;
+  final VoidCallback onSelect;
 
   @override
   Widget build(BuildContext context) {
@@ -140,7 +153,7 @@ class CountryTile extends StatelessWidget {
         selected: vm.selectedCountry == country,
         selectedColor: Theme.of(context).colorScheme.primary,
         leading: country.flagIcon(),
-        onTap: () => vm.selectCountry(country),
+        onTap: () => onSelect(),
         contentPadding: const EdgeInsets.only(left: 16, right: 12),
         title: Text(
           country.name(context),
@@ -151,22 +164,22 @@ class CountryTile extends StatelessWidget {
   }
 }
 
-class CountryRegionsView extends StatefulWidget {
-  const CountryRegionsView({required this.vm, super.key});
+class CountryLocationsView extends StatefulWidget {
+  const CountryLocationsView({required this.vm, super.key});
 
   final LocationsViewModel vm;
 
   @override
-  State<CountryRegionsView> createState() => _CountryRegionsViewState();
+  State<CountryLocationsView> createState() => _CountryLocationsViewState();
 }
 
-class _CountryRegionsViewState extends State<CountryRegionsView> {
+class _CountryLocationsViewState extends State<CountryLocationsView> {
   @override
   Widget build(BuildContext context) {
     return Observer(builder: (context) {
       final country = widget.vm.selectedCountry;
       if (country == null) {
-        return const Center(child: Text('Please select a country to start adding regions'));
+        return const Center(child: Text('Please select a country to start adding locations'));
       }
       return Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -205,8 +218,28 @@ class _CountryRegionsViewState extends State<CountryRegionsView> {
                     itemBuilder: (context, index) => ListTile(
                       dense: true,
                       title: Text(suggestions[index].name),
-                      onTap: () => print('Selected region ${suggestions[index].name}'),
+                      onTap: () => widget.vm.addLocation(suggestions[index]),
                     ),
+                  ),
+                ),
+              );
+            }),
+          ),
+          Expanded(
+            child: Observer(builder: (context) {
+              return widget.vm.locationsObservable.value.when(
+                loading: () => const SizedBox(),
+                notFound: () => const Center(child: CircularProgressIndicator()),
+                unknownError: () => const Center(
+                  child: ListTile(
+                    title: Text('Could not load locations'),
+                  ),
+                ),
+                data: (suggestions, _) => ListView.builder(
+                  itemCount: suggestions.length,
+                  itemBuilder: (context, index) => ListTile(
+                    dense: true,
+                    title: Text(suggestions[index].name),
                   ),
                 ),
               );
@@ -215,5 +248,13 @@ class _CountryRegionsViewState extends State<CountryRegionsView> {
         ],
       );
     });
+  }
+
+  void addLocationFromSuggestion(LocationSuggestionResponse suggestion) async {
+    final response = await widget.vm.addLocation(suggestion);
+
+    if (response is OperationResultError && context.mounted) {
+      response.error.showErrorDialog(context, () => addLocationFromSuggestion(suggestion));
+    }
   }
 }

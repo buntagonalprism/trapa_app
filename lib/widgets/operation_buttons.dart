@@ -42,28 +42,29 @@ class _FilledOperationButtonState<T> extends State<FilledOperationButton<T>> {
     setState(() => operationInProgress = false);
     result.when(
       success: (value) => widget.onSuccess(value),
-      error: (error) => showErrorDialog(error),
+      error: (error) => error.showErrorDialog(context, () => runOperation()),
     );
   }
+}
 
-  void showErrorDialog(OperationError error) {
+extension OperationErrorDialogExtension on OperationError {
+  void showErrorDialog(BuildContext context, [VoidCallback? retryCallback]) {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text(error.titleText(context)),
-        content: Text(error.bodyText(context)),
+        title: Text(titleText(context)),
+        content: Text(bodyText(context)),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
-            child: Text(error.retryable
-                ? Messages.of(context)!.actionClose
-                : Messages.of(context)!.actionOk),
+            child: Text(
+                retryable ? Messages.of(context)!.actionClose : Messages.of(context)!.actionOk),
           ),
-          if (error.retryable)
+          if (retryable && retryCallback != null)
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
-                runOperation();
+                retryCallback();
               },
               child: Text(Messages.of(context)!.actionRetry),
             ),

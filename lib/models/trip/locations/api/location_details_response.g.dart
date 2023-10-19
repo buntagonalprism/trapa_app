@@ -14,7 +14,6 @@ _$_LocationDetailsResponse _$$_LocationDetailsResponseFromJson(
       coordinates: CoordinatesResposne.fromJson(
           json['coordinates'] as Map<String, dynamic>),
       website: json['website'] as String,
-      id: json['id'] as int,
     );
 
 Map<String, dynamic> _$$_LocationDetailsResponseToJson(
@@ -23,7 +22,6 @@ Map<String, dynamic> _$$_LocationDetailsResponseToJson(
       'place': instance.place,
       'coordinates': instance.coordinates,
       'website': instance.website,
-      'id': instance.id,
     };
 
 _$_CoordinatesResposne _$$_CoordinatesResposneFromJson(

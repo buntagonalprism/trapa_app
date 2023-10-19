@@ -13,7 +13,6 @@ class LocationDetailsResponse with _$LocationDetailsResponse {
     required LocationSuggestionResponse place,
     required CoordinatesResposne coordinates,
     required String website,
-    required int id,
   }) = _LocationDetailsResponse;
 
   factory LocationDetailsResponse.fromJson(Map<String, dynamic> json) =>

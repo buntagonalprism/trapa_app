@@ -24,7 +24,6 @@ mixin _$LocationDetailsResponse {
   LocationSuggestionResponse get place => throw _privateConstructorUsedError;
   CoordinatesResposne get coordinates => throw _privateConstructorUsedError;
   String get website => throw _privateConstructorUsedError;
-  int get id => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -41,8 +40,7 @@ abstract class $LocationDetailsResponseCopyWith<$Res> {
   $Res call(
       {LocationSuggestionResponse place,
       CoordinatesResposne coordinates,
-      String website,
-      int id});
+      String website});
 
   $LocationSuggestionResponseCopyWith<$Res> get place;
   $CoordinatesResposneCopyWith<$Res> get coordinates;
@@ -65,7 +63,6 @@ class _$LocationDetailsResponseCopyWithImpl<$Res,
     Object? place = null,
     Object? coordinates = null,
     Object? website = null,
-    Object? id = null,
   }) {
     return _then(_value.copyWith(
       place: null == place
@@ -80,10 +77,6 @@ class _$LocationDetailsResponseCopyWithImpl<$Res,
           ? _value.website
           : website // ignore: cast_nullable_to_non_nullable
               as String,
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int,
     ) as $Val);
   }
 
@@ -115,8 +108,7 @@ abstract class _$$_LocationDetailsResponseCopyWith<$Res>
   $Res call(
       {LocationSuggestionResponse place,
       CoordinatesResposne coordinates,
-      String website,
-      int id});
+      String website});
 
   @override
   $LocationSuggestionResponseCopyWith<$Res> get place;
@@ -139,7 +131,6 @@ class __$$_LocationDetailsResponseCopyWithImpl<$Res>
     Object? place = null,
     Object? coordinates = null,
     Object? website = null,
-    Object? id = null,
   }) {
     return _then(_$_LocationDetailsResponse(
       place: null == place
@@ -154,10 +145,6 @@ class __$$_LocationDetailsResponseCopyWithImpl<$Res>
           ? _value.website
           : website // ignore: cast_nullable_to_non_nullable
               as String,
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int,
     ));
   }
 }
@@ -166,10 +153,7 @@ class __$$_LocationDetailsResponseCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_LocationDetailsResponse extends _LocationDetailsResponse {
   const _$_LocationDetailsResponse(
-      {required this.place,
-      required this.coordinates,
-      required this.website,
-      required this.id})
+      {required this.place, required this.coordinates, required this.website})
       : super._();
 
   factory _$_LocationDetailsResponse.fromJson(Map<String, dynamic> json) =>
@@ -181,12 +165,10 @@ class _$_LocationDetailsResponse extends _LocationDetailsResponse {
   final CoordinatesResposne coordinates;
   @override
   final String website;
-  @override
-  final int id;
 
   @override
   String toString() {
-    return 'LocationDetailsResponse(place: $place, coordinates: $coordinates, website: $website, id: $id)';
+    return 'LocationDetailsResponse(place: $place, coordinates: $coordinates, website: $website)';
   }
 
   @override
@@ -197,13 +179,12 @@ class _$_LocationDetailsResponse extends _LocationDetailsResponse {
             (identical(other.place, place) || other.place == place) &&
             (identical(other.coordinates, coordinates) ||
                 other.coordinates == coordinates) &&
-            (identical(other.website, website) || other.website == website) &&
-            (identical(other.id, id) || other.id == id));
+            (identical(other.website, website) || other.website == website));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, place, coordinates, website, id);
+  int get hashCode => Object.hash(runtimeType, place, coordinates, website);
 
   @JsonKey(ignore: true)
   @override
@@ -225,8 +206,7 @@ abstract class _LocationDetailsResponse extends LocationDetailsResponse {
   const factory _LocationDetailsResponse(
       {required final LocationSuggestionResponse place,
       required final CoordinatesResposne coordinates,
-      required final String website,
-      required final int id}) = _$_LocationDetailsResponse;
+      required final String website}) = _$_LocationDetailsResponse;
   const _LocationDetailsResponse._() : super._();
 
   factory _LocationDetailsResponse.fromJson(Map<String, dynamic> json) =
@@ -238,8 +218,6 @@ abstract class _LocationDetailsResponse extends LocationDetailsResponse {
   CoordinatesResposne get coordinates;
   @override
   String get website;
-  @override
-  int get id;
   @override
   @JsonKey(ignore: true)
   _$$_LocationDetailsResponseCopyWith<_$_LocationDetailsResponse>

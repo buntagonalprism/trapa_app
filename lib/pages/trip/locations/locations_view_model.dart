@@ -4,9 +4,11 @@ import 'package:mobx/mobx.dart';
 
 import '../../../models/api/network_observable.dart';
 import '../../../models/operations.dart';
+import '../../../models/trip/common/coordinates.dart';
 import '../../../models/trip/common/country.dart';
-import '../../../models/trip/locations/api/region_suggestion.dart';
-import '../../../models/trip/locations/region.dart';
+import '../../../models/trip/locations/api/location_details_response.dart';
+import '../../../models/trip/locations/api/location_suggestion_response.dart';
+import '../../../models/trip/locations/location.dart';
 import '../../../models/trip/trip.dart';
 import '../../../services/crash_report_service.dart';
 import '../../../services/trapa_api_service.dart';
@@ -34,7 +36,9 @@ abstract class _LocationsViewModel with Store {
   final TrapaApiService _apiService;
   final CrashReportService _crashReporter;
 
-  static const String placeAutocompletePath = '/v1/locations/search';
+  static const String locationsAutocompleteApiPath = '/v1/locations/search';
+
+  static const String locationsDetailApiPath = '/v1/locations';
 
   @observable
   Country? selectedCountry;
@@ -54,19 +58,20 @@ abstract class _LocationsViewModel with Store {
   void setTripId(String id) {
     tripId = id;
     tripObservable = _tripStore.getTrip(id);
-    regionObservable = _locationStore.getTripRegions(id);
+    locationsObservable = _locationStore.getTripLocations(id);
   }
 
   @observable
   NetworkObservable<Trip> tripObservable = loadingNetworkObservable<Trip>();
 
   @observable
-  NetworkObservable<List<Region>> regionObservable = loadingNetworkObservable<List<Region>>();
+  NetworkObservable<List<Location>> locationsObservable =
+      loadingNetworkObservable<List<Location>>();
 
   @computed
-  List<Region> get regionsInCountry {
-    final regions = regionObservable.dataOrNull() ?? [];
-    return regions.where((region) => region.countryCode == selectedCountry?.code).toList();
+  List<Location> get locationsInCountry {
+    final locations = locationsObservable.dataOrNull() ?? [];
+    return locations.where((location) => location.countryCode == selectedCountry?.code).toList();
   }
 
   void setTripCountries(List<Country> countries) {
@@ -85,10 +90,10 @@ abstract class _LocationsViewModel with Store {
   }
 
   @observable
-  ObservableFuture<List<RegionSuggestion>>? _searchResultsFuture;
+  ObservableFuture<List<LocationSuggestionResponse>>? _searchResultsFuture;
 
   @computed
-  OperationState<List<RegionSuggestion>> get searchResults {
+  OperationState<List<LocationSuggestionResponse>> get searchResults {
     if (_searchResultsFuture == null) {
       return const OperationState.pending();
     }
@@ -98,38 +103,73 @@ abstract class _LocationsViewModel with Store {
     }
 
     if (_searchResultsFuture!.error != null) {
-      return const OperationState.result(OperationResult.error(RegionSearchError()));
+      return const OperationState.result(OperationResult.error(LocationSearchError()));
     }
 
     return OperationState.result(OperationResult.success(_searchResultsFuture!.result));
   }
 
-  Future<List<RegionSuggestion>> _searchSuggestions(String query) async {
+  Future<List<LocationSuggestionResponse>> _searchSuggestions(String query) async {
     try {
       final response = await _apiService.get(
-        placeAutocompletePath,
+        locationsAutocompleteApiPath,
         {
           'query': locationSearchQuery!,
           'country': selectedCountry!.code,
         },
       );
-      final results = response.parseSuccessBodyList(RegionSuggestion.fromJson);
+      final results = response.parseSuccessBodyList(LocationSuggestionResponse.fromJson);
       return results;
     } catch (e, t) {
       _crashReporter.report(e, t);
       rethrow;
     }
   }
+
+  Future<OperationResult<void>> addLocation(LocationSuggestionResponse suggestion) async {
+    final country = selectedCountry!;
+    try {
+      final response = await _apiService.get('$locationsDetailApiPath/${suggestion.id}');
+      final locationResponse = response.parseSuccessBody(LocationDetailsResponse.fromJson);
+      final location = Location(
+        name: locationResponse.place.name,
+        parentLocation: null,
+        countryCode: country.code,
+        coordinates: Coordinates(
+          lat: locationResponse.coordinates.latitude,
+          lng: locationResponse.coordinates.longitude,
+        ),
+      );
+      await _locationStore.addLocation(location, tripId!);
+      return const OperationResult.success(null);
+    } catch (e, t) {
+      _crashReporter.report(e, t);
+      return const OperationResult.error(AddLocationError());
+    }
+  }
 }
 
-class RegionSearchError implements OperationError {
-  const RegionSearchError();
+class LocationSearchError implements OperationError {
+  const LocationSearchError();
 
   @override
   final bool retryable = false;
 
   @override
   String titleText(BuildContext context) => "Search failed";
+
+  @override
+  String bodyText(BuildContext context) => "Please try again";
+}
+
+class AddLocationError implements OperationError {
+  const AddLocationError();
+
+  @override
+  final bool retryable = false;
+
+  @override
+  String titleText(BuildContext context) => "Failed to add location";
 
   @override
   String bodyText(BuildContext context) => "Please try again";

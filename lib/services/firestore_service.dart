@@ -93,6 +93,41 @@ class FirestoreService {
   }) async {
     await _fs.doc(path).update(data);
   }
+
+  /// [data] must either already be a `Map<String, dynamic>`, or have a [toJson] method returning a
+  /// `Map<String, dynamic>`. All nested child properties of [data] must either be of primitive type
+  /// or have their own [toJson] method.
+  Future<void> addDocument({
+    required String collectionPath,
+    String? docId,
+    required dynamic data,
+  }) async {
+    await _fs.collection(collectionPath).doc(docId).set(_objectToFirestore(data));
+  }
+
+  Map<String, dynamic> _objectToFirestore(dynamic data) {
+    Map<String, dynamic> firestoreData;
+    if (data is Map<String, dynamic>) {
+      firestoreData = Map.from(data);
+    } else {
+      firestoreData = data.toJson();
+    }
+    for (var key in firestoreData.keys) {
+      final value = firestoreData[key];
+      firestoreData[key] = _valueToFirestore(value);
+    }
+    return firestoreData;
+  }
+
+  dynamic _valueToFirestore(dynamic value) {
+    if (value is String || value is double || value is bool || value == null) {
+      return value;
+    } else if (value is List) {
+      return value.map((e) => _valueToFirestore(e)).toList();
+    } else {
+      return _objectToFirestore(value);
+    }
+  }
 }
 
 class FirestoreFieldQuery {

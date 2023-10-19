@@ -20,7 +20,7 @@ class TrapaApiService {
 
   /// Sent a HTTP PUT request to the provided path. If the server cannot be reached, a
   /// [TrapaApiConnectionException] will be thrown.
-  Future<TrapaApiResponse> get(String path, Map<String, String>? queryParams) async {
+  Future<TrapaApiResponse> get(String path, [Map<String, String>? queryParams]) async {
     Uri uri = Uri.parse('$host/$path');
     final headers = await _buildHeaders();
     uri = uri.replace(queryParameters: queryParams ?? {});

@@ -9,19 +9,20 @@ part of 'locations_view_model.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$LocationsViewModel on _LocationsViewModel, Store {
-  Computed<List<Region>>? _$regionsInCountryComputed;
+  Computed<List<Location>>? _$locationsInCountryComputed;
 
   @override
-  List<Region> get regionsInCountry => (_$regionsInCountryComputed ??=
-          Computed<List<Region>>(() => super.regionsInCountry,
-              name: '_LocationsViewModel.regionsInCountry'))
+  List<Location> get locationsInCountry => (_$locationsInCountryComputed ??=
+          Computed<List<Location>>(() => super.locationsInCountry,
+              name: '_LocationsViewModel.locationsInCountry'))
       .value;
-  Computed<OperationState<List<RegionSuggestion>>>? _$searchResultsComputed;
+  Computed<OperationState<List<LocationSuggestionResponse>>>?
+      _$searchResultsComputed;
 
   @override
-  OperationState<List<RegionSuggestion>> get searchResults =>
+  OperationState<List<LocationSuggestionResponse>> get searchResults =>
       (_$searchResultsComputed ??=
-              Computed<OperationState<List<RegionSuggestion>>>(
+              Computed<OperationState<List<LocationSuggestionResponse>>>(
                   () => super.searchResults,
                   name: '_LocationsViewModel.searchResults'))
           .value;
@@ -90,20 +91,20 @@ mixin _$LocationsViewModel on _LocationsViewModel, Store {
     });
   }
 
-  late final _$regionObservableAtom =
-      Atom(name: '_LocationsViewModel.regionObservable', context: context);
+  late final _$locationsObservableAtom =
+      Atom(name: '_LocationsViewModel.locationsObservable', context: context);
 
   @override
-  ObservableValue<NetworkDataSnapshot<List<Region>>> get regionObservable {
-    _$regionObservableAtom.reportRead();
-    return super.regionObservable;
+  ObservableValue<NetworkDataSnapshot<List<Location>>> get locationsObservable {
+    _$locationsObservableAtom.reportRead();
+    return super.locationsObservable;
   }
 
   @override
-  set regionObservable(
-      ObservableValue<NetworkDataSnapshot<List<Region>>> value) {
-    _$regionObservableAtom.reportWrite(value, super.regionObservable, () {
-      super.regionObservable = value;
+  set locationsObservable(
+      ObservableValue<NetworkDataSnapshot<List<Location>>> value) {
+    _$locationsObservableAtom.reportWrite(value, super.locationsObservable, () {
+      super.locationsObservable = value;
     });
   }
 
@@ -111,13 +112,14 @@ mixin _$LocationsViewModel on _LocationsViewModel, Store {
       Atom(name: '_LocationsViewModel._searchResultsFuture', context: context);
 
   @override
-  ObservableFuture<List<RegionSuggestion>>? get _searchResultsFuture {
+  ObservableFuture<List<LocationSuggestionResponse>>? get _searchResultsFuture {
     _$_searchResultsFutureAtom.reportRead();
     return super._searchResultsFuture;
   }
 
   @override
-  set _searchResultsFuture(ObservableFuture<List<RegionSuggestion>>? value) {
+  set _searchResultsFuture(
+      ObservableFuture<List<LocationSuggestionResponse>>? value) {
     _$_searchResultsFutureAtom.reportWrite(value, super._searchResultsFuture,
         () {
       super._searchResultsFuture = value;
@@ -167,8 +169,8 @@ selectedCountry: ${selectedCountry},
 tripId: ${tripId},
 locationSearchQuery: ${locationSearchQuery},
 tripObservable: ${tripObservable},
-regionObservable: ${regionObservable},
-regionsInCountry: ${regionsInCountry},
+locationsObservable: ${locationsObservable},
+locationsInCountry: ${locationsInCountry},
 searchResults: ${searchResults}
     ''';
   }
