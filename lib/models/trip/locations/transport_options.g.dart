@@ -8,8 +8,9 @@ part of 'transport_options.dart';
 
 _$_TransportOptions _$$_TransportOptionsFromJson(Map<String, dynamic> json) =>
     _$_TransportOptions(
-      departure: Region.fromJson(json['departure'] as Map<String, dynamic>),
-      destination: Region.fromJson(json['destination'] as Map<String, dynamic>),
+      departure: Location.fromJson(json['departure'] as Map<String, dynamic>),
+      destination:
+          Location.fromJson(json['destination'] as Map<String, dynamic>),
       options: (json['options'] as List<dynamic>)
           .map((e) => (e as List<dynamic>)
               .map((e) => TransportLeg.fromJson(e as Map<String, dynamic>))

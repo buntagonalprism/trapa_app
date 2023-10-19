@@ -23,8 +23,8 @@ mixin _$TransportLeg {
   DateTime get departureTime => throw _privateConstructorUsedError;
   DateTime get arrivalTime => throw _privateConstructorUsedError;
   TransportType get type => throw _privateConstructorUsedError;
-  Region get departure => throw _privateConstructorUsedError;
-  Region get arrival => throw _privateConstructorUsedError;
+  Location get departure => throw _privateConstructorUsedError;
+  Location get arrival => throw _privateConstructorUsedError;
   Coordinates? get departureLocation => throw _privateConstructorUsedError;
   Address? get depatureAddress => throw _privateConstructorUsedError;
   Coordinates? get arrivalLocation => throw _privateConstructorUsedError;
@@ -47,16 +47,16 @@ abstract class $TransportLegCopyWith<$Res> {
       {DateTime departureTime,
       DateTime arrivalTime,
       TransportType type,
-      Region departure,
-      Region arrival,
+      Location departure,
+      Location arrival,
       Coordinates? departureLocation,
       Address? depatureAddress,
       Coordinates? arrivalLocation,
       Address? arrivalAddress,
       Expense? cost});
 
-  $RegionCopyWith<$Res> get departure;
-  $RegionCopyWith<$Res> get arrival;
+  $LocationCopyWith<$Res> get departure;
+  $LocationCopyWith<$Res> get arrival;
   $CoordinatesCopyWith<$Res>? get departureLocation;
   $AddressCopyWith<$Res>? get depatureAddress;
   $CoordinatesCopyWith<$Res>? get arrivalLocation;
@@ -104,11 +104,11 @@ class _$TransportLegCopyWithImpl<$Res, $Val extends TransportLeg>
       departure: null == departure
           ? _value.departure
           : departure // ignore: cast_nullable_to_non_nullable
-              as Region,
+              as Location,
       arrival: null == arrival
           ? _value.arrival
           : arrival // ignore: cast_nullable_to_non_nullable
-              as Region,
+              as Location,
       departureLocation: freezed == departureLocation
           ? _value.departureLocation
           : departureLocation // ignore: cast_nullable_to_non_nullable
@@ -134,16 +134,16 @@ class _$TransportLegCopyWithImpl<$Res, $Val extends TransportLeg>
 
   @override
   @pragma('vm:prefer-inline')
-  $RegionCopyWith<$Res> get departure {
-    return $RegionCopyWith<$Res>(_value.departure, (value) {
+  $LocationCopyWith<$Res> get departure {
+    return $LocationCopyWith<$Res>(_value.departure, (value) {
       return _then(_value.copyWith(departure: value) as $Val);
     });
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $RegionCopyWith<$Res> get arrival {
-    return $RegionCopyWith<$Res>(_value.arrival, (value) {
+  $LocationCopyWith<$Res> get arrival {
+    return $LocationCopyWith<$Res>(_value.arrival, (value) {
       return _then(_value.copyWith(arrival: value) as $Val);
     });
   }
@@ -221,8 +221,8 @@ abstract class _$$_TransportLegCopyWith<$Res>
       {DateTime departureTime,
       DateTime arrivalTime,
       TransportType type,
-      Region departure,
-      Region arrival,
+      Location departure,
+      Location arrival,
       Coordinates? departureLocation,
       Address? depatureAddress,
       Coordinates? arrivalLocation,
@@ -230,9 +230,9 @@ abstract class _$$_TransportLegCopyWith<$Res>
       Expense? cost});
 
   @override
-  $RegionCopyWith<$Res> get departure;
+  $LocationCopyWith<$Res> get departure;
   @override
-  $RegionCopyWith<$Res> get arrival;
+  $LocationCopyWith<$Res> get arrival;
   @override
   $CoordinatesCopyWith<$Res>? get departureLocation;
   @override
@@ -283,11 +283,11 @@ class __$$_TransportLegCopyWithImpl<$Res>
       departure: null == departure
           ? _value.departure
           : departure // ignore: cast_nullable_to_non_nullable
-              as Region,
+              as Location,
       arrival: null == arrival
           ? _value.arrival
           : arrival // ignore: cast_nullable_to_non_nullable
-              as Region,
+              as Location,
       departureLocation: freezed == departureLocation
           ? _value.departureLocation
           : departureLocation // ignore: cast_nullable_to_non_nullable
@@ -338,9 +338,9 @@ class _$_TransportLeg extends _TransportLeg {
   @override
   final TransportType type;
   @override
-  final Region departure;
+  final Location departure;
   @override
-  final Region arrival;
+  final Location arrival;
   @override
   final Coordinates? departureLocation;
   @override
@@ -415,8 +415,8 @@ abstract class _TransportLeg extends TransportLeg {
       {required final DateTime departureTime,
       required final DateTime arrivalTime,
       required final TransportType type,
-      required final Region departure,
-      required final Region arrival,
+      required final Location departure,
+      required final Location arrival,
       final Coordinates? departureLocation,
       final Address? depatureAddress,
       final Coordinates? arrivalLocation,
@@ -434,9 +434,9 @@ abstract class _TransportLeg extends TransportLeg {
   @override
   TransportType get type;
   @override
-  Region get departure;
+  Location get departure;
   @override
-  Region get arrival;
+  Location get arrival;
   @override
   Coordinates? get departureLocation;
   @override

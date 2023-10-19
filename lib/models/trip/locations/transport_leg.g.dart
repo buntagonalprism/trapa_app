@@ -11,8 +11,8 @@ _$_TransportLeg _$$_TransportLegFromJson(Map<String, dynamic> json) =>
       departureTime: DateTime.parse(json['departureTime'] as String),
       arrivalTime: DateTime.parse(json['arrivalTime'] as String),
       type: $enumDecode(_$TransportTypeEnumMap, json['type']),
-      departure: Region.fromJson(json['departure'] as Map<String, dynamic>),
-      arrival: Region.fromJson(json['arrival'] as Map<String, dynamic>),
+      departure: Location.fromJson(json['departure'] as Map<String, dynamic>),
+      arrival: Location.fromJson(json['arrival'] as Map<String, dynamic>),
       departureLocation: json['departureLocation'] == null
           ? null
           : Coordinates.fromJson(

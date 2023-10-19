@@ -20,7 +20,7 @@ Destination _$DestinationFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Destination {
-  Region get region => throw _privateConstructorUsedError;
+  Location get region => throw _privateConstructorUsedError;
   DateTime get arrivalDate => throw _privateConstructorUsedError;
   DateTime get departureDate => throw _privateConstructorUsedError;
   List<Reservation> get reservations => throw _privateConstructorUsedError;
@@ -40,14 +40,14 @@ abstract class $DestinationCopyWith<$Res> {
       _$DestinationCopyWithImpl<$Res, Destination>;
   @useResult
   $Res call(
-      {Region region,
+      {Location region,
       DateTime arrivalDate,
       DateTime departureDate,
       List<Reservation> reservations,
       List<Activity> activities,
       List<DayTrip> dayTrips});
 
-  $RegionCopyWith<$Res> get region;
+  $LocationCopyWith<$Res> get region;
 }
 
 /// @nodoc
@@ -74,7 +74,7 @@ class _$DestinationCopyWithImpl<$Res, $Val extends Destination>
       region: null == region
           ? _value.region
           : region // ignore: cast_nullable_to_non_nullable
-              as Region,
+              as Location,
       arrivalDate: null == arrivalDate
           ? _value.arrivalDate
           : arrivalDate // ignore: cast_nullable_to_non_nullable
@@ -100,8 +100,8 @@ class _$DestinationCopyWithImpl<$Res, $Val extends Destination>
 
   @override
   @pragma('vm:prefer-inline')
-  $RegionCopyWith<$Res> get region {
-    return $RegionCopyWith<$Res>(_value.region, (value) {
+  $LocationCopyWith<$Res> get region {
+    return $LocationCopyWith<$Res>(_value.region, (value) {
       return _then(_value.copyWith(region: value) as $Val);
     });
   }
@@ -116,7 +116,7 @@ abstract class _$$_DestinationCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {Region region,
+      {Location region,
       DateTime arrivalDate,
       DateTime departureDate,
       List<Reservation> reservations,
@@ -124,7 +124,7 @@ abstract class _$$_DestinationCopyWith<$Res>
       List<DayTrip> dayTrips});
 
   @override
-  $RegionCopyWith<$Res> get region;
+  $LocationCopyWith<$Res> get region;
 }
 
 /// @nodoc
@@ -149,7 +149,7 @@ class __$$_DestinationCopyWithImpl<$Res>
       region: null == region
           ? _value.region
           : region // ignore: cast_nullable_to_non_nullable
-              as Region,
+              as Location,
       arrivalDate: null == arrivalDate
           ? _value.arrivalDate
           : arrivalDate // ignore: cast_nullable_to_non_nullable
@@ -193,7 +193,7 @@ class _$_Destination extends _Destination {
       _$$_DestinationFromJson(json);
 
   @override
-  final Region region;
+  final Location region;
   @override
   final DateTime arrivalDate;
   @override
@@ -271,7 +271,7 @@ class _$_Destination extends _Destination {
 
 abstract class _Destination extends Destination {
   const factory _Destination(
-      {required final Region region,
+      {required final Location region,
       required final DateTime arrivalDate,
       required final DateTime departureDate,
       required final List<Reservation> reservations,
@@ -283,7 +283,7 @@ abstract class _Destination extends Destination {
       _$_Destination.fromJson;
 
   @override
-  Region get region;
+  Location get region;
   @override
   DateTime get arrivalDate;
   @override

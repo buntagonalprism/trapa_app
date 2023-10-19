@@ -8,7 +8,7 @@ part of 'destination.dart';
 
 _$_Destination _$$_DestinationFromJson(Map<String, dynamic> json) =>
     _$_Destination(
-      region: Region.fromJson(json['region'] as Map<String, dynamic>),
+      region: Location.fromJson(json['region'] as Map<String, dynamic>),
       arrivalDate: DateTime.parse(json['arrivalDate'] as String),
       departureDate: DateTime.parse(json['departureDate'] as String),
       reservations: (json['reservations'] as List<dynamic>)

@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'region_suggestion.dart';
+part of 'location_suggestion_response.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator

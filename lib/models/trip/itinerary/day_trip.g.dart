@@ -7,9 +7,9 @@ part of 'day_trip.dart';
 // **************************************************************************
 
 _$_DayTrip _$$_DayTripFromJson(Map<String, dynamic> json) => _$_DayTrip(
-      baseRegion: Region.fromJson(json['baseRegion'] as Map<String, dynamic>),
+      baseRegion: Location.fromJson(json['baseRegion'] as Map<String, dynamic>),
       targetRegion:
-          Region.fromJson(json['targetRegion'] as Map<String, dynamic>),
+          Location.fromJson(json['targetRegion'] as Map<String, dynamic>),
       date: DateTime.parse(json['date'] as String),
     );
 

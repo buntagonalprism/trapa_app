@@ -21,7 +21,7 @@ Attraction _$AttractionFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Attraction {
   String get name => throw _privateConstructorUsedError;
-  Region get region => throw _privateConstructorUsedError;
+  Location get region => throw _privateConstructorUsedError;
   Details? get details => throw _privateConstructorUsedError;
   Coordinates? get coordinates => throw _privateConstructorUsedError;
   PriceRating? get priceRating => throw _privateConstructorUsedError;
@@ -46,7 +46,7 @@ abstract class $AttractionCopyWith<$Res> {
   @useResult
   $Res call(
       {String name,
-      Region region,
+      Location region,
       Details? details,
       Coordinates? coordinates,
       PriceRating? priceRating,
@@ -56,7 +56,7 @@ abstract class $AttractionCopyWith<$Res> {
       OpenDaysSchedule? openDays,
       Map<DayOfWeek, List<TimeRange>>? openingHours});
 
-  $RegionCopyWith<$Res> get region;
+  $LocationCopyWith<$Res> get region;
   $DetailsCopyWith<$Res>? get details;
   $CoordinatesCopyWith<$Res>? get coordinates;
   $DateRangeCopyWith<$Res>? get openDateRange;
@@ -95,7 +95,7 @@ class _$AttractionCopyWithImpl<$Res, $Val extends Attraction>
       region: null == region
           ? _value.region
           : region // ignore: cast_nullable_to_non_nullable
-              as Region,
+              as Location,
       details: freezed == details
           ? _value.details
           : details // ignore: cast_nullable_to_non_nullable
@@ -133,8 +133,8 @@ class _$AttractionCopyWithImpl<$Res, $Val extends Attraction>
 
   @override
   @pragma('vm:prefer-inline')
-  $RegionCopyWith<$Res> get region {
-    return $RegionCopyWith<$Res>(_value.region, (value) {
+  $LocationCopyWith<$Res> get region {
+    return $LocationCopyWith<$Res>(_value.region, (value) {
       return _then(_value.copyWith(region: value) as $Val);
     });
   }
@@ -198,7 +198,7 @@ abstract class _$$_AttractionCopyWith<$Res>
   @useResult
   $Res call(
       {String name,
-      Region region,
+      Location region,
       Details? details,
       Coordinates? coordinates,
       PriceRating? priceRating,
@@ -209,7 +209,7 @@ abstract class _$$_AttractionCopyWith<$Res>
       Map<DayOfWeek, List<TimeRange>>? openingHours});
 
   @override
-  $RegionCopyWith<$Res> get region;
+  $LocationCopyWith<$Res> get region;
   @override
   $DetailsCopyWith<$Res>? get details;
   @override
@@ -250,7 +250,7 @@ class __$$_AttractionCopyWithImpl<$Res>
       region: null == region
           ? _value.region
           : region // ignore: cast_nullable_to_non_nullable
-              as Region,
+              as Location,
       details: freezed == details
           ? _value.details
           : details // ignore: cast_nullable_to_non_nullable
@@ -310,7 +310,7 @@ class _$_Attraction extends _Attraction {
   @override
   final String name;
   @override
-  final Region region;
+  final Location region;
   @override
   final Details? details;
   @override
@@ -395,7 +395,7 @@ class _$_Attraction extends _Attraction {
 abstract class _Attraction extends Attraction {
   const factory _Attraction(
       {required final String name,
-      required final Region region,
+      required final Location region,
       final Details? details,
       final Coordinates? coordinates,
       final PriceRating? priceRating,
@@ -412,7 +412,7 @@ abstract class _Attraction extends Attraction {
   @override
   String get name;
   @override
-  Region get region;
+  Location get region;
   @override
   Details? get details;
   @override

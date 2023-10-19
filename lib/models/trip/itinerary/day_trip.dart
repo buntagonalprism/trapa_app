@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../locations/region.dart';
+import '../locations/location.dart';
 
 part 'day_trip.freezed.dart';
 part 'day_trip.g.dart';
@@ -10,8 +10,8 @@ class DayTrip with _$DayTrip {
   const DayTrip._();
 
   const factory DayTrip({
-    required Region baseRegion,
-    required Region targetRegion,
+    required Location baseRegion,
+    required Location targetRegion,
     required DateTime date,
   }) = _DayTrip;
 

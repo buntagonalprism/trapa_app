@@ -24,9 +24,9 @@ mixin _$Tour {
   DateTime get startDate => throw _privateConstructorUsedError;
   DateTime get endDate => throw _privateConstructorUsedError;
   OngoingExpense? get cost => throw _privateConstructorUsedError;
-  List<Region>? get regionsVisited => throw _privateConstructorUsedError;
-  Region? get departureRegion => throw _privateConstructorUsedError;
-  Region? get destinationRegion => throw _privateConstructorUsedError;
+  List<Location>? get regionsVisited => throw _privateConstructorUsedError;
+  Location? get departureRegion => throw _privateConstructorUsedError;
+  Location? get destinationRegion => throw _privateConstructorUsedError;
   DateTime? get departureTime => throw _privateConstructorUsedError;
   DateTime? get arrivalTime => throw _privateConstructorUsedError;
 
@@ -45,15 +45,15 @@ abstract class $TourCopyWith<$Res> {
       DateTime startDate,
       DateTime endDate,
       OngoingExpense? cost,
-      List<Region>? regionsVisited,
-      Region? departureRegion,
-      Region? destinationRegion,
+      List<Location>? regionsVisited,
+      Location? departureRegion,
+      Location? destinationRegion,
       DateTime? departureTime,
       DateTime? arrivalTime});
 
   $OngoingExpenseCopyWith<$Res>? get cost;
-  $RegionCopyWith<$Res>? get departureRegion;
-  $RegionCopyWith<$Res>? get destinationRegion;
+  $LocationCopyWith<$Res>? get departureRegion;
+  $LocationCopyWith<$Res>? get destinationRegion;
 }
 
 /// @nodoc
@@ -99,15 +99,15 @@ class _$TourCopyWithImpl<$Res, $Val extends Tour>
       regionsVisited: freezed == regionsVisited
           ? _value.regionsVisited
           : regionsVisited // ignore: cast_nullable_to_non_nullable
-              as List<Region>?,
+              as List<Location>?,
       departureRegion: freezed == departureRegion
           ? _value.departureRegion
           : departureRegion // ignore: cast_nullable_to_non_nullable
-              as Region?,
+              as Location?,
       destinationRegion: freezed == destinationRegion
           ? _value.destinationRegion
           : destinationRegion // ignore: cast_nullable_to_non_nullable
-              as Region?,
+              as Location?,
       departureTime: freezed == departureTime
           ? _value.departureTime
           : departureTime // ignore: cast_nullable_to_non_nullable
@@ -133,24 +133,24 @@ class _$TourCopyWithImpl<$Res, $Val extends Tour>
 
   @override
   @pragma('vm:prefer-inline')
-  $RegionCopyWith<$Res>? get departureRegion {
+  $LocationCopyWith<$Res>? get departureRegion {
     if (_value.departureRegion == null) {
       return null;
     }
 
-    return $RegionCopyWith<$Res>(_value.departureRegion!, (value) {
+    return $LocationCopyWith<$Res>(_value.departureRegion!, (value) {
       return _then(_value.copyWith(departureRegion: value) as $Val);
     });
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $RegionCopyWith<$Res>? get destinationRegion {
+  $LocationCopyWith<$Res>? get destinationRegion {
     if (_value.destinationRegion == null) {
       return null;
     }
 
-    return $RegionCopyWith<$Res>(_value.destinationRegion!, (value) {
+    return $LocationCopyWith<$Res>(_value.destinationRegion!, (value) {
       return _then(_value.copyWith(destinationRegion: value) as $Val);
     });
   }
@@ -167,18 +167,18 @@ abstract class _$$_TourCopyWith<$Res> implements $TourCopyWith<$Res> {
       DateTime startDate,
       DateTime endDate,
       OngoingExpense? cost,
-      List<Region>? regionsVisited,
-      Region? departureRegion,
-      Region? destinationRegion,
+      List<Location>? regionsVisited,
+      Location? departureRegion,
+      Location? destinationRegion,
       DateTime? departureTime,
       DateTime? arrivalTime});
 
   @override
   $OngoingExpenseCopyWith<$Res>? get cost;
   @override
-  $RegionCopyWith<$Res>? get departureRegion;
+  $LocationCopyWith<$Res>? get departureRegion;
   @override
-  $RegionCopyWith<$Res>? get destinationRegion;
+  $LocationCopyWith<$Res>? get destinationRegion;
 }
 
 /// @nodoc
@@ -220,15 +220,15 @@ class __$$_TourCopyWithImpl<$Res> extends _$TourCopyWithImpl<$Res, _$_Tour>
       regionsVisited: freezed == regionsVisited
           ? _value._regionsVisited
           : regionsVisited // ignore: cast_nullable_to_non_nullable
-              as List<Region>?,
+              as List<Location>?,
       departureRegion: freezed == departureRegion
           ? _value.departureRegion
           : departureRegion // ignore: cast_nullable_to_non_nullable
-              as Region?,
+              as Location?,
       destinationRegion: freezed == destinationRegion
           ? _value.destinationRegion
           : destinationRegion // ignore: cast_nullable_to_non_nullable
-              as Region?,
+              as Location?,
       departureTime: freezed == departureTime
           ? _value.departureTime
           : departureTime // ignore: cast_nullable_to_non_nullable
@@ -249,7 +249,7 @@ class _$_Tour extends _Tour {
       required this.startDate,
       required this.endDate,
       this.cost,
-      final List<Region>? regionsVisited,
+      final List<Location>? regionsVisited,
       this.departureRegion,
       this.destinationRegion,
       this.departureTime,
@@ -267,9 +267,9 @@ class _$_Tour extends _Tour {
   final DateTime endDate;
   @override
   final OngoingExpense? cost;
-  final List<Region>? _regionsVisited;
+  final List<Location>? _regionsVisited;
   @override
-  List<Region>? get regionsVisited {
+  List<Location>? get regionsVisited {
     final value = _regionsVisited;
     if (value == null) return null;
     if (_regionsVisited is EqualUnmodifiableListView) return _regionsVisited;
@@ -278,9 +278,9 @@ class _$_Tour extends _Tour {
   }
 
   @override
-  final Region? departureRegion;
+  final Location? departureRegion;
   @override
-  final Region? destinationRegion;
+  final Location? destinationRegion;
   @override
   final DateTime? departureTime;
   @override
@@ -347,9 +347,9 @@ abstract class _Tour extends Tour {
       required final DateTime startDate,
       required final DateTime endDate,
       final OngoingExpense? cost,
-      final List<Region>? regionsVisited,
-      final Region? departureRegion,
-      final Region? destinationRegion,
+      final List<Location>? regionsVisited,
+      final Location? departureRegion,
+      final Location? destinationRegion,
       final DateTime? departureTime,
       final DateTime? arrivalTime}) = _$_Tour;
   const _Tour._() : super._();
@@ -365,11 +365,11 @@ abstract class _Tour extends Tour {
   @override
   OngoingExpense? get cost;
   @override
-  List<Region>? get regionsVisited;
+  List<Location>? get regionsVisited;
   @override
-  Region? get departureRegion;
+  Location? get departureRegion;
   @override
-  Region? get destinationRegion;
+  Location? get destinationRegion;
   @override
   DateTime? get departureTime;
   @override

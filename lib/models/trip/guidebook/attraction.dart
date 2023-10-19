@@ -6,7 +6,7 @@ import '../common/day_of_week.dart';
 import '../common/details.dart';
 import '../common/open_days_schedule.dart';
 import '../common/time_range.dart';
-import '../locations/region.dart';
+import '../locations/location.dart';
 import 'attraction_type.dart';
 import 'interest_rating.dart';
 import 'price_rating.dart';
@@ -20,7 +20,7 @@ class Attraction with _$Attraction {
 
   const factory Attraction({
     required String name,
-    required Region region,
+    required Location region,
     Details? details,
     Coordinates? coordinates,
     PriceRating? priceRating,

@@ -21,7 +21,7 @@ Accommodation _$AccommodationFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Accommodation {
   String get name => throw _privateConstructorUsedError;
-  Region get region => throw _privateConstructorUsedError;
+  Location get region => throw _privateConstructorUsedError;
   Details? get details => throw _privateConstructorUsedError;
   Address? get address => throw _privateConstructorUsedError;
   Coordinates? get coordinates => throw _privateConstructorUsedError;
@@ -43,7 +43,7 @@ abstract class $AccommodationCopyWith<$Res> {
   @useResult
   $Res call(
       {String name,
-      Region region,
+      Location region,
       Details? details,
       Address? address,
       Coordinates? coordinates,
@@ -51,7 +51,7 @@ abstract class $AccommodationCopyWith<$Res> {
       PriceRating? price,
       AccommodationType? type});
 
-  $RegionCopyWith<$Res> get region;
+  $LocationCopyWith<$Res> get region;
   $DetailsCopyWith<$Res>? get details;
   $AddressCopyWith<$Res>? get address;
   $CoordinatesCopyWith<$Res>? get coordinates;
@@ -87,7 +87,7 @@ class _$AccommodationCopyWithImpl<$Res, $Val extends Accommodation>
       region: null == region
           ? _value.region
           : region // ignore: cast_nullable_to_non_nullable
-              as Region,
+              as Location,
       details: freezed == details
           ? _value.details
           : details // ignore: cast_nullable_to_non_nullable
@@ -117,8 +117,8 @@ class _$AccommodationCopyWithImpl<$Res, $Val extends Accommodation>
 
   @override
   @pragma('vm:prefer-inline')
-  $RegionCopyWith<$Res> get region {
-    return $RegionCopyWith<$Res>(_value.region, (value) {
+  $LocationCopyWith<$Res> get region {
+    return $LocationCopyWith<$Res>(_value.region, (value) {
       return _then(_value.copyWith(region: value) as $Val);
     });
   }
@@ -170,7 +170,7 @@ abstract class _$$_AccommodationCopyWith<$Res>
   @useResult
   $Res call(
       {String name,
-      Region region,
+      Location region,
       Details? details,
       Address? address,
       Coordinates? coordinates,
@@ -179,7 +179,7 @@ abstract class _$$_AccommodationCopyWith<$Res>
       AccommodationType? type});
 
   @override
-  $RegionCopyWith<$Res> get region;
+  $LocationCopyWith<$Res> get region;
   @override
   $DetailsCopyWith<$Res>? get details;
   @override
@@ -216,7 +216,7 @@ class __$$_AccommodationCopyWithImpl<$Res>
       region: null == region
           ? _value.region
           : region // ignore: cast_nullable_to_non_nullable
-              as Region,
+              as Location,
       details: freezed == details
           ? _value.details
           : details // ignore: cast_nullable_to_non_nullable
@@ -265,7 +265,7 @@ class _$_Accommodation extends _Accommodation {
   @override
   final String name;
   @override
-  final Region region;
+  final Location region;
   @override
   final Details? details;
   @override
@@ -322,7 +322,7 @@ class _$_Accommodation extends _Accommodation {
 abstract class _Accommodation extends Accommodation {
   const factory _Accommodation(
       {required final String name,
-      required final Region region,
+      required final Location region,
       final Details? details,
       final Address? address,
       final Coordinates? coordinates,
@@ -337,7 +337,7 @@ abstract class _Accommodation extends Accommodation {
   @override
   String get name;
   @override
-  Region get region;
+  Location get region;
   @override
   Details? get details;
   @override

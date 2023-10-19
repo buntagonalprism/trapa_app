@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../locations/region.dart';
+import '../locations/location.dart';
 import 'activity.dart';
 import 'day_trip.dart';
 import 'reservation.dart';
@@ -13,7 +13,7 @@ class Destination with _$Destination {
   const Destination._();
 
   const factory Destination({
-    required Region region,
+    required Location region,
     required DateTime arrivalDate,
     required DateTime departureDate,
     required List<Reservation> reservations,

@@ -1,24 +1,29 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'region.dart';
+part of 'location.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_Region _$$_RegionFromJson(Map<String, dynamic> json) => _$_Region(
+_$_Location _$$_LocationFromJson(Map<String, dynamic> json) => _$_Location(
       name: json['name'] as String,
-      parentRegion:
-          Region.fromJson(json['parentRegion'] as Map<String, dynamic>),
+      parentLocation: json['parentLocation'] == null
+          ? null
+          : Location.fromJson(json['parentLocation'] as Map<String, dynamic>),
       countryCode: json['countryCode'] as String,
+      coordinates:
+          Coordinates.fromJson(json['coordinates'] as Map<String, dynamic>),
       details: json['details'] == null
           ? null
           : Details.fromJson(json['details'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$$_RegionToJson(_$_Region instance) => <String, dynamic>{
+Map<String, dynamic> _$$_LocationToJson(_$_Location instance) =>
+    <String, dynamic>{
       'name': instance.name,
-      'parentRegion': instance.parentRegion,
+      'parentLocation': instance.parentLocation,
       'countryCode': instance.countryCode,
+      'coordinates': instance.coordinates,
       'details': instance.details,
     };

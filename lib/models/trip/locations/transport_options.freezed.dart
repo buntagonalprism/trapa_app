@@ -20,8 +20,8 @@ TransportOptions _$TransportOptionsFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$TransportOptions {
-  Region get departure => throw _privateConstructorUsedError;
-  Region get destination => throw _privateConstructorUsedError;
+  Location get departure => throw _privateConstructorUsedError;
+  Location get destination => throw _privateConstructorUsedError;
   List<List<TransportLeg>> get options => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -37,10 +37,12 @@ abstract class $TransportOptionsCopyWith<$Res> {
       _$TransportOptionsCopyWithImpl<$Res, TransportOptions>;
   @useResult
   $Res call(
-      {Region departure, Region destination, List<List<TransportLeg>> options});
+      {Location departure,
+      Location destination,
+      List<List<TransportLeg>> options});
 
-  $RegionCopyWith<$Res> get departure;
-  $RegionCopyWith<$Res> get destination;
+  $LocationCopyWith<$Res> get departure;
+  $LocationCopyWith<$Res> get destination;
 }
 
 /// @nodoc
@@ -64,11 +66,11 @@ class _$TransportOptionsCopyWithImpl<$Res, $Val extends TransportOptions>
       departure: null == departure
           ? _value.departure
           : departure // ignore: cast_nullable_to_non_nullable
-              as Region,
+              as Location,
       destination: null == destination
           ? _value.destination
           : destination // ignore: cast_nullable_to_non_nullable
-              as Region,
+              as Location,
       options: null == options
           ? _value.options
           : options // ignore: cast_nullable_to_non_nullable
@@ -78,16 +80,16 @@ class _$TransportOptionsCopyWithImpl<$Res, $Val extends TransportOptions>
 
   @override
   @pragma('vm:prefer-inline')
-  $RegionCopyWith<$Res> get departure {
-    return $RegionCopyWith<$Res>(_value.departure, (value) {
+  $LocationCopyWith<$Res> get departure {
+    return $LocationCopyWith<$Res>(_value.departure, (value) {
       return _then(_value.copyWith(departure: value) as $Val);
     });
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $RegionCopyWith<$Res> get destination {
-    return $RegionCopyWith<$Res>(_value.destination, (value) {
+  $LocationCopyWith<$Res> get destination {
+    return $LocationCopyWith<$Res>(_value.destination, (value) {
       return _then(_value.copyWith(destination: value) as $Val);
     });
   }
@@ -102,12 +104,14 @@ abstract class _$$_TransportOptionsCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {Region departure, Region destination, List<List<TransportLeg>> options});
+      {Location departure,
+      Location destination,
+      List<List<TransportLeg>> options});
 
   @override
-  $RegionCopyWith<$Res> get departure;
+  $LocationCopyWith<$Res> get departure;
   @override
-  $RegionCopyWith<$Res> get destination;
+  $LocationCopyWith<$Res> get destination;
 }
 
 /// @nodoc
@@ -129,11 +133,11 @@ class __$$_TransportOptionsCopyWithImpl<$Res>
       departure: null == departure
           ? _value.departure
           : departure // ignore: cast_nullable_to_non_nullable
-              as Region,
+              as Location,
       destination: null == destination
           ? _value.destination
           : destination // ignore: cast_nullable_to_non_nullable
-              as Region,
+              as Location,
       options: null == options
           ? _value._options
           : options // ignore: cast_nullable_to_non_nullable
@@ -156,9 +160,9 @@ class _$_TransportOptions extends _TransportOptions {
       _$$_TransportOptionsFromJson(json);
 
   @override
-  final Region departure;
+  final Location departure;
   @override
-  final Region destination;
+  final Location destination;
   final List<List<TransportLeg>> _options;
   @override
   List<List<TransportLeg>> get options {
@@ -205,8 +209,8 @@ class _$_TransportOptions extends _TransportOptions {
 
 abstract class _TransportOptions extends TransportOptions {
   const factory _TransportOptions(
-      {required final Region departure,
-      required final Region destination,
+      {required final Location departure,
+      required final Location destination,
       required final List<List<TransportLeg>> options}) = _$_TransportOptions;
   const _TransportOptions._() : super._();
 
@@ -214,9 +218,9 @@ abstract class _TransportOptions extends TransportOptions {
       _$_TransportOptions.fromJson;
 
   @override
-  Region get departure;
+  Location get departure;
   @override
-  Region get destination;
+  Location get destination;
   @override
   List<List<TransportLeg>> get options;
   @override

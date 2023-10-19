@@ -4,7 +4,7 @@ import '../budget/expense.dart';
 import '../common/address.dart';
 import '../common/coordinates.dart';
 import '../itinerary/transport_type.dart';
-import 'region.dart';
+import 'location.dart';
 
 part 'transport_leg.freezed.dart';
 part 'transport_leg.g.dart';
@@ -19,8 +19,8 @@ class TransportLeg with _$TransportLeg {
     required DateTime departureTime,
     required DateTime arrivalTime,
     required TransportType type,
-    required Region departure,
-    required Region arrival,
+    required Location departure,
+    required Location arrival,
     Coordinates? departureLocation,
     Address? depatureAddress,
     Coordinates? arrivalLocation,

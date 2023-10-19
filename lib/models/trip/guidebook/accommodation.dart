@@ -3,7 +3,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import '../common/address.dart';
 import '../common/coordinates.dart';
 import '../common/details.dart';
-import '../locations/region.dart';
+import '../locations/location.dart';
 import 'accommodation_type.dart';
 import 'price_rating.dart';
 
@@ -16,7 +16,7 @@ class Accommodation with _$Accommodation {
 
   const factory Accommodation({
     required String name,
-    required Region region,
+    required Location region,
     Details? details,
     Address? address,
     Coordinates? coordinates,

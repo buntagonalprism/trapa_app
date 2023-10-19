@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'region.dart';
+import 'location.dart';
 import 'transport_leg.dart';
 
 part 'transport_options.freezed.dart';
@@ -11,8 +11,8 @@ class TransportOptions with _$TransportOptions {
   const TransportOptions._();
 
   const factory TransportOptions({
-    required Region departure,
-    required Region destination,
+    required Location departure,
+    required Location destination,
     required List<TransportOption> options,
   }) = _TransportOptions;
 

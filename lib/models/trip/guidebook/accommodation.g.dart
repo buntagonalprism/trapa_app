@@ -9,7 +9,7 @@ part of 'accommodation.dart';
 _$_Accommodation _$$_AccommodationFromJson(Map<String, dynamic> json) =>
     _$_Accommodation(
       name: json['name'] as String,
-      region: Region.fromJson(json['region'] as Map<String, dynamic>),
+      region: Location.fromJson(json['region'] as Map<String, dynamic>),
       details: json['details'] == null
           ? null
           : Details.fromJson(json['details'] as Map<String, dynamic>),

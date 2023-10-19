@@ -1,7 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../budget/ongoing_expense.dart';
-import '../locations/region.dart';
+import '../locations/location.dart';
 
 part 'tour.freezed.dart';
 part 'tour.g.dart';
@@ -12,16 +12,15 @@ class Tour with _$Tour {
 
   const factory Tour({
     required String name,
-    required DateTime startDate, 
-    required DateTime endDate, 
-    OngoingExpense? cost, 
-    List<Region>? regionsVisited,
-    Region? departureRegion, 
-    Region? destinationRegion,
-    DateTime? departureTime, 
+    required DateTime startDate,
+    required DateTime endDate,
+    OngoingExpense? cost,
+    List<Location>? regionsVisited,
+    Location? departureRegion,
+    Location? destinationRegion,
+    DateTime? departureTime,
     DateTime? arrivalTime,
   }) = _Tour;
 
   factory Tour.fromJson(Map<String, dynamic> json) => _$TourFromJson(json);
-
 }

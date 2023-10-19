@@ -20,8 +20,8 @@ DayTrip _$DayTripFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$DayTrip {
-  Region get baseRegion => throw _privateConstructorUsedError;
-  Region get targetRegion => throw _privateConstructorUsedError;
+  Location get baseRegion => throw _privateConstructorUsedError;
+  Location get targetRegion => throw _privateConstructorUsedError;
   DateTime get date => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -34,10 +34,10 @@ abstract class $DayTripCopyWith<$Res> {
   factory $DayTripCopyWith(DayTrip value, $Res Function(DayTrip) then) =
       _$DayTripCopyWithImpl<$Res, DayTrip>;
   @useResult
-  $Res call({Region baseRegion, Region targetRegion, DateTime date});
+  $Res call({Location baseRegion, Location targetRegion, DateTime date});
 
-  $RegionCopyWith<$Res> get baseRegion;
-  $RegionCopyWith<$Res> get targetRegion;
+  $LocationCopyWith<$Res> get baseRegion;
+  $LocationCopyWith<$Res> get targetRegion;
 }
 
 /// @nodoc
@@ -61,11 +61,11 @@ class _$DayTripCopyWithImpl<$Res, $Val extends DayTrip>
       baseRegion: null == baseRegion
           ? _value.baseRegion
           : baseRegion // ignore: cast_nullable_to_non_nullable
-              as Region,
+              as Location,
       targetRegion: null == targetRegion
           ? _value.targetRegion
           : targetRegion // ignore: cast_nullable_to_non_nullable
-              as Region,
+              as Location,
       date: null == date
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
@@ -75,16 +75,16 @@ class _$DayTripCopyWithImpl<$Res, $Val extends DayTrip>
 
   @override
   @pragma('vm:prefer-inline')
-  $RegionCopyWith<$Res> get baseRegion {
-    return $RegionCopyWith<$Res>(_value.baseRegion, (value) {
+  $LocationCopyWith<$Res> get baseRegion {
+    return $LocationCopyWith<$Res>(_value.baseRegion, (value) {
       return _then(_value.copyWith(baseRegion: value) as $Val);
     });
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $RegionCopyWith<$Res> get targetRegion {
-    return $RegionCopyWith<$Res>(_value.targetRegion, (value) {
+  $LocationCopyWith<$Res> get targetRegion {
+    return $LocationCopyWith<$Res>(_value.targetRegion, (value) {
       return _then(_value.copyWith(targetRegion: value) as $Val);
     });
   }
@@ -97,12 +97,12 @@ abstract class _$$_DayTripCopyWith<$Res> implements $DayTripCopyWith<$Res> {
       __$$_DayTripCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Region baseRegion, Region targetRegion, DateTime date});
+  $Res call({Location baseRegion, Location targetRegion, DateTime date});
 
   @override
-  $RegionCopyWith<$Res> get baseRegion;
+  $LocationCopyWith<$Res> get baseRegion;
   @override
-  $RegionCopyWith<$Res> get targetRegion;
+  $LocationCopyWith<$Res> get targetRegion;
 }
 
 /// @nodoc
@@ -123,11 +123,11 @@ class __$$_DayTripCopyWithImpl<$Res>
       baseRegion: null == baseRegion
           ? _value.baseRegion
           : baseRegion // ignore: cast_nullable_to_non_nullable
-              as Region,
+              as Location,
       targetRegion: null == targetRegion
           ? _value.targetRegion
           : targetRegion // ignore: cast_nullable_to_non_nullable
-              as Region,
+              as Location,
       date: null == date
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
@@ -149,9 +149,9 @@ class _$_DayTrip extends _DayTrip {
       _$$_DayTripFromJson(json);
 
   @override
-  final Region baseRegion;
+  final Location baseRegion;
   @override
-  final Region targetRegion;
+  final Location targetRegion;
   @override
   final DateTime date;
 
@@ -192,17 +192,17 @@ class _$_DayTrip extends _DayTrip {
 
 abstract class _DayTrip extends DayTrip {
   const factory _DayTrip(
-      {required final Region baseRegion,
-      required final Region targetRegion,
+      {required final Location baseRegion,
+      required final Location targetRegion,
       required final DateTime date}) = _$_DayTrip;
   const _DayTrip._() : super._();
 
   factory _DayTrip.fromJson(Map<String, dynamic> json) = _$_DayTrip.fromJson;
 
   @override
-  Region get baseRegion;
+  Location get baseRegion;
   @override
-  Region get targetRegion;
+  Location get targetRegion;
   @override
   DateTime get date;
   @override

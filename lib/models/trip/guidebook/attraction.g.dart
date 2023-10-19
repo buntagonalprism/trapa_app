@@ -9,7 +9,7 @@ part of 'attraction.dart';
 _$_Attraction _$$_AttractionFromJson(Map<String, dynamic> json) =>
     _$_Attraction(
       name: json['name'] as String,
-      region: Region.fromJson(json['region'] as Map<String, dynamic>),
+      region: Location.fromJson(json['region'] as Map<String, dynamic>),
       details: json['details'] == null
           ? null
           : Details.fromJson(json['details'] as Map<String, dynamic>),

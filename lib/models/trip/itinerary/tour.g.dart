@@ -14,14 +14,15 @@ _$_Tour _$$_TourFromJson(Map<String, dynamic> json) => _$_Tour(
           ? null
           : OngoingExpense.fromJson(json['cost'] as Map<String, dynamic>),
       regionsVisited: (json['regionsVisited'] as List<dynamic>?)
-          ?.map((e) => Region.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => Location.fromJson(e as Map<String, dynamic>))
           .toList(),
       departureRegion: json['departureRegion'] == null
           ? null
-          : Region.fromJson(json['departureRegion'] as Map<String, dynamic>),
+          : Location.fromJson(json['departureRegion'] as Map<String, dynamic>),
       destinationRegion: json['destinationRegion'] == null
           ? null
-          : Region.fromJson(json['destinationRegion'] as Map<String, dynamic>),
+          : Location.fromJson(
+              json['destinationRegion'] as Map<String, dynamic>),
       departureTime: json['departureTime'] == null
           ? null
           : DateTime.parse(json['departureTime'] as String),
