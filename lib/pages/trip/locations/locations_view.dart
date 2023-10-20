@@ -211,6 +211,20 @@ class _CountryLocationsViewState extends State<CountryLocationsView> {
                 itemBuilder: (context, index) => ListTile(
                   dense: true,
                   title: Text(locations[index].name),
+                  trailing: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      IconButton(
+                        onPressed: () => EditLocationDialog.show(
+                            context: context, vm: widget.vm, location: locations[index]),
+                        icon: const Icon(Icons.edit),
+                      ),
+                      IconButton(
+                        onPressed: () => widget.vm.deleteLocation(locations[index]),
+                        icon: const Icon(Icons.delete),
+                      ),
+                    ],
+                  ),
                 ),
               );
             }),

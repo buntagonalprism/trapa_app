@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
-import '../../messages.dart';
 import '../../models/api/network_observable.dart';
 import '../../widgets/home_icon.dart';
 import '../../widgets/settings_icon.dart';
@@ -21,7 +20,6 @@ class TripPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final messages = Messages.of(context)!;
     final theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(

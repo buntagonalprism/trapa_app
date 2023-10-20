@@ -9,6 +9,9 @@ part 'form_store.g.dart';
 ///
 /// Subclass the [FormStore] to add your fields as properties of the subclass. You can add
 /// computed properties to the form, and field validation that depends on values of other fields.
+///
+/// [dispose] should be called when the form is no longer required.
+///
 /// For example:
 ///
 /// ```dart
@@ -84,6 +87,13 @@ abstract class _FormStore with Store {
 
   @computed
   bool get isValid => fields.every((field) => field.isValid);
+
+  /// Dispose the form, including all fields
+  void dispose() {
+    for (var field in fields) {
+      field.dispose();
+    }
+  }
 }
 
 enum ErrorDisplayBehaviour {
@@ -136,10 +146,17 @@ abstract class _FieldStore<T> with Store {
   /// [FormStore] of this field is [ErrorDisplayBehaviour.onSubmit] and the form has not been
   /// submitted. Null if there is no error. Otherwise the localised error message is returned.
   @computed
-  FieldErrorTextBuilder<T> get errorText =>
-      form.isSubmitted || form.errorDisplayBehaviour == ErrorDisplayBehaviour.always
-          ? (ctx) => error?.message(ctx)
-          : (_) => null;
+  FieldErrorTextBuilder<T> get errorText {
+    final err = error;
+    return form.isSubmitted || form.errorDisplayBehaviour == ErrorDisplayBehaviour.always
+        ? (ctx) => err?.message(ctx)
+        : (_) => null;
+  }
+
+  /// Dispose this form field.
+  void dispose() {
+    // No-op
+  }
 }
 
 class TextFieldStore extends FieldStore<String> {
@@ -148,9 +165,25 @@ class TextFieldStore extends FieldStore<String> {
     required String initialValue,
     required FieldValidator<String> validator,
   })  : controller = TextEditingController(text: initialValue),
-        super(form: form, initialValue: initialValue, validator: validator);
+        super(form: form, initialValue: initialValue, validator: validator) {
+    controller.addListener(() {
+      super.set(controller.text);
+    });
+  }
 
   late final TextEditingController controller;
+
+  @override
+  void set(String newValue) {
+    controller.text = newValue;
+    super.set(value);
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
 }
 
 /// A localisable field error that can be displayed in the UI

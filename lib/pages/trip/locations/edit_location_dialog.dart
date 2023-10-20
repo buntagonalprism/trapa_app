@@ -3,6 +3,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 
 import '../../../models/trip/locations/api/location_suggestion_response.dart';
 import '../../../models/trip/locations/location.dart';
+import '../../../utils/form_store.dart';
 import 'edit_location_form.dart';
 import 'locations_view_model.dart';
 
@@ -28,7 +29,11 @@ class AddLocationDialog extends StatefulWidget {
 class _AddLocationDialogState extends State<AddLocationDialog> with SingleTickerProviderStateMixin {
   late final TabController newLocationTabController = TabController(vsync: this, length: 2);
 
-  late EditLocationForm form = EditLocationForm(countryCode: widget.vm.selectedCountry!.code);
+  late EditLocationForm form = EditLocationForm(
+    countryCode: widget.vm.selectedCountry!.code,
+    otherLocations: widget.vm.locationsInCountry,
+    errorBehaviour: ErrorDisplayBehaviour.onSubmit,
+  );
   bool onDetailsTab = false;
   bool loadingDetails = false;
   String? detailsError;
@@ -117,10 +122,10 @@ class _AddLocationDialogState extends State<AddLocationDialog> with SingleTicker
 
     locationResult.when(
       error: (_) => setState(() => detailsError = 'Failed to load location details'),
-      success: (value) => setState(() => form = EditLocationForm(
-            countryCode: widget.vm.selectedCountry!.code,
-            location: value,
-          )),
+      success: (value) {
+        form.latitude.set(value.coordinates.latitude.toString());
+        form.longitude.set(value.coordinates.longitude.toString());
+      },
     );
   }
 
@@ -153,6 +158,12 @@ class _AddLocationDialogState extends State<AddLocationDialog> with SingleTicker
       newLocationTabController.animateTo(0);
     });
   }
+
+  @override
+  void dispose() {
+    form.dispose();
+    super.dispose();
+  }
 }
 
 class EditLocationDialog extends StatefulWidget {
@@ -182,7 +193,9 @@ class EditLocationDialog extends StatefulWidget {
 class _EditLocationDialogState extends State<EditLocationDialog> {
   late EditLocationForm form = EditLocationForm(
     countryCode: widget.vm.selectedCountry!.code,
+    errorBehaviour: ErrorDisplayBehaviour.always,
     location: widget.location,
+    otherLocations: widget.vm.locationsInCountry,
   );
 
   @override
@@ -209,11 +222,21 @@ class _EditLocationDialogState extends State<EditLocationDialog> {
           )),
       actions: [
         FilledButton(
-          onPressed: () => print('TODO'),
+          onPressed: () => updateLocation(),
           child: const Text('Save'),
         ),
       ],
     );
+  }
+
+  void updateLocation() {
+    form.submit();
+    if (!form.isValid) {
+      return;
+    }
+    final location = form.toLocation();
+    widget.vm.updateLocation(location);
+    Navigator.of(context).pop();
   }
 }
 
@@ -284,6 +307,7 @@ class LocationEditorView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         const SizedBox(height: 16),
         Observer(builder: (context) {
@@ -293,11 +317,11 @@ class LocationEditorView extends StatelessWidget {
               label: const Text('Location name'),
               errorText: form.name.errorText(context),
             ),
-            onChanged: (value) => form.name.set(value),
           );
         }),
         const SizedBox(height: 16),
         Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(
               child: Observer(builder: (context) {
@@ -307,7 +331,6 @@ class LocationEditorView extends StatelessWidget {
                     label: const Text('Latitude'),
                     errorText: form.latitude.errorText(context),
                   ),
-                  onChanged: (value) => form.latitude.set(value),
                 );
               }),
             ),
@@ -320,13 +343,26 @@ class LocationEditorView extends StatelessWidget {
                     label: const Text('Longitude'),
                     errorText: form.longitude.errorText(context),
                   ),
-                  onChanged: (value) => form.longitude.set(value),
                 );
               }),
             ),
           ],
         ),
         const SizedBox(height: 16),
+        Observer(builder: (context) {
+          return DropdownMenu<String>(
+            controller: form.parentLocation.controller,
+            label: const Text('Parent Location'),
+            errorText: form.parentLocation.errorText(context),
+            dropdownMenuEntries: form.otherLocations
+                .map((location) => DropdownMenuEntry<String>(
+                      value: location.name,
+                      label: location.name,
+                    ))
+                .toList(),
+            onSelected: (value) => form.parentLocation.set(value ?? ''),
+          );
+        }),
       ],
     );
   }

@@ -10,14 +10,19 @@ part 'edit_location_form.g.dart';
 class EditLocationForm = _EditLocationForm with _$EditLocationForm;
 
 abstract class _EditLocationForm extends FormStore with Store {
-  _EditLocationForm({required this.countryCode, this.location})
-      : super(
-          errorDisplayBehaviour:
-              location == null ? ErrorDisplayBehaviour.onSubmit : ErrorDisplayBehaviour.always,
+  _EditLocationForm({
+    required this.countryCode,
+    required this.otherLocations,
+    required ErrorDisplayBehaviour errorBehaviour,
+    // ignore: unused_element
+    this.location,
+  }) : super(
+          errorDisplayBehaviour: errorBehaviour,
         );
 
   final String countryCode;
   final Location? location;
+  final List<Location> otherLocations;
 
   late final TextFieldStore name = TextFieldStore(
     form: this,
@@ -47,17 +52,25 @@ abstract class _EditLocationForm extends FormStore with Store {
     ),
   );
 
-  late final FieldStore<Location?> parentLocation = FieldStore<Location?>(
+  late final TextFieldStore parentLocation = TextFieldStore(
     form: this,
-    initialValue: location?.parentLocation,
-    validator: (value) => null,
+    initialValue: location?.parentLocation?.name ?? '',
+    validator: (value) {
+      if (value.isEmpty) return null;
+      if (otherLocations.where((location) => location.name == value).isEmpty) {
+        return EditLocationError.parentLocationInvalid;
+      }
+      return null;
+    },
   );
 
   Location toLocation() {
     return Location(
       id: location?.id ?? '',
       name: name.value,
-      parentLocation: parentLocation.value,
+      parentLocation: parentLocation.value.isNotEmpty
+          ? otherLocations.firstWhere((location) => location.name == parentLocation.value)
+          : null,
       countryCode: countryCode,
       coordinates: Coordinates(
         lat: double.parse(latitude.value),
@@ -100,7 +113,8 @@ enum EditLocationError implements FieldError {
   latitudeMissing,
   latitudeInvalid,
   longitudeMissing,
-  longitudeInvalid;
+  longitudeInvalid,
+  parentLocationInvalid;
 
   const EditLocationError();
 
@@ -112,6 +126,7 @@ enum EditLocationError implements FieldError {
       latitudeInvalid => 'Latitude must be between -90 and 90',
       longitudeMissing => 'Longitude is required',
       longitudeInvalid => 'Longitude must be between -180 and 180',
+      parentLocationInvalid => 'Parent location must be a location already added to your trip',
     };
   }
 }

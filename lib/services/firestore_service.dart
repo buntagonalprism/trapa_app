@@ -96,7 +96,7 @@ class FirestoreService {
     required String path,
     FirestoreData data,
   }) async {
-    await _fs.doc(path).update(data);
+    await _fs.doc(path).update(_objectToFirestore(data));
   }
 
   Future<void> addDocument({

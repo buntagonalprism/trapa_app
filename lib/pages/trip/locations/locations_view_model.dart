@@ -4,7 +4,6 @@ import 'package:mobx/mobx.dart';
 
 import '../../../models/api/network_observable.dart';
 import '../../../models/operations.dart';
-import '../../../models/trip/common/coordinates.dart';
 import '../../../models/trip/common/country.dart';
 import '../../../models/trip/locations/api/location_details_response.dart';
 import '../../../models/trip/locations/api/location_suggestion_response.dart';
@@ -126,23 +125,13 @@ abstract class _LocationsViewModel with Store {
     }
   }
 
-  Future<OperationResult<Location>> getLocationFromSuggestion(
+  Future<OperationResult<LocationDetailsResponse>> getLocationFromSuggestion(
       LocationSuggestionResponse suggestion) async {
-    final country = selectedCountry!;
     try {
       final response = await _apiService.get('$locationsDetailApiPath/${suggestion.id}');
       final locationResponse = response.parseSuccessBody(LocationDetailsResponse.fromJson);
-      final location = Location(
-        id: '',
-        name: locationResponse.place.name,
-        parentLocation: null,
-        countryCode: country.code,
-        coordinates: Coordinates(
-          lat: locationResponse.coordinates.latitude,
-          lng: locationResponse.coordinates.longitude,
-        ),
-      );
-      return OperationResult.success(location);
+
+      return OperationResult.success(locationResponse);
     } catch (e, t) {
       _crashReporter.report(e, t);
       return const OperationResult.error(AddLocationError());
