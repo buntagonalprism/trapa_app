@@ -126,12 +126,14 @@ abstract class _LocationsViewModel with Store {
     }
   }
 
-  Future<OperationResult<void>> addLocation(LocationSuggestionResponse suggestion) async {
+  Future<OperationResult<Location>> getLocationFromSuggestion(
+      LocationSuggestionResponse suggestion) async {
     final country = selectedCountry!;
     try {
       final response = await _apiService.get('$locationsDetailApiPath/${suggestion.id}');
       final locationResponse = response.parseSuccessBody(LocationDetailsResponse.fromJson);
       final location = Location(
+        id: '',
         name: locationResponse.place.name,
         parentLocation: null,
         countryCode: country.code,
@@ -140,12 +142,23 @@ abstract class _LocationsViewModel with Store {
           lng: locationResponse.coordinates.longitude,
         ),
       );
-      await _locationStore.addLocation(location, tripId!);
-      return const OperationResult.success(null);
+      return OperationResult.success(location);
     } catch (e, t) {
       _crashReporter.report(e, t);
       return const OperationResult.error(AddLocationError());
     }
+  }
+
+  void addLocation(Location location) {
+    _locationStore.addLocation(location, tripId!);
+  }
+
+  void updateLocation(Location location) {
+    _locationStore.updateLocation(location, tripId!);
+  }
+
+  void deleteLocation(Location location) {
+    _locationStore.deleteLocation(location, tripId!);
   }
 }
 

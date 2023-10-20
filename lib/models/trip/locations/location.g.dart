@@ -7,6 +7,7 @@ part of 'location.dart';
 // **************************************************************************
 
 _$_Location _$$_LocationFromJson(Map<String, dynamic> json) => _$_Location(
+      id: json['id'] as String,
       name: json['name'] as String,
       parentLocation: json['parentLocation'] == null
           ? null
@@ -21,6 +22,7 @@ _$_Location _$$_LocationFromJson(Map<String, dynamic> json) => _$_Location(
 
 Map<String, dynamic> _$$_LocationToJson(_$_Location instance) =>
     <String, dynamic>{
+      'id': instance.id,
       'name': instance.name,
       'parentLocation': instance.parentLocation,
       'countryCode': instance.countryCode,

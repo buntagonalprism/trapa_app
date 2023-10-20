@@ -4,6 +4,11 @@ import 'package:mobx/mobx.dart';
 
 import '../models/api/network_observable.dart';
 
+/// Must either already be a `Map<String, dynamic>`, or have a [toJson] method returning a
+/// `Map<String, dynamic>`. All nested child properties of [data] must either be of primitive type
+/// or have their own [toJson] method.
+typedef FirestoreData = dynamic;
+
 @injectable
 class FirestoreService {
   final _fs = FirebaseFirestore.instance;
@@ -89,20 +94,23 @@ class FirestoreService {
 
   Future<void> updateDocument({
     required String path,
-    required Map<String, dynamic> data,
+    FirestoreData data,
   }) async {
     await _fs.doc(path).update(data);
   }
 
-  /// [data] must either already be a `Map<String, dynamic>`, or have a [toJson] method returning a
-  /// `Map<String, dynamic>`. All nested child properties of [data] must either be of primitive type
-  /// or have their own [toJson] method.
   Future<void> addDocument({
     required String collectionPath,
     String? docId,
-    required dynamic data,
+    required FirestoreData data,
   }) async {
     await _fs.collection(collectionPath).doc(docId).set(_objectToFirestore(data));
+  }
+
+  Future<void> deleteDocument({
+    required String path,
+  }) async {
+    await _fs.doc(path).delete();
   }
 
   Map<String, dynamic> _objectToFirestore(dynamic data) {

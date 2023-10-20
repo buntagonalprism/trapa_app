@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
-import '../../../models/operations.dart';
 import '../../../models/trip/common/country.dart';
-import '../../../models/trip/locations/api/location_suggestion_response.dart';
 import '../../../models/trip/trip.dart';
-import '../../../widgets/operation_buttons.dart';
 import '../edit_countries_dialog.dart';
+import 'edit_location_dialog.dart';
 import 'locations_view_model.dart';
 
 class LocationsView extends StatelessWidget {
@@ -194,53 +192,25 @@ class _CountryLocationsViewState extends State<CountryLocationsView> {
             ]),
             textAlign: TextAlign.start,
           ),
-          TextField(
-            decoration: const InputDecoration(
-              hintText: 'Start typing a new location...',
-              prefixIcon: Icon(Icons.search),
-            ),
-            onChanged: (value) => widget.vm.setLocationSearchQuery(value),
+          FilledButton(
+            onPressed: () => AddLocationDialog.show(context: context, vm: widget.vm),
+            child: const Text('Add location'),
           ),
           Expanded(
             child: Observer(builder: (context) {
-              return widget.vm.searchResults.when(
-                pending: () => const SizedBox(),
-                inProgress: () => const Center(child: CircularProgressIndicator()),
-                result: (result) => result.when(
-                  error: (error) => Center(
-                    child: ListTile(
-                      title: Text(error.titleText(context)),
-                      subtitle: Text(error.bodyText(context)),
-                    ),
-                  ),
-                  success: (suggestions) => ListView.builder(
-                    itemCount: suggestions.length,
-                    itemBuilder: (context, index) => ListTile(
-                      dense: true,
-                      title: Text(suggestions[index].name),
-                      onTap: () => widget.vm.addLocation(suggestions[index]),
-                    ),
-                  ),
-                ),
-              );
-            }),
-          ),
-          Expanded(
-            child: Observer(builder: (context) {
-              return widget.vm.locationsObservable.value.when(
-                loading: () => const SizedBox(),
-                notFound: () => const Center(child: CircularProgressIndicator()),
-                unknownError: () => const Center(
+              final locations = widget.vm.locationsInCountry;
+              if (locations.isEmpty) {
+                return const Center(
                   child: ListTile(
-                    title: Text('Could not load locations'),
+                    title: Text('No locations found'),
                   ),
-                ),
-                data: (suggestions, _) => ListView.builder(
-                  itemCount: suggestions.length,
-                  itemBuilder: (context, index) => ListTile(
-                    dense: true,
-                    title: Text(suggestions[index].name),
-                  ),
+                );
+              }
+              return ListView.builder(
+                itemCount: locations.length,
+                itemBuilder: (context, index) => ListTile(
+                  dense: true,
+                  title: Text(locations[index].name),
                 ),
               );
             }),
@@ -248,13 +218,5 @@ class _CountryLocationsViewState extends State<CountryLocationsView> {
         ],
       );
     });
-  }
-
-  void addLocationFromSuggestion(LocationSuggestionResponse suggestion) async {
-    final response = await widget.vm.addLocation(suggestion);
-
-    if (response is OperationResultError && context.mounted) {
-      response.error.showErrorDialog(context, () => addLocationFromSuggestion(suggestion));
-    }
   }
 }

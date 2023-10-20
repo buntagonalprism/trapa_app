@@ -33,4 +33,17 @@ abstract class _LocationStore with Store {
       data: location,
     );
   }
+
+  Future<void> updateLocation(Location location, String tripId) {
+    return _firestoreService.updateDocument(
+      path: '$tripsFirestoreCollection/$tripId/$locationsFirestoreCollection/${location.id}',
+      data: location,
+    );
+  }
+
+  Future<void> deleteLocation(Location location, String tripId) {
+    return _firestoreService.deleteDocument(
+      path: '$tripsFirestoreCollection/$tripId/$locationsFirestoreCollection/${location.id}',
+    );
+  }
 }

@@ -142,6 +142,17 @@ abstract class _FieldStore<T> with Store {
           : (_) => null;
 }
 
+class TextFieldStore extends FieldStore<String> {
+  TextFieldStore({
+    required FormStore form,
+    required String initialValue,
+    required FieldValidator<String> validator,
+  })  : controller = TextEditingController(text: initialValue),
+        super(form: form, initialValue: initialValue, validator: validator);
+
+  late final TextEditingController controller;
+}
+
 /// A localisable field error that can be displayed in the UI
 ///
 /// Implement this class to add your own field errors. The buildcontext is available to lookup

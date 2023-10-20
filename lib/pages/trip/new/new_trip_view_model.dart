@@ -104,7 +104,6 @@ enum TripCountries {
   multiple,
 }
 
-@injectable
 class NewTripForm = _NewTripForm with _$NewTripForm;
 
 abstract class _NewTripForm extends FormStore with Store {

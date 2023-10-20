@@ -11,6 +11,7 @@ class Location with _$Location {
   const Location._();
 
   const factory Location({
+    required String id,
     required String name,
     required Location? parentLocation,
     required String countryCode,

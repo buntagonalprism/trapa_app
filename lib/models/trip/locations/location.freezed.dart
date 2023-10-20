@@ -20,6 +20,7 @@ Location _$LocationFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Location {
+  String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   Location? get parentLocation => throw _privateConstructorUsedError;
   String get countryCode => throw _privateConstructorUsedError;
@@ -38,7 +39,8 @@ abstract class $LocationCopyWith<$Res> {
       _$LocationCopyWithImpl<$Res, Location>;
   @useResult
   $Res call(
-      {String name,
+      {String id,
+      String name,
       Location? parentLocation,
       String countryCode,
       Coordinates coordinates,
@@ -62,6 +64,7 @@ class _$LocationCopyWithImpl<$Res, $Val extends Location>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
     Object? name = null,
     Object? parentLocation = freezed,
     Object? countryCode = null,
@@ -69,6 +72,10 @@ class _$LocationCopyWithImpl<$Res, $Val extends Location>
     Object? details = freezed,
   }) {
     return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -133,7 +140,8 @@ abstract class _$$_LocationCopyWith<$Res> implements $LocationCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {String name,
+      {String id,
+      String name,
       Location? parentLocation,
       String countryCode,
       Coordinates coordinates,
@@ -158,6 +166,7 @@ class __$$_LocationCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
     Object? name = null,
     Object? parentLocation = freezed,
     Object? countryCode = null,
@@ -165,6 +174,10 @@ class __$$_LocationCopyWithImpl<$Res>
     Object? details = freezed,
   }) {
     return _then(_$_Location(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -193,7 +206,8 @@ class __$$_LocationCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_Location extends _Location {
   const _$_Location(
-      {required this.name,
+      {required this.id,
+      required this.name,
       required this.parentLocation,
       required this.countryCode,
       required this.coordinates,
@@ -203,6 +217,8 @@ class _$_Location extends _Location {
   factory _$_Location.fromJson(Map<String, dynamic> json) =>
       _$$_LocationFromJson(json);
 
+  @override
+  final String id;
   @override
   final String name;
   @override
@@ -216,7 +232,7 @@ class _$_Location extends _Location {
 
   @override
   String toString() {
-    return 'Location(name: $name, parentLocation: $parentLocation, countryCode: $countryCode, coordinates: $coordinates, details: $details)';
+    return 'Location(id: $id, name: $name, parentLocation: $parentLocation, countryCode: $countryCode, coordinates: $coordinates, details: $details)';
   }
 
   @override
@@ -224,6 +240,7 @@ class _$_Location extends _Location {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Location &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.parentLocation, parentLocation) ||
                 other.parentLocation == parentLocation) &&
@@ -237,7 +254,7 @@ class _$_Location extends _Location {
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType, name, parentLocation, countryCode, coordinates, details);
+      runtimeType, id, name, parentLocation, countryCode, coordinates, details);
 
   @JsonKey(ignore: true)
   @override
@@ -255,7 +272,8 @@ class _$_Location extends _Location {
 
 abstract class _Location extends Location {
   const factory _Location(
-      {required final String name,
+      {required final String id,
+      required final String name,
       required final Location? parentLocation,
       required final String countryCode,
       required final Coordinates coordinates,
@@ -264,6 +282,8 @@ abstract class _Location extends Location {
 
   factory _Location.fromJson(Map<String, dynamic> json) = _$_Location.fromJson;
 
+  @override
+  String get id;
   @override
   String get name;
   @override
