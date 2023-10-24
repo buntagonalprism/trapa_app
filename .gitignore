@@ -45,3 +45,6 @@ app.*.map.json
 
 # Code coverage
 coverage
+
+# Secrets files
+settings/app_secrets*.json

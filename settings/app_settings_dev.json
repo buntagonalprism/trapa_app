@@ -1,7 +1,5 @@
 {
-    "googleClientId": "584032921839-of54r0qdfsoplum0ndf6tvkruijc6nvq.apps.googleusercontent.com",
     "androidAppIdSuffix": ".dev",
     "appNamePrefix": "(Dev) ",
-    "firebaseEnvironment": "dev",
     "trapaApiHost": "https://trapa-api-flymcfervq-ts.a.run.app"
 }

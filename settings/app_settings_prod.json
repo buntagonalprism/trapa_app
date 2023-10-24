@@ -1,6 +1,4 @@
 {
-    "googleClientId": "",
     "androidAppIdSuffix": "",
-    "appNamePrefix": "",
-    "firebaseEnvironment": "prod"
+    "appNamePrefix": ""
 }

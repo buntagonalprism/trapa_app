@@ -7,7 +7,9 @@
             "type": "dart",
             "args": [
                 "--dart-define-from-file",
-                "settings/app_settings_local.json"
+                "settings/app_settings_local.json",
+                "--dart-define-from-file",
+                "settings/app_secrets_local.json"
             ]
         },
         {
@@ -16,7 +18,9 @@
             "type": "dart",
             "args": [
                 "--dart-define-from-file",
-                "settings/app_settings_dev.json"
+                "settings/app_settings_dev.json",
+                "--dart-define-from-file",
+                "settings/app_secrets_dev.json"
             ]
         },
         {
@@ -25,7 +29,9 @@
             "type": "dart",
             "args": [
                 "--dart-define-from-file",
-                "settings/app_settings_prod.json"
+                "settings/app_settings_prod.json",
+                "--dart-define-from-file",
+                "settings/app_secrets_prod.json"
             ]
         }
     ]
