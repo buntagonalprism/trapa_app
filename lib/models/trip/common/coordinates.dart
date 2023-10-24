@@ -14,3 +14,15 @@ class Coordinates with _$Coordinates {
 
   factory Coordinates.fromJson(Map<String, dynamic> json) => _$CoordinatesFromJson(json);
 }
+
+@freezed
+class BoundingBox with _$BoundingBox {
+  const BoundingBox._();
+
+  const factory BoundingBox({
+    required Coordinates southWest,
+    required Coordinates northEast,
+  }) = _BoundingBox;
+
+  factory BoundingBox.fromJson(Map<String, dynamic> json) => _$BoundingBoxFromJson(json);
+}

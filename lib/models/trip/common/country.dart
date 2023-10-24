@@ -2,6 +2,9 @@ import 'package:country_picker/country_picker.dart' as country_picker;
 import 'package:flutter/widgets.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import 'coordinates.dart';
+import 'data/country_bounding_boxes.dart';
+
 part 'country.freezed.dart';
 part 'country.g.dart';
 
@@ -41,6 +44,10 @@ class Country with _$Country {
 
   static final List<Country> all =
       _countriesByCode.keys.map((code) => Country._internal(code: code)).toList();
+
+  BoundingBox get boundingBox {
+    return boundingBoxes[code]!;
+  }
 }
 
 class InvalidCountryException implements Exception {

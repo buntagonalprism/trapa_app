@@ -17,3 +17,17 @@ Map<String, dynamic> _$$_CoordinatesToJson(_$_Coordinates instance) =>
       'lat': instance.lat,
       'lng': instance.lng,
     };
+
+_$_BoundingBox _$$_BoundingBoxFromJson(Map<String, dynamic> json) =>
+    _$_BoundingBox(
+      southWest:
+          Coordinates.fromJson(json['southWest'] as Map<String, dynamic>),
+      northEast:
+          Coordinates.fromJson(json['northEast'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$$_BoundingBoxToJson(_$_BoundingBox instance) =>
+    <String, dynamic>{
+      'southWest': instance.southWest,
+      'northEast': instance.northEast,
+    };
