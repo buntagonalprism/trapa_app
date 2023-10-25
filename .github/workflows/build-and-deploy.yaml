@@ -16,7 +16,7 @@ jobs:
         with:
           flutter-version: '3.13.8'
           channel: 'stable'
-      - run: flutter --version
+      - run: flutter doctor -v
       - run: flutter test --coverage
       - shell: bash
         name: Load secrets files

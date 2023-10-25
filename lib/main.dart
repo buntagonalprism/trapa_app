@@ -12,9 +12,11 @@ import 'firebase/firebase_options.dart';
 import 'injection.dart';
 import 'messages.dart';
 import 'router.dart';
+import 'services/google_maps_loader.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  initGoogleMaps();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.forCurrentPlatform,
   );

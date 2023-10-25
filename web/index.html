@@ -38,7 +38,18 @@
   </script>
   <!-- This script adds the flutter initialization JS code -->
   <script src="flutter.js" defer></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCYnMCCr4vLzbVjC_IsTONan267J6v_tyc&libraries=drawing,marker"></script>
+
+  <!-- This script allows the google maps API key to be loaded from a dart environment variable -->
+  <script>
+    document.addEventListener("google-maps-api-key-loaded", function (event){
+      var script = document.createElement('script');
+      script.src = "https://maps.googleapis.com/maps/api/js?key=" + event.detail + "&libraries=drawing,marker&callback=onMapsInit";
+      script.defer = true;
+      script.async = true;
+      document.head.appendChild(script);
+    });    
+  </script> 
+
 </head>
 <body>
   <script>

@@ -1,0 +1,3 @@
+void initGoogleMaps() {
+  // No-op
+}
