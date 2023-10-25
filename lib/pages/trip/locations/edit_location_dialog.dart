@@ -39,6 +39,12 @@ class _AddLocationDialogState extends State<AddLocationDialog> with SingleTicker
   String? detailsError;
 
   @override
+  void initState() {
+    super.initState();
+    widget.vm.setLocationSearchQuery('');
+  }
+
+  @override
   Widget build(BuildContext context) {
     return AlertDialog(
       content: SizedBox(
@@ -125,6 +131,7 @@ class _AddLocationDialogState extends State<AddLocationDialog> with SingleTicker
       success: (value) {
         form.latitude.set(value.coordinates.latitude.toString());
         form.longitude.set(value.coordinates.longitude.toString());
+        form.name.set(value.place.name);
       },
     );
   }

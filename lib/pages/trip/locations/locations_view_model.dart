@@ -48,6 +48,14 @@ abstract class _LocationsViewModel with Store {
   @observable
   String? locationSearchQuery;
 
+  @observable
+  Location? hoveredLocation;
+
+  @action
+  void setHoveredLocation(Location? location) {
+    hoveredLocation = location;
+  }
+
   @action
   void selectCountry(Country country) {
     selectedCountry = country;

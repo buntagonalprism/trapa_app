@@ -75,6 +75,22 @@ mixin _$LocationsViewModel on _LocationsViewModel, Store {
     });
   }
 
+  late final _$hoveredLocationAtom =
+      Atom(name: '_LocationsViewModel.hoveredLocation', context: context);
+
+  @override
+  Location? get hoveredLocation {
+    _$hoveredLocationAtom.reportRead();
+    return super.hoveredLocation;
+  }
+
+  @override
+  set hoveredLocation(Location? value) {
+    _$hoveredLocationAtom.reportWrite(value, super.hoveredLocation, () {
+      super.hoveredLocation = value;
+    });
+  }
+
   late final _$tripObservableAtom =
       Atom(name: '_LocationsViewModel.tripObservable', context: context);
 
@@ -130,6 +146,17 @@ mixin _$LocationsViewModel on _LocationsViewModel, Store {
       ActionController(name: '_LocationsViewModel', context: context);
 
   @override
+  void setHoveredLocation(Location? location) {
+    final _$actionInfo = _$_LocationsViewModelActionController.startAction(
+        name: '_LocationsViewModel.setHoveredLocation');
+    try {
+      return super.setHoveredLocation(location);
+    } finally {
+      _$_LocationsViewModelActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void selectCountry(Country country) {
     final _$actionInfo = _$_LocationsViewModelActionController.startAction(
         name: '_LocationsViewModel.selectCountry');
@@ -168,6 +195,7 @@ mixin _$LocationsViewModel on _LocationsViewModel, Store {
 selectedCountry: ${selectedCountry},
 tripId: ${tripId},
 locationSearchQuery: ${locationSearchQuery},
+hoveredLocation: ${hoveredLocation},
 tripObservable: ${tripObservable},
 locationsObservable: ${locationsObservable},
 locationsInCountry: ${locationsInCountry},

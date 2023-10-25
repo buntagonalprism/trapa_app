@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:mobx/mobx.dart';
 
+import '../../../models/trip/common/coordinates.dart';
 import '../../../models/trip/common/country.dart';
+import '../../../models/trip/locations/location.dart';
 import '../../../models/trip/trip.dart';
 import '../edit_countries_dialog.dart';
 import 'edit_location_dialog.dart';
@@ -172,65 +176,175 @@ class CountryLocationsView extends StatefulWidget {
 }
 
 class _CountryLocationsViewState extends State<CountryLocationsView> {
+  static const CameraPosition _kGooglePlex = CameraPosition(
+    target: LatLng(37.42796133580664, -122.085749655962),
+    zoom: 14.4746,
+  );
+
+  GoogleMapController? _controller;
+  late final ReactionDisposer countryReactionDisposer;
+
+  @override
+  void initState() {
+    super.initState();
+    countryReactionDisposer = autorun((_) {
+      final country = widget.vm.selectedCountry;
+      if (country != null) {
+        _animateToCountry(country);
+      }
+    });
+  }
+
+  void _animateToCountry(Country country) {
+    _controller?.animateCamera(CameraUpdate.newLatLngBounds(
+      country.boundingBox.toLatLngBounds(),
+      10,
+    ));
+  }
+
+  @override
+  void dispose() {
+    countryReactionDisposer();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Observer(builder: (context) {
-      final country = widget.vm.selectedCountry;
-      if (country == null) {
-        return const Center(child: Text('Please select a country to start adding locations'));
-      }
-      return Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Text.rich(
-            TextSpan(children: [
-              const TextSpan(text: 'Editing locations in '),
-              TextSpan(
-                text: country.name(context),
-                style: const TextStyle(fontWeight: FontWeight.bold),
-              ),
-            ]),
-            textAlign: TextAlign.start,
-          ),
-          FilledButton(
-            onPressed: () => AddLocationDialog.show(context: context, vm: widget.vm),
-            child: const Text('Add location'),
-          ),
-          Expanded(
-            child: Observer(builder: (context) {
-              final locations = widget.vm.locationsInCountry;
-              if (locations.isEmpty) {
-                return const Center(
-                  child: ListTile(
-                    title: Text('No locations found'),
-                  ),
-                );
-              }
-              return ListView.builder(
-                itemCount: locations.length,
-                itemBuilder: (context, index) => ListTile(
-                  dense: true,
-                  title: Text(locations[index].name),
-                  trailing: Row(
-                    mainAxisSize: MainAxisSize.min,
+    return Row(
+      children: [
+        Expanded(
+          child: Observer(builder: (context) {
+            final country = widget.vm.selectedCountry;
+            if (country == null) {
+              return const Center(child: Text('Please select a country to start adding locations'));
+            }
+            return Row(
+              children: [
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      IconButton(
-                        onPressed: () => EditLocationDialog.show(
-                            context: context, vm: widget.vm, location: locations[index]),
-                        icon: const Icon(Icons.edit),
+                      Text.rich(
+                        TextSpan(children: [
+                          const TextSpan(text: 'Editing locations in '),
+                          TextSpan(
+                            text: country.name(context),
+                            style: const TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                        ]),
+                        textAlign: TextAlign.start,
                       ),
-                      IconButton(
-                        onPressed: () => widget.vm.deleteLocation(locations[index]),
-                        icon: const Icon(Icons.delete),
+                      FilledButton(
+                        onPressed: () => AddLocationDialog.show(context: context, vm: widget.vm),
+                        child: const Text('Add location'),
+                      ),
+                      Expanded(
+                        child: Observer(builder: (context) {
+                          final locations = widget.vm.locationsInCountry;
+                          if (locations.isEmpty) {
+                            return const Center(
+                              child: ListTile(
+                                title: Text('No locations found'),
+                              ),
+                            );
+                          }
+                          return ListView.builder(
+                            itemCount: locations.length,
+                            itemBuilder: (context, index) => LocationTile(
+                              location: locations[index],
+                              vm: widget.vm,
+                            ),
+                          );
+                        }),
                       ),
                     ],
                   ),
                 ),
-              );
-            }),
+              ],
+            );
+          }),
+        ),
+        Expanded(
+          child: Observer(builder: (context) {
+            final hoveredId = widget.vm.hoveredLocation?.id;
+            return GoogleMap(
+              mapType: MapType.normal,
+              markers: widget.vm.locationsInCountry
+                  .map((location) => _buildMarker(location, location.id == hoveredId))
+                  .toSet(),
+              initialCameraPosition: const CameraPosition(target: LatLng(0, 0), zoom: 2),
+              onMapCreated: (GoogleMapController controller) {
+                _controller = controller;
+                final country = widget.vm.selectedCountry;
+                if (country != null) {
+                  _animateToCountry(country);
+                }
+              },
+            );
+          }),
+        ),
+      ],
+    );
+  }
+
+  Marker _buildMarker(Location location, bool highlight) {
+    return Marker(
+      markerId: MarkerId(location.id),
+      position: location.coordinates.toLatLng(),
+      infoWindow: InfoWindow(title: location.name),
+      alpha: highlight ? 1.0 : 0.6,
+    );
+  }
+}
+
+class LocationTile extends StatefulWidget {
+  const LocationTile({super.key, required this.location, required this.vm});
+
+  final Location location;
+  final LocationsViewModel vm;
+
+  @override
+  State<LocationTile> createState() => _LocationTileState();
+}
+
+class _LocationTileState extends State<LocationTile> {
+  bool isHovered = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return MouseRegion(
+      onEnter: (_) {
+        setState(() => isHovered = true);
+        widget.vm.setHoveredLocation(widget.location);
+      },
+      onExit: (_) {
+        setState(() => isHovered = false);
+        if (widget.vm.hoveredLocation == widget.location) {
+          widget.vm.setHoveredLocation(null);
+        }
+      },
+      child: Container(
+        color: isHovered ? Theme.of(context).hoverColor : null,
+        child: ListTile(
+          dense: true,
+          title: Text(widget.location.name),
+          hoverColor: Theme.of(context).colorScheme.primary.withOpacity(0.1),
+          trailing: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              IconButton(
+                onPressed: () => EditLocationDialog.show(
+                    context: context, vm: widget.vm, location: widget.location),
+                icon: const Icon(Icons.edit),
+              ),
+              IconButton(
+                onPressed: () => widget.vm.deleteLocation(widget.location),
+                icon: const Icon(Icons.delete),
+              ),
+            ],
           ),
-        ],
-      );
-    });
+        ),
+      ),
+    );
   }
 }
