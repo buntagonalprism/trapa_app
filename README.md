@@ -44,7 +44,13 @@ As such, it might seem pointless to designate any values as secret/sensitive in 
 
 
 
+## Semantic Versioning
+Semantic versioning is used in this repository, with a format of `<MAJOR>.<MINOR>.<PATCH>`. 
+- By default, each commit on master automatically increments the `<PATCH>` version and tags the repository
+- If the commit message title includes the text `(MINOR)` then the minor version is incremented and the patch version is reset to 0
+- If the commit message title includes the text `(MAJOR)` then the major version is incremented, and the minor version and patch version are both reset to 0 
 
+Commits to other branches generate prelease version numbers using the most recent master branch tag and an incrementing prerelease version number in format `<MAJOR>.<MINOR>.<PATCH>-<PRERELEASE>`
 
 
 
