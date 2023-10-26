@@ -44,8 +44,7 @@ jobs:
         with:
           name: web-dev
           path: build/web
-      - run: flutter clean
-      - run: flutter build web --release --dart-define-from-file=settings/app_settings_prod.json --dart-define-from-file=settings/app_secrets_prod.json
+      - run: flutter build web --release --dart-define-from-file=settings/app_settings_prod.json --dart-define-from-file=settings/app_secrets_prod.json --build-name=${{ steps.version.outputs.version }} --build-number=${{ github.run_number }}
         name: Build PROD
       - uses: actions/upload-artifact@v3
         with:
