@@ -29,7 +29,7 @@ jobs:
           DEV_SECRETS: ${{ secrets.APP_SECRETS_DEV }}
         run: |
           echo "$DEV_SECRETS" >> settings/app_secrets_dev.json
-      - run: flutter build web --release --dart-define-from-file=settings/app_settings_dev.json --dart-define-from-file=settings/app_secrets_dev.json --build-name=${{ steps.version.outputs.version }} --build-number=${{ github.run_number }}
+      - run: flutter build web --release --dart-define-from-file=settings/app_settings_dev.json --dart-define-from-file=settings/app_secrets_dev.json --build-name=${{ steps.version.outputs.version }}+${{ steps.version.outputs.increment }} --build-number=${{ github.run_id }}
         name: Build DEV
       - uses: actions/upload-artifact@v3
         with:
