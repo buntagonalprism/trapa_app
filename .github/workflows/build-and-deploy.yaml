@@ -24,6 +24,7 @@ jobs:
           git config --global user.email "pipeline@trapa_app.com"
           git config --global user.name "${{ github.actor }}"
           git tag -a ${{ steps.version.outputs.version_tag }} -m "Version ${{ steps.version.outputs.version_tag }}" ${{ github.sha }}
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY
           git push origin ${{ steps.version.outputs.version_tag }}
       - uses: subosito/flutter-action@v2
         with:
