@@ -21,6 +21,8 @@ jobs:
           change_path: "src/service"
       - name: Tag Commit with Version
         run: |
+          git config --global user.email "pipeline@trapa_app.com"
+          git config --global user.name "${{ github.actor }}"
           git tag -a ${{ steps.version.outputs.version_tag }} -m "Version ${{ steps.version.outputs.version_tag }}" ${{ github.sha }}
           git push origin ${{ steps.version.outputs.version_tag }}
       - uses: subosito/flutter-action@v2
