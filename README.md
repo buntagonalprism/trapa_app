@@ -53,15 +53,12 @@ Semantic versioning is used in this repository, with a format of `<MAJOR>.<MINOR
 Commits to other branches generate prelease version numbers using the most recent master branch tag and an incrementing prerelease version number in format `<MAJOR>.<MINOR>.<PATCH>-<PRERELEASE>`
 
 
-
-
-## Build Pipeline Configuration
-1. Under Github Repo > Settings > Actions > General > Workflow permissions select "Read and write permissions" so the pipelines can push tags back to the repo
-2. Generate firebase service accounts for each environment:
+### Pipeline Configuration
+1. Generate firebase service accounts for each environment:
     1. `firebase login`
     2. `firebase use <my-project>`
     3. `firebase init hosting:github`. Press "y", then "enter". There should be a message "Uploaded service account JSON to GitHub as secret FIREBASE_SERVICE_ACCOUNT_<PROJECT_NAME>". You can now quit the process (the remaining setup steps run by this command continue to generate github actions pipelines to deploy to Firebase hosting, which are not required)
-3. Set a FLUTTER_VERSION under the variables configuration
+2. Set a FLUTTER_VERSION under the variables configuration
 
 
 # DUMMY CHANGE FOR TESTING PIPELINES
