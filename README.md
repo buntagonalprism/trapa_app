@@ -44,18 +44,19 @@ As such, it might seem pointless to designate any values as secret/sensitive in 
 
 
 
-## Semantic Versioning
-Semantic versioning is used in this repository, with a format of `<MAJOR>.<MINOR>.<PATCH>`. 
-- By default, each commit on master automatically increments the `<PATCH>` version and tags the repository
-- If the commit message title includes the text `(MINOR)` then the minor version is incremented and the patch version is reset to 0
-- If the commit message title includes the text `(MAJOR)` then the major version is incremented, and the minor version and patch version are both reset to 0 
+## Deployment
+**Dev pipeline:** `build-and-deploy-dev.yaml`
+Each commit on master is:
+- Given a build number `<MAJOR>.<MINOR>.<PATCH>+<PRERELEASE>`. The major, minor, and patch version numbers are the same as the last production release. The prerelease number is auto-incremented, resetting to 0 after each prod relase. 
+- Tested, built, and deployed to dev environment
 
-Commits to other branches generate prelease version numbers using the most recent master branch tag and an incrementing prerelease version number in format `<MAJOR>.<MINOR>.<PATCH>-<PRERELEASE>`
+**Prod pipeline:** `build-and-deploy-prod.yaml`
+To release to production, create a branch named `release/v<MAJOR>.<MINOR>`. Each commit on a branch with this pattern is:
+- Tagged with a tag `v<MAJOR>.<MINOR>.<PATCH>` where the patch is auto-incremented
+- Tested, built, and deployed to the production environment
 
 
-
-
-## Build Pipeline Configuration
+### Pipeline Configuration
 1. Under Github Repo > Settings > Actions > General > Workflow permissions select "Read and write permissions" so the pipelines can push tags back to the repo
 2. Generate firebase service accounts for each environment:
     1. `firebase login`
@@ -63,4 +64,3 @@ Commits to other branches generate prelease version numbers using the most recen
     3. `firebase init hosting:github`. Press "y", then "enter". There should be a message "Uploaded service account JSON to GitHub as secret FIREBASE_SERVICE_ACCOUNT_<PROJECT_NAME>". You can now quit the process (the remaining setup steps run by this command continue to generate github actions pipelines to deploy to Firebase hosting, which are not required)
 3. Set a FLUTTER_VERSION under the variables configuration
 
-# DUMMY CHANGE FOR TESTING PIPELINES
