@@ -1,4 +1,5 @@
 {
     "androidAppIdSuffix": "",
-    "appNamePrefix": ""
+    "appNamePrefix": "",
+    "trapaApiHost": "https://trapa-api-lfagjswz2a-ts.a.run.app"
 }
