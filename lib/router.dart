@@ -33,6 +33,10 @@ class AppRouter {
     context.go('/trips/$tripId');
   }
 
+  void goToLogin(BuildContext context) {
+    context.go('/login');
+  }
+
   late final goRouter = GoRouter(
     routes: [
       GoRoute(

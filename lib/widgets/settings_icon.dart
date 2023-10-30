@@ -4,12 +4,14 @@ import 'package:flutter/services.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 import '../injection.dart';
+import '../router.dart';
 import '../services/auth_service.dart';
 
 class SettingsIcon extends StatelessWidget {
   SettingsIcon({super.key});
 
   final AuthService _auth = getIt<AuthService>();
+  final AppRouter _router = getIt<AppRouter>();
 
   @override
   Widget build(BuildContext context) {
@@ -28,6 +30,7 @@ class SettingsIcon extends StatelessWidget {
         break;
       case _SettingsMenu.logout:
         _auth.signOut();
+        _router.goToLogin(context);
         break;
       case _SettingsMenu.copyAuthToken:
         _copyAuthTokenToClipboard();
