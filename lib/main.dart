@@ -22,12 +22,10 @@ Future<void> main() async {
   );
   configureDependencies();
 
-  final config = getIt<Config>();
-
   FirebaseUIAuth.configureProviders([
     EmailAuthProvider(),
     GoogleProvider(
-      clientId: config.googleClientId,
+      clientId: DefaultFirebaseOptions.googleSignInClientId,
     ),
   ]);
 

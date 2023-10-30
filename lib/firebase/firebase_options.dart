@@ -55,4 +55,7 @@ class DefaultFirebaseOptions {
     projectId: String.fromEnvironment('firebaseProjectId'),
     storageBucket: String.fromEnvironment('firebaseStorageBucket'),
   );
+
+  static const String googleSignInClientId =
+      String.fromEnvironment('firebaseGoogleAuthWebClientId');
 }
