@@ -39,20 +39,6 @@
   <!-- This script adds the flutter initialization JS code -->
   <script src="flutter.js" defer></script>
 
-  <!-- This script allows the google maps API key to be loaded from a dart environment variable -->
-  <script>
-    document.addEventListener("google-maps-api-key-loaded", function (event){
-      if (document.getElementById("google-maps-js-loader") != null) {
-        return;
-      }
-      var script = document.createElement('script');
-      script.id = "google-maps-js-loader";
-      script.src = "https://maps.googleapis.com/maps/api/js?key=" + event.detail + "&libraries=drawing,marker&callback=onMapsInit";
-      script.defer = true;
-      script.async = true;
-      document.head.appendChild(script);
-    });    
-  </script> 
 
 </head>
 <body>
