@@ -63,3 +63,5 @@ To release to production, create a branch named `release/v<MAJOR>.<MINOR>`. Each
     3. `firebase init hosting:github`. Press "y", then "enter". There should be a message "Uploaded service account JSON to GitHub as secret FIREBASE_SERVICE_ACCOUNT_<PROJECT_NAME>". You can now quit the process (the remaining setup steps run by this command continue to generate github actions pipelines to deploy to Firebase hosting, which are not required)
 2. Set a FLUTTER_VERSION under the variables configuration
 
+## Firebase Configuration
+Under Firebase Console > Authentication > Settings > Authorised Domains, any custom domain names need to be added to enable google sign in.  
